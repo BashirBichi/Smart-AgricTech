@@ -131,20 +131,38 @@
 <body>
 
     <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2 class="sidebar-title">Smart AgricTech</h2>
-            <ul class="nav flex-column">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Lorem ipsum dolor sit.</a></li>
-                <li class="nav-item"><a href="#Lorem ipsum dolor sit." class="nav-link">Lorem ipsum dolor sit.</a></li>
-                <li class="nav-item"><a href="#Lorem ipsum dolor sit." class="nav-link">Lorem ipsum dolor sit.</a></li>
-                <li class="nav-item"><a href="#Lorem ipsum dolor sit." class="nav-link">Lorem ipsum dolor sit.</a></li>
-                <li class="nav-item"><a href="#Lorem ipsum dolor sit." class="nav-link">Lorem ipsum dolor sit.</a></li>
-                <li class="nav-item"><a href="#Lorem ipsum dolor sit." class="nav-link">Lorem ipsum dolor sit.</a></li>
-                <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link text-danger">Logout</a></li>
-            </ul>
-        </aside>
+       <!-- Sidebar (Visible on Desktop, Offcanvas on Mobile) -->
+<aside class="sidebar d-none d-md-block">
+    <h2 class="sidebar-title">Smart AgricTech</h2>
+    <ul class="nav flex-column">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Lorem ipsum dolor sit.</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+        <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link text-danger">Logout</a></li>
+    </ul>
+</aside>
 
+<!-- Sidebar (Bootstrap Offcanvas for Mobile) -->
+<div class="offcanvas offcanvas-start text-bg-dark d-md-none" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileSidebarLabel">Smart AgricTech</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a href="index.html" class="nav-link active">Lorem ipsum dolor sit.</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Lorem ipsum dolor sit.</a></li>
+            <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link text-danger">Logout</a></li>
+        </ul>
+    </div>
+</div>
         <!-- Main Content -->
         <main class="main-content">
             <!-- Sidebar Toggle (Mobile) -->
