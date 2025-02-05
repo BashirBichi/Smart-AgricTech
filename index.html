@@ -167,30 +167,25 @@
                 /* Desktop View */
 .content-section {
     display: none; /* Initially hidden */
-    margin: 50px auto; /* Centers horizontally */
+    margin-left: 270px; /* Starts from where the sidebar ends */
+    margin-right: 20px; /* Keep margin from right */
+    margin-top: 20px;
     background: rgba(41, 41, 61, 0.8);
-    padding: 40px; /* More padding for better spacing */
+    padding: 30px;
     border-radius: 8px;
     color: white;
-    width: calc(100% - 270px); /* Takes the full remaining width after the sidebar */
+    width: calc(100% - 250px); /* Takes the full remaining width after the sidebar */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     transition: all 0.3s ease-in-out;
-
-    /* Center vertically */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 80vh; /* Makes sure it centers in viewport */
 }
 
 /* Mobile View - When Sidebar is Hidden */
 @media (max-width: 768px) {
     .content-section {
-        margin: 40px auto; /* Center horizontally */
+        margin-left: 20px; /* Reset left margin */
+        margin-right: 20px; /* Equal margin on both sides */
         width: calc(100% - 40px); /* Take full width minus margins */
-        padding: 30px;
-        min-height: 70vh; /* Adjust height for smaller screens */
     }
 }
 
