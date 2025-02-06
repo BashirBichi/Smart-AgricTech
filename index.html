@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Skeleton </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <style>
@@ -145,7 +146,7 @@
             display: none;
             position: absolute;
             background: rgba(21, 21, 31, 0.9);
-            padding: 10px;
+            padding: 30px;
             border-radius: 5px;
             top: 60px;
             right: 20px;
@@ -165,16 +166,18 @@
                 }
                 Ensure the default section is visible */
                 /* Desktop View */
+/* Content Section */
 .content-section {
     display: none; /* Initially hidden */
-    margin-left: 270px; /* Starts from where the sidebar ends */
-    margin-right: 20px; /* Keep margin from right */
-    margin-top: 20px;
+    margin-left: 40px; /* Starts from where the sidebar ends */
+    margin-right: 20px; /* Keep right margin */
+    margin-top: 30px;
     background: rgba(41, 41, 61, 0.8);
-    padding: 30px;
-    border-radius: 8px;
+    padding: 40px;
+    border-radius: 10px;
     color: white;
-    width: calc(100% - 250px); /* Takes the full remaining width after the sidebar */
+    width: calc(100% - -180px); /* Adjusted width with spacing */
+    min-height: 80vh; /* Ensure it takes up most of the viewport height */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     transition: all 0.3s ease-in-out;
@@ -183,19 +186,57 @@
 /* Mobile View - When Sidebar is Hidden */
 @media (max-width: 768px) {
     .content-section {
-        margin-left: 20px; /* Reset left margin */
-        margin-right: 20px; /* Equal margin on both sides */
-        width: calc(100% - 40px); /* Take full width minus margins */
+        margin-left: 10px; /* Adjusted for mobile */
+        margin-right: 10px; /* Equal margin */
+        width: calc(100% - 20px); /* Takes full width with padding */
+        padding: 50px 20px; /* Added more padding for better spacing */
+        min-height: 75vh; /* Adjusted height for mobile */
     }
 }
 
+        /* Profile Picture */
+#profile-pic-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+}
+
         /* Show the default section */
-        #user-list {
+        #market-access {
             display: block;
         }
-           /* Profile Content Wrapper */
+        table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      color: black;
+    }
 
-        
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f1f1f1;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    canvas {
+      max-width: 100%;
+      margin: 20px auto;
+    }
+    .dropdown-container {
+      text-align: center;
+      margin: 20px 0;
+    }
         /* Footer Styling */
         .footer {
             text-align: center;
@@ -224,12 +265,15 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <h2 class="sidebar-title">Smart AgricTech</h2>
-            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="user-list">Manage Users</a>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="analytics">View Analytics</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="reports">Generate Reports</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="logistics">Manage Logistics</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="settings">Settings</a></li>
-                <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li>
+            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-place"><i class="fas fa-shop"></i> Market Place</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i> Weather Forecast</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i> Finance</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="resources"><i class="fas fa-book-open"></i> Resources</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="community"><i class="fas fa-users"></i> Community </a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> View Analytics</a></li>
+                <!-- <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li> -->
            </ul>
         </aside>
             <!-- Sidebar (Bootstrap Offcanvas for Mobile) -->
@@ -239,12 +283,14 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="user-list">Manage Users</a>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="analytics">View Analytics</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="reports">Generate Reports</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="logistics">Manage Logistics</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="settings">Settings</a></li>
-                <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li>
+            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access </a>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i>Weather Forecast</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i>Market Trends</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i>Finance</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="resources"><i class="fas fa-book-open"></i> Resources</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="community"><i class="fas fa-users"></i>Community </a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> View Analytics</a></li>
+                <!-- <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li> -->
            </ul>
         </div>
     </div>
@@ -262,116 +308,104 @@
                         👤 Profile
                     </span>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item profile-link" href="#" data-section="edit-profile">Edit Profile</a></li>
-                        <li><a class="dropdown-item profile-link" href="#" data-section="view-profile">View Profile</a></li>
-                        <li><a class="dropdown-item profile-link" href="#" data-section="settings">Settings</a></li>
-                        <li><a class="dropdown-item text-danger profile-link" href="#" data-section="logout">Logout</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="view-profile"><i class="fas fa-id-badge"></i> View Profile</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="my-wallet"><i class="fas fa-wallet"></i>My  Wallet</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a class="dropdown-item text-danger profile-link" href="#" data-section="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
                 </div>
 
             </header>
             <!-- Content Sections -->
             <div class="col-md-9">
-                <!-- User List Section -->
-                <div id="user-list" class="content-section">
-                    <h3>User List</h3>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in users %}
-                            <tr>
-                                <td>{{ user.id }}</td>
-                                <td>{{ user.name }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.role }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-sm">View</a>
-                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                <!-- Market Access -->
+            <div id="market-access" class="content-section" data-section="market-access">
+                <h2 class="section-header">Market Access</h2>
+                <table>
+                <thead>
+                    <tr>
+                    <th>Produce</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>Tomatoes</td>
+                    <td>100kg</td>
+                    <td>$10/kg</td>
+                    <td>Available</td>
+                    </tr>
+                    <tr>
+                    <td>Potatoes</td>
+                    <td>200kg</td>
+                    <td>$5/kg</td>
+                    <td>Sold</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="dropdown-container">
+            <div class="content-section" data-section="market-access" id="market-trends">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Check other grains and products trends
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Maize Trends</a></li>
+                  <li><a class="dropdown-item" href="#">Wheat Trends</a></li>
+                  <li><a class="dropdown-item" href="#">Rice Trends</a></li>
+                  <li><a class="dropdown-item" href="#">Soybean Trends</a></li>
+                </ul>
+                <!-- Chart Container -->
+                <canvas id="progressiveLineChart" width="600" height="400"></canvas>
+              </div>
+              </div>
 
-                <!-- Analytics Section -->
-                <div id="analytics" class="content-section">
-                    <h3>Analytics</h3>
-                    <p>View detailed analytics about the platform's performance and user activities.</p>
-                </div>
-
-                <!-- Reports Section -->
-                <div id="reports" class="content-section">
-                    <h3>Generate Reports</h3>
-                    <p>Generate and download reports for platform data, user statistics, and more.</p>
-                </div>
-
-                <!-- Logistics Section -->
-                <div id="logistics" class="content-section">
-                    <h3>Manage Logistics</h3>
-                    <p>View and manage logistics for transactions and delivery activities.</p>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Transaction ID</th>
-                                <th>Customer Name</th>
-                                <th>Delivery Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for logistic in logistics %}
-                            <tr>
-                                <td>{{ logistic.transaction_id }}</td>
-                                <td>{{ logistic.customer_name }}</td>
-                                <td>{{ logistic.status }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm">Notify</a>
-                                    <a href="#" class="btn btn-success btn-sm">Initiate Delivery</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Settings Section -->
-                <div id="settings" class="content-section">
-                    <h3>Settings</h3>
-                    <p>Manage platform settings and configurations.</p>
-                </div>
+  
 
                  <!-- Profile Sections -->
                 <div id="profile-content">
+                    <!-- Edit Profile Section -->
                     <div id="edit-profile" class="content-section" style="display: none;">
                         <h2>Edit Profile</h2>
+                        <div class="text-center mb-3">
+                            <img id="profile-pic-preview" src="https://via.placeholder.com/100" class="rounded-circle border" alt="Profile Picture">
+                            <input type="file" id="profile-pic" class="form-control mt-2" accept="image/*">
+                        </div>
+
                         <form>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Full Name</label>
                                 <input type="text" class="form-control" id="name" placeholder="Enter your full name">
                             </div>
+
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Enter your email">
                             </div>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Bio</label>
+                                <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Save Changes</button>
                         </form>
                     </div>
 
+                    <!-- View Profile Section -->
                     <div id="view-profile" class="content-section" style="display: none;">
                         <h2>Profile Details</h2>
+                        <div class="text-center">
+                            <img src="https://via.placeholder.com/100" class="rounded-circle border mb-3" alt="Profile Picture">
+                        </div>
                         <p><strong>Name:</strong> John Doe</p>
                         <p><strong>Email:</strong> johndoe@example.com</p>
+                        <p><strong>Bio:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec lacus eu arcu vehicula aliquet.</p>
                     </div>
+                </div>
 
                     <div id="settings" class="content-section" style="display: none;">
                         <h2>Settings</h2>
@@ -391,6 +425,7 @@
   
     </main>
     </div>
+    
 
 <!-- Bootstrap & Chart.js Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -459,6 +494,129 @@ function logoutUser() {
     alert("Logging out...");
     window.location.href = "login.html"; // Redirect to login page
 }
+
+// Market Trends function
+document.addEventListener("DOMContentLoaded", function () {
+    const chartCanvas = document.getElementById("progressiveLineChart");
+
+    if (chartCanvas) {
+        // Generate dummy data
+        const data = [];
+        const data2 = [];
+        let prev = 100; // Start value for dataset 1
+        let prev2 = 80; // Start value for dataset 2
+        for (let i = 0; i < 1000; i++) {
+            prev += 5 - Math.random() * 10;
+            data.push({ x: i, y: prev });
+            prev2 += 5 - Math.random() * 10;
+            data2.push({ x: i, y: prev2 });
+        }
+
+        const totalDuration = 10000;
+        const delayBetweenPoints = totalDuration / data.length;
+        const previousY = (ctx) =>
+            ctx.index === 0
+                ? ctx.chart.scales.y.getPixelForValue(100)
+                : ctx.chart.getDatasetMeta(ctx.datasetIndex)
+                    .data[ctx.index - 1].getProps(["y"], true).y;
+
+        const animation = {
+            x: {
+                type: "number",
+                easing: "linear",
+                duration: delayBetweenPoints,
+                from: NaN,
+                delay(ctx) {
+                    if (ctx.type !== "data" || ctx.xStarted) {
+                        return 0;
+                    }
+                    ctx.xStarted = true;
+                    return ctx.index * delayBetweenPoints;
+                },
+            },
+            y: {
+                type: "number",
+                easing: "linear",
+                duration: delayBetweenPoints,
+                from: previousY,
+                delay(ctx) {
+                    if (ctx.type !== "data" || ctx.yStarted) {
+                        return 0;
+                    }
+                    ctx.yStarted = true;
+                    return ctx.index * delayBetweenPoints;
+                },
+            },
+        };
+
+        const config = {
+            type: "line",
+            data: {
+                datasets: [
+                    {
+                        label: "Dataset 1",
+                        borderColor: "red",
+                        borderWidth: 1,
+                        radius: 0,
+                        data: data,
+                    },
+                    {
+                        label: "Dataset 2",
+                        borderColor: "blue",
+                        borderWidth: 1,
+                        radius: 0,
+                        data: data2,
+                    },
+                ],
+            },
+            options: {
+                animation,
+                interaction: {
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "top",
+                    },
+                },
+                scales: {
+                    x: {
+                        type: "linear",
+                        title: {
+                            display: true,
+                            text: "Time (arbitrary units)",
+                        },
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Value",
+                        },
+                    },
+                },
+            },
+        };
+
+        const ctx = chartCanvas.getContext("2d");
+        new Chart(ctx, config);
+    }
+});
+// Ensure the chart container is visible
+function showChart() {
+    const chartSection = document.getElementById("market-trends");
+    chartSection.style.display = "block";
+
+    // Delay chart rendering slightly
+    setTimeout(() => {
+        if (!window.chartInitialized) {
+            const ctx = document.getElementById("progressiveLineChart").getContext("2d");
+            new Chart(ctx, config);
+            window.chartInitialized = true;
+        }
+    }, 300);
+}
+
 </script>
  <!-- Footer -->
  <footer class="footer">
