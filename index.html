@@ -204,7 +204,7 @@
 }
 
         /* Show the default section */
-        #market-access {
+        #home{
             display: block;
         }
         /* Table Styling - Adjusted to Match Content Section */
@@ -266,6 +266,25 @@
       text-align: center;
       margin: 20px 0;
     }
+    /* Widget Box */
+.widget-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick Actions */
+.btn-block {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
         /* Footer Styling */
         .footer {
             text-align: center;
@@ -294,8 +313,8 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <h2 class="sidebar-title">Smart AgricTech</h2>
-            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-place"><i class="fas fa-shop"></i> Market Place</a></li>
+            <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i> Weather Forecast</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i> Finance</a></li>
@@ -312,7 +331,8 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access </a>
+            <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i>Weather Forecast</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i>Market Trends</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i>Finance</a></li>
@@ -348,6 +368,59 @@
             </header>
             <!-- Content Sections -->
             <div class="col-md-9">
+<!--                 Home Section -->
+                <div id="home" class="content-section">
+    <h2>Welcome to Your Dashboard</h2>
+    <p>Stay informed and manage your farming operations efficiently with Smart AgricTech.</p>
+    
+    <div class="row">
+        <!-- Quick Stats -->
+        <div class="col-md-4">
+            <div class="widget-box">
+                <h3><i class="fas fa-seedling"></i> Active Crops</h3>
+                <p><strong>5 Fields</strong> currently growing</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget-box">
+                <h3><i class="fas fa-cloud-rain"></i> Weather Alert</h3>
+                <p><strong>Rain Expected</strong> in 3 days</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget-box">
+                <h3><i class="fas fa-wallet"></i> Finance Overview</h3>
+                <p>Balance: <strong>$12,500</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shortcuts -->
+    <h3 class="mt-4">Quick Actions</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="#" class="btn btn-primary btn-block" data-section="market-access">
+                <i class="fas fa-store"></i> Access Market
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="btn btn-success btn-block" data-section="weather-forecast">
+                <i class="fas fa-cloud-sun"></i> View Weather
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="btn btn-warning btn-block" data-section="market-trends">
+                <i class="fas fa-chart-line"></i> Check Trends
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="btn btn-info btn-block" data-section="community">
+                <i class="fas fa-users"></i> Join Community
+            </a>
+        </div>
+    </div>
+</div>
+
                 <!-- Market Access -->
             <div id="market-access" class="content-section" data-section="market-access">
                 <h2 class="section-header">Market Access</h2>
