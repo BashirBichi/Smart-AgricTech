@@ -279,12 +279,42 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Quick Actions */
+/* Quick Actions Section */
+.quick-actions h3 {
+    text-align: center;
+}
+
+/* Button Styling */
 .btn-block {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
+    padding: 8px 12px; /* Reduce padding */
+    font-size: 14px; /* Reduce font size */
+    width: 100%; /* Ensure full width in mobile */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icon inside button */
+.btn-block i {
+    margin-right: 5px;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+    .quick-actions .row {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center;
+    }
+
+    .quick-actions .col-md-3 {
+        width: 100%; /* Make each button take full width */
+        margin-bottom: 10px; /* Add spacing */
+    }
+
+    .btn-block {
+        width: 80%; /* Slightly reduce width for a balanced look */
+    }
 }
 
         /* Footer Styling */
