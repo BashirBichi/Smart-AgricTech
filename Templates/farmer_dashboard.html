@@ -1,0 +1,869 @@
+<!-- Produce Listings:
+A table or grid showing the farmer's current produce listings, including:
+Produce name and description
+Quantity and price
+Status (e.g. "available", "sold", "pending")
+Option to edit or delete existing listings
+Post New Produce:
+A form to post new produce for sale, including:
+Produce name and description
+Quantity and price
+Photos of the produce
+Option to save draft or publish the listing
+Buyer Inquiries and Orders:
+A table or grid showing buyer inquiries and orders, including:
+Buyer name and contact information
+Produce name and quantity
+Status (e.g. "pending", "accepted", "rejected")
+Option to respond to buyer inquiries and manage orders
+Resources
+
+This section provides farmers with access to important resources and information to help them improve their agricultural practices.
+
+Agricultural Best Practices:
+A library of articles and videos on best practices for different crops and farming techniques
+Option to search and filter by topic or crop
+Fertilizers and Pesticides:
+A database of fertilizers and pesticides, including:
+Product name and description
+Usage instructions and safety precautions
+Reviews and ratings from other farmers
+Option to search and filter by product name or type
+Agricultural Extension Services:
+A directory of local agricultural extension services, including:
+Service name and description
+Contact information and location
+Reviews and ratings from other farmers
+Option to search and filter by location or service type
+Finance
+
+This section provides farmers with access to financial tools and services to help them manage their finances.
+
+Microloans and Grants:
+A list of available microloans and grants, including:
+Loan/grant name and description
+Eligibility criteria and application process
+Interest rates and repayment terms
+Option to apply for a loan or grant
+Financial Management Tools:
+A set of tools to help farmers manage their finances, including:
+Budgeting and expense tracking
+Cash flow forecasting
+Financial reporting and analysis
+Option to connect to the farmer's bank account or mobile money wallet
+Transaction History and Balance:
+A record of the farmer's transactions, including:
+Transaction date and amount
+Transaction type (e.g. sale, purchase, loan repayment)
+Balance and available funds
+Option to view detailed transaction history and balance
+Community
+
+This section provides farmers with a platform to connect with other farmers, ask questions, and share knowledge.
+
+Forums and Chat Groups:
+A set of online forums and chat groups for farmers to discuss various topics, including:
+Crop management and best practices
+Market trends and prices
+Agricultural news and policies
+Option to create new topics and respond to existing ones
+Contact Information for Local Agricultural Officers:
+A directory of local agricultural officers, including:
+Officer name and contact information
+Location and area of expertise
+Reviews and ratings from other farmers
+Option to search and filter by location or area of expertise
+This design provides a clean and intuitive interface for farmers to access important information and tools. The layout is organized into clear sections, and the use of icons and images helps to break up the text and make the platform more visually appealing. The platform is also optimized for mobile devices, making it accessible to farmers who may not have access to a computer. --> --> -->
+
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Skeleton </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<style>
+
+
+
+</style>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Inventory-management"><i class="fas fa-clipboard-list"></i> Inventory</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Product-catalog"> <i class="fas fa-shopping-cart">
+                </i><span id="cart-badge" class="badge badge-danger" style="color: rgb(255, 0, 0);">0</span> Cart</a></li> 
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i> Weather Forecast</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="order-management"><i class="fas fa-box"></i> Order Management</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance-management"><i class="fas fa-wallet"></i> Finance</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Resources"><i class="fas fa-book-open"></i> Resources</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community </a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> View Analytics</a></li>
+                <!-- <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li> -->
+           </ul>
+        </aside>
+            <!-- Sidebar (Bootstrap Offcanvas for Mobile) -->
+    <div class="offcanvas offcanvas-start text-bg-dark d-md-none" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="mobileSidebarLabel">Smart AgricTech</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i>Weather Forecast</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i>Market Trends</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i>Finance</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="resources"><i class="fas fa-book-open"></i> Resources</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="community"><i class="fas fa-users"></i>Community </a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> View Analytics</a></li>
+                <!-- <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li> -->
+           </ul>
+        </div>
+    </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar Toggle (Mobile) -->
+            <!-- Header -->
+            <header class="dashboard-header">
+                <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                    ☰ Menu
+                </button>
+                <h1 class="dashboard-title">Smart AgricTech | Empowering Farmers, Traders & Innovators</h1>
+                <div class="dropdown">
+                    <span class="profile-menu dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        👤 Profile
+                    </span>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item profile-link" href="#" data-section="edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="view-profile"><i class="fas fa-id-badge"></i> View Profile</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="my-wallet"><i class="fas fa-wallet"></i>My  Wallet</a></li>
+                        <li><a class="dropdown-item profile-link" href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a class="dropdown-item text-danger profile-link" href="#" data-section="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+
+            </header>
+            <!-- Content Sections -->
+            <div class="col-md-9">
+            <!-- Profile Sections -->
+            <div id="profile-content">
+            <!-- Edit Profile Section -->
+            <div id="edit-profile" class="content-section" style="display: none;">
+                <h2>Edit Profile</h2>
+                <div class="text-center mb-3">
+                    <img id="profile-pic-preview" src="https://via.placeholder.com/100" class="rounded-circle border" alt="Profile Picture">
+                    <input type="file" id="profile-pic" class="form-control mt-2" accept="image/*">
+                </div>
+
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- View Profile Section -->
+            <!-- <div id="view-profile" class="content-section" style="display: none;">
+                <h2>Profile Details</h2>
+                <div class="text-center">
+                    <img src="https://via.placeholder.com/100" class="rounded-circle border mb-3" alt="Profile Picture">
+                </div>
+                <p><strong>Name:</strong> <h3 class="farmer-name">{{ name}}</h3></p>
+                <p><strong>Email:</strong> johndoe@example.com</p>
+                <p><strong>Bio:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec lacus eu arcu vehicula aliquet.</p>
+            </div> -->
+            <div id="view-profile" class="content-section">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img src="your-profile-image.jpg" alt="Profile Picture">
+                    </div>
+                    <h2>{{ name}}</h2>
+                    <p class="username">{{ name}}</p>
+                    <p class="bio">🌾 Passionate Farmer | Expert in crop production & sustainable agriculture.</p>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Location: City, Country</p>
+                    <div class="profile-buttons">
+                        <button class="btn follow">Follow</button>
+                        <button class="btn message">Message</button>
+                    </div>
+                </div>
+
+        </div>
+            
+        </div>
+
+            <div id="settings" class="content-section" style="display: none;">
+                <h2>Settings</h2>
+                <p>Manage your account settings here.</p>
+                <button class="btn btn-warning">Change Password</button>
+            </div>
+
+            <div id="logout" class="content-section" style="display: none;">
+                <h2>Logout</h2>
+                <p>Are you sure you want to logout?</p>
+                <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
+            </div>
+            <!-- Home Section -->
+            <div id="home" class="content-section" >
+                <h2>Welcome to Your Dashboard</h2>
+                    <!-- <h2 id="market-trends" class="content-section">Market Trends</h2>
+                    
+                    <canvas id="progressiveLineChart" class="content-section" style="display: none;"></canvas> -->
+
+                <p>Stay informed and manage your farming operations efficiently with Smart AgricTech.</p>
+                
+                <div class="row">
+                    <!-- Quick Stats -->
+                    <div class="col-md-4">
+                    <div class="widget-box">
+                            <h3><i class="fas fa-seedling"></i> Active Crops</h3>
+                            <p><strong>5 Fields</strong> currently growing</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget-box">
+                            <h3><i class="fas fa-cloud-rain"></i> Weather Alert</h3>
+                            <p><strong>Rain Expected</strong> in 3 days</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget-box">
+                            <h3><i class="fas fa-wallet"></i> Finance Overview</h3>
+                            <p>Balance: <strong>12,500</strong></p>
+                        </div>
+                    </div>
+                </div>
+            
+            
+                <!-- Shortcuts -->
+                <h3 class="mt-4">Quick Actions</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="#" class="btn btn-primary btn-block" data-section="market-access">
+                            <i class="fas fa-store"></i> Access Market
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="btn btn-success btn-block" data-section="weather-forecast">
+                            <i class="fas fa-cloud-sun"></i> View Weather
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="btn btn-warning btn-block" data-section="market-trends">
+                            <i class="fas fa-chart-line" onclick="showbtn()"></i> Check Trends
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="btn btn-info btn-block" data-section="community">
+                            <i class="fas fa-users"></i> Join Community
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="weather-forecast" class="content-section">
+                <h2>🌦 Weather Forecast</h2>
+            
+                <!-- Location Search Bar -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="weatherLocation" placeholder="Enter location..." aria-label="Search">
+                    <button class="btn btn-outline-secondary" id="fetchWeather">Get Weather</button>
+                </div>
+            
+                <!-- Weather Display -->
+                <div class="weather-info">
+                    <div class="weather-card">
+                        <h3 id="city-name">Kano, Nigeria</h3>
+                        <img id="weather-icon" src="https://openweathermap.org/img/wn/10d.png" alt="Weather Icon">
+                        <h4 id="temperature">28°C</h4>
+                        <p id="weather-description">Sunny</p>
+                        <p><strong>Humidity:</strong> <span id="humidity">40%</span></p>
+                        <p><strong>Wind Speed:</strong> <span id="wind-speed">10 km/h</span></p>
+                    </div>
+                </div>
+            </div>
+                 <!-- Cart Section -->
+                <div id="Product-catalog" class="content-section">
+                    <h2>Your Cart</h2>
+                    <ul id="cart-items" class="list-group"></ul>
+                
+                    <div class="cart-summary mt-3">
+                        <h4> <span id="cart-total">₦0.00</span></h4>
+                        <button id="clear-cart" class="btn btn-danger">Clear Cart</button>
+                        <button id="proceed-to-checkout" class="btn btn-primary">Proceed to Checkout</button>
+                    </div>
+                </div>
+
+                
+                <!-- Checkout Invoice Modal -->
+                <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="checkoutModalLabel">Invoice</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h4>Order Summary</h4>
+                                <ul id="invoice-items" class="list-group"></ul>
+                                <h5 class="mt-3">Total: <span id="invoice-total">₦0.00</span></h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="download-invoice" class="btn btn-secondary">Download Invoice</button>
+                                <button id="proceed-to-payment" class="btn btn-success" data-section="checkout-section">Proceed to Payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <!-- Invoice Modal -->
+                <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="invoiceModalLabel">Invoice</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul id="invoice-items" class="list-group"></ul>
+                                <h4 id="invoice-total" class="mt-3 text-center"></h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="download-invoice" class="btn btn-secondary">Download Invoice</button>
+                                <button id="proceed-to-payment" class="btn btn-success">Proceed to Payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div id="checkout-section" class="content-section">
+                    <h2>Checkout</h2>
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label for="full-name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="full-name" required>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Shipping Address</label>
+                            <textarea class="form-control" id="address" required></textarea>
+                        </div>
+                
+                        <div class="mb-3">
+                            <label for="payment-method" class="form-label">Select Payment Method</label>
+                            <select class="form-control" id="payment-method">
+                                <option value="paystack">Pay with Paystack</option>
+                                <option value="flutterwave">Pay with Flutterwave</option>
+                                <option value="stripe">Pay with Stripe</option>
+                            </select>
+                        </div>
+                
+                        <button type="submit" class="btn btn-success">Place Order</button>
+                    </form>
+                </div> -->
+                <!-- Checkout Section -->
+                <div id="checkout-section" class="content-section" style="display: none;">
+                    <h2>Checkout</h2>
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="payment-method" class="form-label">Payment Method</label>
+                            <select class="form-control" id="payment-method">
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="transfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Place Order</button>
+                    </form>
+                </div>
+
+                <div id="order-management" class="content-section">
+                    <h2>Order Management</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order-table">
+                            <!-- Orders will be inserted dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                                <!-- Market Access -->
+                <div id="market-access" class="content-section" style="display: none;">
+                    <h3>Market Access</h3>
+                    <p>Post your inventory products for sale in the marketplace.</p>
+                
+                    <!-- Market Access Form -->
+                    <form id="marketAccessForm">
+                        <div class="mb-3">
+                            <label for="marketProductName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="marketProductName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marketProductDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="marketProductDescription" rows="2" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marketProductPrice" class="form-label">Price ₦</label>
+                            <input type="number" class="form-control" id="marketProductPrice" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marketProductImage" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="marketProductImage" accept="image/*" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="postToMarketplace">Post to Marketplace</button>
+                    </form>
+                
+                    <hr>
+                
+
+                </div>
+                <!-- Market Place -->
+                <div  id="marketplace" class="content-section"> 
+                    <!-- Marketplace Search Bar -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="marketSearch" placeholder="Search for products..." aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="searchProduct">Search</button>
+                        </div>
+                    </div>
+                
+                    <!-- Marketplace Products -->
+                    <div class="row" id="marketplaceContainer">
+                        <!-- Products posted from Market Access will appear here -->
+                    </div>
+                </div>
+                <div id="market-trends" class="content-section">
+                    <h2>Market Trends</h2>
+                
+                    <!-- Dropdown for Grain Selection -->
+                    <div class="mb-3">
+                        <label for="grainSelect" class="form-label">Select a Grain:</label>
+                        <select class="form-select" id="grainSelect">
+                            <option value="rice">Rice</option>
+                            <option value="maize">Maize</option>
+                            <option value="wheat">Wheat</option>
+                            <option value="millet">Millet</option>
+                            <option value="sorghum">Sorghum</option>
+                            <option value="barley">Barley</option>
+                            <option value="oats">Oats</option>
+                            <option value="soybeans">Soybeans</option>
+                            <option value="groundnuts">Groundnuts</option>
+                            <option value="sesame">Sesame</option>
+                        </select>
+                    </div>
+                
+                    <!-- Chart Canvas -->
+                    <canvas id="marketTrendsChart"></canvas>
+                
+                    <!-- Button to View More Trends -->
+                    <button class="btn btn-primary mt-3" id="viewMoreTrends">Check Other Product Trends</button>
+                </div>
+                
+                
+                <!-- Product Details Modal -->
+            <!-- <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productDetailsModalLabel">Product Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img id="modalProductImage" src="" alt="Product Image" class="img-fluid">
+                            <h5 id="modalProductName"></h5>
+                            <p id="modalProductPrice"></p>
+                            <p id="modalProductDescription"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             -->
+             <!-- <div id="market-trends" class="content-section">
+                <h2>Market Trends</h2>
+             -->
+                <!-- Search Bar -->
+                <!-- <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="userTrendSearch" placeholder="Search for products..." aria-label="Search">
+                    <select id="userTrendCategory" class="form-select">
+                        <option value="">Select Category</option>
+                        <option value="Grains">Grains</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" id="userSearchTrends">Search</button>
+                </div>
+             -->
+                <!-- Market Trends Chart -->
+                <!-- <canvas id="userMarketTrendsChart"></canvas>
+             -->
+                <!-- Button to check trends of other products -->
+                <!-- <button id="userCheckOtherTrends" class="btn btn-primary mt-3">Check Other Products Trends</button>
+            </div>
+             -->
+            <div id="Inventory-management" class="content-section" style="display: none;">
+                <h3>Inventory Management</h3>
+                
+                <!-- Inventory Table -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Current Inventory</h5>
+                        <table class="table table-striped" id="inventoryTable">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Inventory items will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                        <button class="btn btn-danger mt-3" id="clearInventory">Clear Inventory</button>
+                    </div>
+                </div>
+            
+                <!-- Add Product to Inventory Form -->
+                <div class="container mt-4">
+                    <h5>Add New Product</h5>
+                    <form id="addProductForm">
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="productName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productQuantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="productQuantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="productPrice" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="addProductBtn">Add to Inventory</button>
+                    </form>
+                </div>
+            </div>
+            <div id="Resources" class="content-section">
+                <div class="col-md-12">
+                    <h5>Resources</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <h5 class="card-title">Agricultural Best Practices</h5>
+                                <p class="card-text">Learn more about agricultural best practices like
+                                    <ul>
+                                    <li>Crop rotation for improved yields</li>
+                                    <li>Integrated pest management techniques</li>
+                                    </p>
+                                <a href="#" class="btn btn-secondary">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <h5 class="card-title">Fertilizers and Pesticides</h5>
+                                <p class="card-text">Learn more about fertilizers and pesticides for you to make informed decision before choosing</p>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                        <th>Product Name</th>
+                                        <th>Description</th>
+                                        <th>Usage Instructions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td>Fertilizer X</td>
+                                        <td>Organic fertilizer for improved soil health</td>
+                                        <td>Apply 10 kg/ha, 2 weeks before planting</td>
+                                        </tr>
+                                        <tr>
+                                        <td>Pesticide Y</td>
+                                        <td>Chemical pesticide for pest control</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                <a href="#" class="btn btn-secondary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <h5 class="card-title">Agricultural Extension Services</h5>
+                                <p class="card-text"><ul>
+                                    <li><a href="#">Local agricultural extension office</a></li>
+                                    <li><a href="#">Private agricultural consulting services</a></li>
+                                </ul>
+                                </p>
+                                <a href="#" class="btn btn-secondary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Finance -->
+           <div id="Finance-management" class="content-section">
+                <h2>Microloans and Grants</h2>
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>Loan/Grant Name</th>
+                    <th>Description</th>
+                    <th>Eligibility Criteria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>Microloan X</td>
+                    <td>Loan for small-scale farmers</td>
+                    <td>Must be a registered farmer, minimum 1 year of farming experience</td>
+                    </tr>
+                    <tr>
+                    <td>Grant Y</td>
+                    <td>Grant for organic farming practices</td>
+                    <td>Must be a certified organic farmer, minimum 2 years of organic farming experience</td>
+                    </tr>
+                </tbody>
+                </table>
+                <h2>Financial Management Tools</h2>
+                <ul>
+                <li><a href="#">Budgeting and expense tracking</a></li>
+                <li><a href="#">Cash flow forecasting</a></li>
+                </ul>
+                <h2>Transaction History and Balance</h2>
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>Transaction Date</th>
+                    <th>Transaction Amount</th>
+                    <th>Transaction Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>2023-02-15</td>
+                    <td>$100</td>
+                    <td>Sale</td>
+                    </tr>
+                    <tr>
+                    <td>2023-02-20</td>
+                    <td>$50</td>
+                    <td>Purchase</td>
+                    </tr>
+                </tbody>
+<!-- Bootstrap & Chart.js Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="{{ url_for('static', filename='js/cart.js') }}"></script> -->
+<script src="{{ url_for('static', filename='js/cartLogic.js') }}"></script>
+<script src="favorite.js"></script>
+<script src="{{ url_for('static', filename='js/marketplace&inventory.js') }}"></script>
+<script src="{{ url_for('static', filename='js/productposting&search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/marketTrends.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/marketTrendsUser.js') }}"></script>  
+<script src="{{ url_for('static', filename='js/trends.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/btn.js') }}"></script> -->
+<!-- <script src="{{ url_for('static', filename='js/cart-checkout-order.js') }}"></script> -->
+
+
+
+
+<script>
+    
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuLinks = document.querySelectorAll('.nav-link[data-section]');
+    const profileLinks = document.querySelectorAll('.profile-link[data-section]');
+    const sections = document.querySelectorAll('.content-section');
+    const profileSections = document.querySelectorAll("#profile-content .content-section");
+
+    // Function to hide all sections
+    function hideAllSections() {
+        sections.forEach(section => section.style.display = 'none');
+        profileSections.forEach(section => section.style.display = 'none');
+    }
+
+    // Function to show sidebar content
+    function showSidebarSection(sectionId) {
+        hideAllSections();
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+        }
+    }
+
+    // Function to show profile section
+    function showProfileSection(sectionId) {
+        hideAllSections();
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.style.display = "block";
+        }
+    }
+
+    // Sidebar Navigation Links
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSidebarSection(link.getAttribute('data-section'));
+
+            // Remove 'active' class from all links and add to the clicked one
+            menuLinks.forEach(item => item.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // Profile Dropdown Links
+    profileLinks.forEach(item => {
+        item.addEventListener("click", function (event) {
+            event.preventDefault();
+            const selectedSection = item.getAttribute("data-section");
+
+            if (selectedSection === "logout") {
+                logoutUser();
+            } else {
+                showProfileSection(selectedSection);
+            }
+        });
+    });
+});
+
+// Logout function
+function logoutUser() {
+    alert("Logging out...");
+    window.location.href = "login.html"; // Redirect to login page
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const fetchWeatherBtn = document.getElementById("fetchWeather");
+
+    fetchWeatherBtn.addEventListener("click", function () {
+        // Mock data for demonstration
+        const mockWeather = {
+            city: "Lagos, Nigeria",
+            temperature: "30°C",
+            description: "Partly Cloudy",
+            humidity: "55%",
+            windSpeed: "12 km/h",
+            icon: "https://openweathermap.org/img/wn/02d.png" // Cloudy icon
+        };
+
+        // Update UI
+        document.getElementById("city-name").textContent = mockWeather.city;
+        document.getElementById("temperature").textContent = mockWeather.temperature;
+        document.getElementById("weather-description").textContent = mockWeather.description;
+        document.getElementById("humidity").textContent = mockWeather.humidity;
+        document.getElementById("wind-speed").textContent = mockWeather.windSpeed;
+        document.getElementById("weather-icon").src = mockWeather.icon;
+    });
+});
+
+</script>
+<script>
+    async function fetchWeather() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+                try {
+                    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    console.log(data); // Log the data for debugging
+                    document.getElementById('weather-info').innerText = `Temperature: ${data.main.temp}°C, Weather: ${data.weather[0].description}`;
+                } catch (error) {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('weather-info').innerText = "Failed to fetch weather data.";
+                }
+            });
+        } else {
+            document.getElementById('weather-info').innerText = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchWeather);
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Function to handle navigation
+    function navigateToSection(sectionId) {
+        // Hide all content sections
+        document.querySelectorAll(".content-section").forEach(section => {
+            section.style.display = "none";
+        });
+
+        // Show the selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.style.display = "block";
+        }
+    }
+
+    // Attach event listeners to buttons
+    document.querySelectorAll(".btn-block").forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetSection = this.getAttribute("data-section");
+            navigateToSection(targetSection);
+        });
+    });
+
+    // Handle the "Check Trends" button separately
+    document.querySelector(".fa-chart-line").addEventListener("click", function (event) {
+        event.preventDefault();
+        navigateToSection("market-trends");
+    });
+});
+
+</script>
+
+ 
+</body>
+
+</html>

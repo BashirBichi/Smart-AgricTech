@@ -1,0 +1,33 @@
+#market-trends {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    min-height: 80vh;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#adminMarketTrendsChart {
+    max-height: 400px;
+    margin-top: 20px;
+}
+
+#addProductName {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.table {
+    background: rgba(255, 255, 255, 0.9);
+    text-align: left;
+}
+
+.table th {
+    background: #007bff;
+    color: white;
+}
+
+.delete-product {
+    background: red;
+    color: white;
+}

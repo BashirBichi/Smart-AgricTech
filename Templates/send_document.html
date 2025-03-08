@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Document</title>
+    <link rel="stylesheet" href="../Static/Css/styles.css">
+    <script>
+        function sendDocument() {
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (emailPattern.test(email)) {
+                // Logic to send the document to the email
+                alert('Document will be sent to ' + email);
+                // Here you would typically make an AJAX call to your backend to send the document
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Send Document</h1>
+        <input type="email" id="email" placeholder="Enter your email address" required>
+        <button onclick="sendDocument()">Get</button>
+    </div>
+</body>
+</html>
