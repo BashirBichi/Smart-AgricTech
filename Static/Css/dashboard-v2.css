@@ -1,0 +1,35 @@
+/* Smart AgricTech dashboard visual system — presentation only */
+:root{--agri-deep:#103e31;--agri-green:#2d8756;--agri-pale:#eef6ed;--agri-ink:#17392d;--agri-muted:#718478;--agri-border:#e1eae2;--agri-shadow:0 8px 30px rgba(22,66,40,.07)}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",system-ui,sans-serif!important;background:#f7f9f5!important;color:var(--agri-ink)!important}
+h1,h2,h3,h4,h5,.navbar-brand,.sidebar-title{font-family:"Manrope",sans-serif!important;letter-spacing:-.035em}
+.dashboard-container{background:#f7f9f5!important;min-height:100vh}
+.sidebar{background:linear-gradient(165deg,#123e31,#19503c)!important;color:#f3f8f3!important;border-right:1px solid #255841!important;box-shadow:5px 0 35px rgba(12,54,32,.12)!important;padding-top:24px!important}
+.sidebar-title{color:#fff!important;font-weight:800!important}
+.sidebar .nav-link{font-family:"DM Sans",sans-serif!important;color:#cbded0!important;font-weight:600!important;font-size:13px!important;line-height:1.5!important;border-radius:11px!important;padding:12px 13px!important;margin:3px 0!important}
+.sidebar .nav-link i{color:#b9ddba!important;margin-right:7px}
+.sidebar .nav-link.active,.sidebar .nav-link:hover{background:rgba(255,255,255,.14)!important;color:#fff!important;box-shadow:inset 3px 0 0 #b6dda2}
+.sidebar .nav-link.active i,.sidebar .nav-link:hover i{color:#fff!important}
+.main-content{background:#f7f9f5!important;color:var(--agri-ink)!important}
+.main-content h1,.main-content h2,.main-content h3,.content-section h2{color:var(--agri-deep)!important;font-weight:800!important}
+.content-section{color:var(--agri-ink)}
+.card,.stat-card,.dashboard-card,.metric-card,.auth-card,.modal-content,.content-section .table-responsive{border:1px solid var(--agri-border)!important;border-radius:16px!important;background:#fff!important;box-shadow:var(--agri-shadow)!important}
+.card-header,.modal-header{background:#f0f6ee!important;color:var(--agri-deep)!important;border-bottom:1px solid var(--agri-border)!important}
+.card-body{color:var(--agri-ink)!important}
+.btn{border-radius:10px!important;font-weight:700!important;font-family:"DM Sans",sans-serif!important}
+.btn-primary,.btn-success,.btn-custom{background:var(--agri-green)!important;border-color:var(--agri-green)!important;color:#fff!important}
+.btn-primary:hover,.btn-success:hover,.btn-custom:hover{background:#1b6844!important;border-color:#1b6844!important}
+.btn-outline-primary{border-color:var(--agri-green)!important;color:var(--agri-green)!important}
+.btn-outline-primary:hover{background:var(--agri-green)!important;color:white!important}
+.form-control,.form-select,select,textarea{border-radius:10px!important;border-color:#d9e6db!important}
+.form-control:focus,.form-select:focus{border-color:var(--agri-green)!important;box-shadow:0 0 0 .2rem rgba(45,135,86,.13)!important}
+.table{background:#fff!important;color:var(--agri-ink)!important;border-radius:12px;overflow:hidden}
+.table thead th,.table th{background:#eaf3e9!important;color:var(--agri-deep)!important;font-weight:800!important;border-color:#dce8de!important}
+.table td{border-color:#edf2ec!important;vertical-align:middle}
+.dropdown-menu{border:1px solid var(--agri-border)!important;border-radius:14px!important;box-shadow:var(--agri-shadow)!important;padding:8px!important}
+.dropdown-item{border-radius:8px!important;font-size:13px}
+.dropdown-item:hover{background:#eaf3e9!important;color:var(--agri-deep)!important}
+.navbar,.topbar,header.dashboard-header{background:#fff!important;border-bottom:1px solid var(--agri-border)!important;box-shadow:0 4px 16px rgba(14,50,30,.04)!important}
+.badge{border-radius:8px!important}
+@media(max-width:768px){.main-content{padding:16px!important}.sidebar{max-width:85vw}.card,.modal-content{border-radius:13px!important}.table-responsive{overflow-x:auto}.content-section{max-width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
