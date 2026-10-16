@@ -17,6 +17,18 @@ document.addEventListener('DOMContentLoaded',()=>{
  async function load(){try{const res=await fetch('/api/account/profile',{credentials:'same-origin'});const data=await res.json();if(!res.ok)throw Error(data.error||'Could not load account');profile=data;fill();}catch(e){const name=document.getElementById('agri-display-name');if(name)name.textContent=e.message;}}
  function open(id){if(!panels[id])return;main.querySelectorAll('.content-section').forEach(e=>{e.style.display='none';});Object.values(panels).forEach(e=>e.style.display='none');panels[id].style.display='block';panels[id].scrollTop=0;main.scrollTop=0;load();}
  document.querySelectorAll('[data-section]').forEach(link=>{const id=link.getAttribute('data-section');if(!panels[id]&&id!=='logout')return;link.addEventListener('click',ev=>{ev.preventDefault();ev.stopImmediatePropagation();if(id==='logout'){if(confirm('Sign out of Smart AgricTech?')){const form=document.createElement('form');form.method='POST';form.action='/logout';document.body.appendChild(form);form.submit();}return;}open(id);},{capture:true});});
+ // When navigating to any regular dashboard management section, close the account workspace.
+ // Use capture only to hide our panels; let the existing navigation handler run normally.
+ document.addEventListener('click',ev=>{
+   const link=ev.target.closest('[data-section]');
+   if(!link)return;
+   const target=link.getAttribute('data-section');
+   if(!target||panels[target]||target==='logout')return;
+   Object.values(panels).forEach(panel=>{
+     panel.style.setProperty('display','none','important');
+     panel.dataset.agriLastActive='false';
+   });
+ },true);
  main.addEventListener('click',e=>{const b=e.target.closest('[data-account-open]');if(b){e.preventDefault();open(b.dataset.accountOpen);}});
  async function post(url,data,status,button){status.textContent='Saving…';status.className='agri-form-status';button.disabled=true;try{const res=await fetch(url,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const json=await res.json();if(!res.ok)throw Error(json.error||'Request failed');status.textContent=json.message;status.className='agri-form-status success';return json;}catch(e){status.textContent=e.message;status.className='agri-form-status error';return null;}finally{button.disabled=false;}}
  document.getElementById('agri-profile-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,btn=f.querySelector('[type=submit]');const result=await post('/api/account/profile',{name:f.elements.name.value.trim(),email:f.elements.email.value.trim()},document.getElementById('agri-profile-status'),btn);if(result){profile={...profile,...result};fill();}});
