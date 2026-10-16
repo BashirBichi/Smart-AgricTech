@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Skeleton </title>
+    <title>Processor Dashboard | Smart AgricTech</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/app-notifications.css') }}">
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-fix.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-app.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-home.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/processor-mobile.css') }}">
 </head>
 <body>
       
@@ -48,28 +49,32 @@
             <h5 class="offcanvas-title" id="mobileSidebarLabel">Smart AgricTech</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body"><div class="agri-mobile-nav-intro"><span class="agri-nav-avatar"><i class="fas fa-industry"></i></span><div><strong>Processor Workspace</strong><small>Manage products, stock and suppliers</small></div></div><label class="agri-nav-search-label" for="processor-nav-search"><i class="fas fa-search"></i><input id="processor-nav-search" type="search" placeholder="Find a section…" autocomplete="off" aria-label="Search processor navigation"></label>
             <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-place"><i class="fas fa-shop"></i> Market Place</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="#"></i> Inventory</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="#"></i>Supplier Directory</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i> Finance</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="resources"><i class="fas fa-book-open"></i> Resources</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community </a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="#"></i> Orders</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="#"></i> Reports</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> View Analytics</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Product-catalog"> <i class="fas fa-shopping-cart">
+                </i><span id="cart-badge" class="badge badge-danger" style="color: rgb(255, 0, 0);">0</span> Cart</a></li> 
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Inventory-management"><i class="fas fa-clipboard-list"></i> Inventory</a></li>
+                <!-- <li class="nav-item"><a href="#"    class="nav-link" data-section="Supplier-directory"><i class="fas fa-address-book"></i> Supplier Directory</a></li>  -->
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance-and-transactions"><i class="fas fa-wallet"></i> Finance</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Resources"><i class="fas fa-book-open"></i> Resources</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community & Support </a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Reports-and-analytics"><i class="fas fa-box"></i> Reports &amp; Orders</a></li>
+                <!-- <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="#"></i> Reports</a></li> -->
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Reports-and-analytics"><i class="fas fa-chart-pie"></i> Reports and Analytics</a></li>
            </ul>
         </div>
     </div>
+        <nav class="agri-bottom-nav" aria-label="Processor quick navigation"><button type="button" data-section="home"><i class="fas fa-house"></i><span>Home</span></button><button type="button" data-section="marketplace"><i class="fas fa-store"></i><span>Market</span></button><button type="button" data-section="Inventory-management"><i class="fas fa-boxes-stacked"></i><span>Inventory</span></button><button type="button" data-section="Product-catalog"><i class="fas fa-cart-shopping"></i><span>Cart <b class="agri-bottom-cart-count" aria-label="Cart items">0</b></span></button><button type="button" id="agri-bottom-more"><i class="fas fa-bars"></i><span>More</span></button></nav>
         <!-- Main Content -->
         <main class="main-content">
             <!-- Sidebar Toggle (Mobile) -->
             <!-- Header -->
             <header class="dashboard-header">
-                <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
-                    ☰ Menu
+                <button class="btn agri-mobile-menu-toggle d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                    <i class="fas fa-bars" aria-hidden="true"></i> Menu
                 </button>
                 <h1 class="dashboard-title">Smart AgricTech | Empowering Farmers, Traders & Innovators</h1>
                 <div class="dropdown">
@@ -142,65 +147,8 @@
                     <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
                 </div>
             </div>
-                <div id="home" class="content-section" data>
-                    <h2>Explore New Product Listings from Farmers</h2>
-                    <p>Stay updated with the latest products and offers.</p>
-                    
-                    <div class="row">
-                        <!-- Quick Stats -->
-                        <div class="col-md-4">
-                            <div class="widget-box">
-                                <h3><i class="fas fa-clipboard-list"></i>Inventory Status</h3>
-                                <p><strong>Current Stock Levels</strong></p>
-                                <ul>
-                                    <li class="list-group-item">Raw Materials: 120 units</li>
-                                    <li class="list-group-item">Processed Goods: 80 units</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="widget-box">
-                                <h3><i class="fas fa-bell"></i> Supplier Notifications</h3>
-                                <p><strong>Recent Updates:</strong></p>
-                                <ul>
-                                    <li class="list-group-item">New product from Farmer John</li>
-                                    <li class="list-group-item">Price change for Wheat</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="widget-box">
-                                <h3><i class="fas fa-wallet"></i> Finance Overview</h3>
-                                <p>Balance: <strong>$12,500</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Shortcuts -->
-                    <h3 class="mt-4">Quick Actions</h3>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-primary btn-block" data-section="Browse Suppliers">
-                                <i class="#"></i>Browse Suppliers
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-success btn-block" data-section="Check Inventory">
-                                <i class="#"></i>Check Inventory
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-warning btn-block" data-section="View Notifications">
-                                <i class="#"></i>View Notifications
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-primary btn-block" data-section="View Orders">
-                                <i class="fas fa-shopping-cart"></i> View Orders</a>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                 <!-- Cart Section -->
+                <section id="home" class="content-section agri-processor-home"><div class="agri-home-heading"><span class="agri-home-eyebrow">PROCESSOR DASHBOARD</span><h2>Welcome to Your Workspace</h2><p>Manage supply, inventory and marketplace activities in one place.</p></div><div class="agri-home-section-title"><h3>Quick Actions</h3><span>Get things done faster</span></div><div class="agri-home-actions"><a href="#" data-section="marketplace" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-store"></i></span><strong>Marketplace</strong><small>Explore products</small></a><a href="#" data-section="Inventory-management" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-boxes-stacked"></i></span><strong>Inventory</strong><small>Manage stock</small></a><a href="#" data-section="Supplier-directory" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-truck"></i></span><strong>Suppliers</strong><small>Browse suppliers</small></a><a href="#" data-section="market-access" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-tags"></i></span><strong>Market Access</strong><small>List products</small></a><a href="#" data-section="Product-catalog" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-cart-shopping"></i></span><strong>My Cart</strong><small>Review selections</small></a><a href="#" data-section="Reports-and-analytics" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-chart-pie"></i></span><strong>Reports</strong><small>Explore insights</small></a></div><div class="agri-home-section-title"><h3>Workspace Overview</h3><span>Processor tools</span></div><div class="agri-home-overview"><article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-box"></i></span><span>Stock</span><strong class="agri-home-stat-word">Inventory</strong><small>View your records</small></article><article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-truck"></i></span><span>Suppliers</span><strong class="agri-home-stat-word">Directory</strong><small>Find suppliers</small></article><article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-cart-shopping"></i></span><span>Cart</span><strong class="agri-home-stat-word">Review</strong><small>Check selected items</small></article><article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-chart-line"></i></span><span>Reports</span><strong class="agri-home-stat-word">Explore</strong><small>See available data</small></article></div><p class="agri-home-footnote">Live stock quantities, notifications and balances are shown only when verified records are available.</p></section>
+                <!-- Cart Section -->
                  <div id="Product-catalog" class="content-section">
                     <h2>Your Cart</h2>
                     <ul id="cart-items" class="list-group"></ul>
@@ -643,6 +591,7 @@ function logoutUser() {
 
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
+<script src="{{ url_for('static', filename='js/processor-mobile.js') }}"></script>
 </body>
 
 </html>
