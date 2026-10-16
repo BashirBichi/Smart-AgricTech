@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-v2.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/weather-contact.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-layout.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/trading-chart.css') }}">
 </head>
 <style>
 
@@ -342,7 +343,7 @@
                     </div>
                 
                     <!-- Chart Canvas -->
-                    <canvas id="marketTrendsChart"></canvas>
+                    <div class="agri-trading-panel"><div class="agri-trading-top"><div><span class="agri-market-label">COMMODITY PRICE OVERVIEW</span><strong id="agri-trend-commodity">Rice / NGN</strong></div><div class="agri-trading-quote"><strong id="agri-trend-price">₦22,000</strong><span id="agri-trend-change">Illustrative period</span></div></div><div class="agri-chart-legend"><span><i class="agri-up"></i> Price increase</span><span><i class="agri-down"></i> Price decrease</span><span>Monthly candles</span></div><div class="agri-chart-frame"><canvas id="marketTrendsChart"></canvas></div><p class="agri-chart-note">Demo visualization: closing prices are illustrative; open, high and low values are simulated. Not live market quotes.</p></div>
                 
                     <!-- Button to View More Trends -->
                     <button class="btn btn-primary mt-3" id="viewMoreTrends">Check Other Product Trends</button>
