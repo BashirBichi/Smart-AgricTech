@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-home.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/app-notifications.css') }}">
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/checkout-mobile.css') }}">
 </head>
 <style>
 
@@ -290,28 +291,31 @@
                         <button type="submit" class="btn btn-success">Place Order</button>
                     </form>
                 </div> -->
-                <!-- Checkout Section -->
-                <div id="checkout-section" class="content-section" style="display: none;">
-                    <h2>Checkout</h2>
-                    <form id="checkout-form">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="payment-method" class="form-label">Payment Method</label>
-                            <select class="form-control" id="payment-method">
-                                <option value="card">Credit/Debit Card</option>
-                                <option value="transfer">Bank Transfer</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Place Order</button>
-                    </form>
-                </div>
+                <!-- Billing information and order review; payment is not yet integrated -->
+                <section id="checkout-section" class="content-section agri-checkout" style="display:none">
+                    <div class="agri-checkout-heading"><span class="agri-checkout-kicker">SECURE CHECKOUT</span><h2>Billing Information</h2><p>Confirm your details and review your order before payment.</p></div>
+                    <div class="agri-checkout-layout">
+                        <form id="checkout-form" class="agri-checkout-card">
+                            <h3><i class="fas fa-address-card"></i> Contact &amp; Billing</h3>
+                            <div class="agri-checkout-fields">
+                                <label>Full Name <input id="billing-name" name="full_name" type="text" autocomplete="name" required maxlength="120" placeholder="Your full name"></label>
+                                <label>Email Address <input id="billing-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+                                <label>Phone Number <input id="billing-phone" name="phone" type="tel" autocomplete="tel" required maxlength="24" placeholder="080…"></label>
+                                <label>Street Address <input id="billing-address" name="address" type="text" autocomplete="street-address" required maxlength="200" placeholder="House number and street"></label>
+                                <label>City / Town <input id="billing-city" name="city" type="text" autocomplete="address-level2" required maxlength="100"></label>
+                                <label>State <input id="billing-state" name="state" type="text" autocomplete="address-level1" required maxlength="100"></label>
+                                <label>Country <select id="billing-country" name="country" required><option value="Nigeria" selected>Nigeria</option></select></label>
+                                <label>Delivery Notes (optional) <textarea id="billing-notes" name="notes" maxlength="500" rows="2" placeholder="Landmark or delivery instructions"></textarea></label>
+                            </div>
+                            <h3><i class="fas fa-credit-card"></i> Payment Preference</h3>
+                            <label class="agri-payment-label">Preferred method<select id="payment-method" name="payment_method" required><option value="card">Debit / Credit Card</option><option value="transfer">Bank Transfer</option></select></label>
+                            <p class="agri-checkout-hint">Payment processing is not yet connected. No payment will be collected on this page.</p>
+                            <button type="submit" class="agri-checkout-submit"><i class="fas fa-clipboard-check"></i> Review Billing Details</button>
+                            <button type="button" id="checkout-back-to-cart" class="agri-checkout-back">← Back to Cart</button>
+                        </form>
+                        <aside class="agri-checkout-card agri-order-summary"><h3><i class="fas fa-bag-shopping"></i> Order Summary</h3><div id="billing-cart-items"></div><div class="agri-checkout-total"><span>Subtotal</span><strong id="billing-cart-total">₦0.00</strong></div><p>Delivery charges will be confirmed separately. No order or payment is finalized at this step.</p></aside>
+                    </div>
+                </section>
 
                 <div id="order-management" class="content-section">
                     <h2>Order Management</h2>
@@ -734,6 +738,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/farmer-mobile-fix.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-mobile-app.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-home.js') }}"></script>
+<script src="{{ url_for('static', filename='js/checkout-mobile.js') }}"></script>
 </body>
 
 </html>
