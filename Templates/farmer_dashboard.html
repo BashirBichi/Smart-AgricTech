@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farm-management.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-fix.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-app.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-home.css') }}">
 </head>
 <style>
 
@@ -181,62 +182,26 @@
                 <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
             </div>
             <!-- Home Section -->
-            <div id="home" class="content-section" >
-                <h2>Welcome to Your Dashboard</h2>
-                    <!-- <h2 id="market-trends" class="content-section">Market Trends</h2>
-                    
-                    <canvas id="progressiveLineChart" class="content-section" style="display: none;"></canvas> -->
-
-                <p>Stay informed and manage your farming operations efficiently with Smart AgricTech.</p>
-                
-                <div class="row">
-                    <!-- Quick Stats -->
-                    <div class="col-md-4">
-                    <div class="widget-box">
-                            <h3><i class="fas fa-seedling"></i> Active Crops</h3>
-                            <p><strong>5 Fields</strong> currently growing</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="widget-box">
-                            <h3><i class="fas fa-cloud-rain"></i> Weather Alert</h3>
-                            <p><strong>Rain Expected</strong> in 3 days</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="widget-box">
-                            <h3><i class="fas fa-wallet"></i> Finance Overview</h3>
-                            <p>Balance: <strong>12,500</strong></p>
-                        </div>
-                    </div>
-                </div>
-            
-            
-                <!-- Shortcuts -->
-                <h3 class="mt-4">Quick Actions</h3>
-                <div class="row">
-                    <div class="col-md-3">
-                        <a href="#" class="btn btn-primary btn-block" data-section="market-access">
-                            <i class="fas fa-store"></i> Access Market
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="btn btn-success btn-block" data-section="weather-forecast">
-                            <i class="fas fa-cloud-sun"></i> View Weather
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="btn btn-warning btn-block" data-section="market-trends">
-                            <i class="fas fa-chart-line" onclick="showbtn()"></i> Check Trends
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="btn btn-info btn-block" data-section="community">
-                            <i class="fas fa-users"></i> Join Community
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <section id="home" class="content-section agri-farmer-home">
+              <div class="agri-home-heading"><span class="agri-home-eyebrow">FARMER DASHBOARD</span><h2>Welcome to Your Dashboard</h2><p>Your farm operations, market tools and updates in one place.</p></div>
+              <div class="agri-home-section-title"><h3>Quick Actions</h3><span>Get things done faster</span></div>
+              <div class="agri-home-actions">
+                <a href="#" data-section="farm-management" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-seedling"></i></span><strong>My Farms</strong><small>Manage operations</small></a>
+                <a href="#" data-section="market-access" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-store"></i></span><strong>Access Market</strong><small>Browse opportunities</small></a>
+                <a href="#" data-section="weather-forecast" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-cloud-sun"></i></span><strong>Weather</strong><small>Check conditions</small></a>
+                <a href="#" data-section="market-trends" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-chart-line"></i></span><strong>Market Trends</strong><small>Explore prices</small></a>
+                <a href="#" data-section="Inventory-management" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-boxes-stacked"></i></span><strong>Inventory</strong><small>View farm stock</small></a>
+                <a href="#" data-section="Community-support" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-users"></i></span><strong>Community</strong><small>Farmer resources</small></a>
+              </div>
+              <div class="agri-home-section-title"><h3>Farm Overview</h3><span>Your farming workspace</span></div>
+              <div class="agri-home-overview">
+                <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-tractor"></i></span><span>Registered Farms</span><strong id="home-farm-count">—</strong><small>From your farm records</small></article>
+                <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-kiwi-bird"></i></span><span>Poultry Batches</span><strong id="home-batch-count">—</strong><small>Registered batches</small></article>
+                <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-egg"></i></span><span>Eggs Recorded</span><strong id="home-egg-count">—</strong><small>All-time recorded eggs</small></article>
+                <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-chart-pie"></i></span><span>Analytics</span><strong class="agri-home-stat-word">Explore</strong><small>View your insights</small></article>
+              </div>
+              <p class="agri-home-footnote">Farm statistics update from saved records. Weather, financial balances and crop counts are not shown as live figures without verified data.</p>
+            </section>
             <div id="weather-forecast" class="content-section">
   <div class="weather-dashboard">
     <div class="weather-heading"><div><span class="weather-eyebrow"><i class="fas fa-seedling"></i> FIELD CONDITIONS</span><h2>Weather Forecast</h2><p>Check local conditions to plan your farming activities.</p></div><span class="weather-heading-icon"><i class="fas fa-cloud-sun"></i></span></div>
@@ -766,6 +731,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/farm-management.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-mobile-fix.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-mobile-app.js') }}"></script>
+<script src="{{ url_for('static', filename='js/farmer-home.js') }}"></script>
 </body>
 
 </html>
