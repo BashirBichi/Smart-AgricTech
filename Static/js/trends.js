@@ -51,20 +51,23 @@ document.addEventListener("DOMContentLoaded", function () {
     ohlc(grainSelect.value in grainData?grainSelect.value:"rice");
     // Function to Update Chart
     function updateChart(grain) {
-        ohlc(grain);\n        marketTrendsChart.data.datasets[0].data = grainData[grain];
+        ohlc(grain);
+        marketTrendsChart.data.datasets[0].data = grainData[grain];
         marketTrendsChart.data.datasets[0].label = grain.charAt(0).toUpperCase() + grain.slice(1) + " Price (₦)";
         marketTrendsChart.update();
     }
 
     // Initialize Chart.js
-    const marketTrendsChart = new Chart(ctx, {\n        plugins:[candlePlugin],
+    const marketTrendsChart = new Chart(ctx, {
+        plugins:[candlePlugin],
         type: "line",
         data: {
             labels: months,
             datasets: [
                 {
                     label: "Rice Price (₦)",
-                    data: grainData["rice"],\n                    pointRadius: 0, pointHoverRadius: 0, showLine: false,
+                    data: grainData["rice"],
+                    pointRadius: 0, pointHoverRadius: 0, showLine: false,
                     borderColor: "#10b981",
                     backgroundColor: "rgba(16,185,129,.85)",
                     borderWidth: 2,
@@ -76,7 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                tooltip:{displayColors:false,backgroundColor:"#102e25",padding:12,callbacks:{label:item=>{const v=candles.values[item.dataIndex];return ["Open: ₦"+v.o.toLocaleString(),"High: ₦"+v.h.toLocaleString(),"Low: ₦"+v.l.toLocaleString(),"Close: ₦"+v.c.toLocaleString()];}}},\n                legend: {
+                tooltip:{displayColors:false,backgroundColor:"#102e25",padding:12,callbacks:{label:item=>{const v=candles.values[item.dataIndex];return ["Open: ₦"+v.o.toLocaleString(),"High: ₦"+v.h.toLocaleString(),"Low: ₦"+v.l.toLocaleString(),"Close: ₦"+v.c.toLocaleString()];}}},
+                legend: {
                     display: false,
                     position: "top"
                 }
@@ -109,7 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
         grainSelect.focus(); grainSelect.scrollIntoView({behavior:"smooth",block:"nearest"});
     });
 
-    const initial=document.getElementById("agri-trend-price"); if(initial)initial.textContent="₦"+candles.values.at(-1).c.toLocaleString("en-NG");\n    // Ensure Chart is Updated When the Section is Activated
+    const initial=document.getElementById("agri-trend-price"); if(initial)initial.textContent="₦"+candles.values.at(-1).c.toLocaleString("en-NG");
+    // Ensure Chart is Updated When the Section is Activated
     document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", function (e) {
             e.preventDefault();
