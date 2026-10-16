@@ -291,26 +291,13 @@ This design provides a clean and intuitive interface for farmers to access impor
                 </div>
             </div>
             <div id="weather-forecast" class="content-section">
-                <h2>🌦 Weather Forecast</h2>
-            
-                <!-- Location Search Bar -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="weatherLocation" placeholder="Enter location..." aria-label="Search">
-                    <button class="btn btn-outline-secondary" id="fetchWeather">Get Weather</button>
-                </div>
-            
-                <!-- Weather Display -->
-                <div class="weather-info">
-                    <div class="weather-card">
-                        <h3 id="city-name">Kano, Nigeria</h3>
-                        <img id="weather-icon" src="https://openweathermap.org/img/wn/10d.png" alt="Weather Icon">
-                        <h4 id="temperature">28°C</h4>
-                        <p id="weather-description">Sunny</p>
-                        <p><strong>Humidity:</strong> <span id="humidity">40%</span></p>
-                        <p><strong>Wind Speed:</strong> <span id="wind-speed">10 km/h</span></p>
-                    </div>
-                </div>
-            </div>
+  <div class="weather-dashboard">
+    <div class="weather-heading"><div><span class="weather-eyebrow"><i class="fas fa-seedling"></i> FIELD CONDITIONS</span><h2>Weather Forecast</h2><p>Check local conditions to plan your farming activities.</p></div><span class="weather-heading-icon"><i class="fas fa-cloud-sun"></i></span></div>
+    <div class="weather-search"><label for="weatherLocation">Search location</label><div class="weather-search-controls"><input type="text" class="form-control" id="weatherLocation" placeholder="Enter city or location" aria-label="Search weather location"><button class="btn btn-primary" id="fetchWeather" type="button"><i class="fas fa-search"></i> Get Weather</button></div></div>
+    <div class="weather-info"><div class="weather-card"><div class="weather-card-top"><span><i class="fas fa-map-marker-alt"></i> LOCAL WEATHER</span><span class="weather-live-indicator">Forecast overview</span></div><div class="weather-location-row"><div><h3 id="city-name">Kano, Nigeria</h3><p id="weather-description">Weather conditions</p></div><img id="weather-icon" src="https://openweathermap.org/img/wn/10d.png" alt="Weather condition icon"></div><div class="weather-temperature"><h4 id="temperature">28°C</h4><span>Temperature</span></div><div class="weather-metrics"><div class="weather-metric"><span class="weather-metric-icon"><i class="fas fa-tint"></i></span><div><small>Humidity</small><strong id="humidity">40%</strong></div></div><div class="weather-metric"><span class="weather-metric-icon"><i class="fas fa-wind"></i></span><div><small>Wind speed</small><strong id="wind-speed">10 km/h</strong></div></div></div></div></div>
+    <p class="weather-disclaimer"><i class="fas fa-info-circle"></i> Weather details are illustrative until updated by the forecast service.</p>
+  </div>
+</div>
                  <!-- Cart Section -->
                 <div id="Product-catalog" class="content-section">
                     <h2>Your Cart</h2>
