@@ -1,0 +1,40 @@
+/* Shared viewport-aware sections and persistent action access */
+@media(min-width:769px){
+ .dashboard-container .main-content{height:100dvh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important}
+ .dashboard-container .main-content>.dashboard-header{flex:0 0 auto!important}
+ .dashboard-container .main-content>.col-md-9{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important}
+ .dashboard-container .main-content>.content-section,
+ .dashboard-container .main-content>.col-md-9>.content-section,
+ .dashboard-container .main-content>.col-md-9>#profile-content>.content-section{
+   max-height:calc(100dvh - 96px)!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-gutter:stable;
+ }
+ .dashboard-container .main-content #profile-content{max-height:100%!important;overflow-y:auto!important;min-height:0!important}
+ .dashboard-container .main-content #profile-content>.content-section{max-height:none!important;overflow:visible!important}
+ .dashboard-container .main-content .content-section>h2:first-child{position:sticky;top:-15px;z-index:5;background:#fff;padding:6px 0 10px!important;margin-bottom:10px!important}
+ .dashboard-container .main-content .content-section>h2:first-child:after{margin-top:5px!important}
+ .dashboard-container .main-content .content-section>button:last-child,
+ .dashboard-container .main-content .content-section>.btn:last-child,
+ .dashboard-container .main-content .content-section>.text-center:last-child:has(.btn),
+ .dashboard-container .main-content .content-section>.d-flex:last-child:has(.btn),
+ .dashboard-container .main-content .content-section>form>button[type=submit]:last-child,
+ .dashboard-container .main-content .content-section>form>.btn[type=submit]:last-child,
+ .dashboard-container .main-content .content-section>form>.text-center:last-child:has(button),
+ .dashboard-container .main-content .content-section>form>.d-flex:last-child:has(button){
+   position:sticky!important;bottom:0!important;z-index:8!important;background:#fff!important;padding:10px 8px!important;margin-top:10px!important;border-top:1px solid #e1ebe2!important;box-shadow:0 -9px 18px rgba(255,255,255,.95)!important;border-radius:8px!important;
+ }
+ /* Preserve button appearance when the button itself is sticky. */
+ .dashboard-container .main-content .content-section>button:last-child,
+ .dashboard-container .main-content .content-section>.btn:last-child,
+ .dashboard-container .main-content .content-section>form>button[type=submit]:last-child,
+ .dashboard-container .main-content .content-section>form>.btn[type=submit]:last-child{background:#27865a!important;color:#fff!important;border:0!important;box-shadow:0 -5px 15px rgba(25,60,36,.12)!important}
+ #market-trends .agri-chart-frame{height:clamp(170px,calc(100dvh - 370px),320px)!important}
+}
+@media(max-width:768px){
+ .dashboard-container .main-content{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+ .dashboard-container .main-content .content-section{max-height:none!important;overflow:visible!important}
+ .dashboard-container .main-content .content-section>form>button[type=submit]:last-child,
+ .dashboard-container .main-content .content-section>form>.btn[type=submit]:last-child,
+ .dashboard-container .main-content .content-section>form>.d-flex:last-child:has(button){
+   position:sticky!important;bottom:0!important;z-index:8!important;padding:11px!important;background:#fff!important;box-shadow:0 -6px 15px rgba(255,255,255,.96)!important
+ }
+}
