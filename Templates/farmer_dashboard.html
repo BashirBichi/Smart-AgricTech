@@ -98,6 +98,7 @@ This design provides a clean and intuitive interface for farmers to access impor
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-actions.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections-ui.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/resources-v2.css') }}">
 </head>
 <style>
 
@@ -584,64 +585,39 @@ This design provides a clean and intuitive interface for farmers to access impor
                     </form>
                 </div>
             </div>
-            <div id="Resources" class="content-section">
-                <div class="col-md-12">
-                    <h5>Resources</h5>
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <h5 class="card-title">Agricultural Best Practices</h5>
-                                <p class="card-text">Learn more about agricultural best practices like
-                                    <ul>
-                                    <li>Crop rotation for improved yields</li>
-                                    <li>Integrated pest management techniques</li>
-                                    </p>
-                                <a href="#" class="btn btn-secondary">Read More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <h5 class="card-title">Fertilizers and Pesticides</h5>
-                                <p class="card-text">Learn more about fertilizers and pesticides for you to make informed decision before choosing</p>
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                        <th>Product Name</th>
-                                        <th>Description</th>
-                                        <th>Usage Instructions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <td>Fertilizer X</td>
-                                        <td>Organic fertilizer for improved soil health</td>
-                                        <td>Apply 10 kg/ha, 2 weeks before planting</td>
-                                        </tr>
-                                        <tr>
-                                        <td>Pesticide Y</td>
-                                        <td>Chemical pesticide for pest control</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                <a href="#" class="btn btn-secondary">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <h5 class="card-title">Agricultural Extension Services</h5>
-                                <p class="card-text"><ul>
-                                    <li><a href="#">Local agricultural extension office</a></li>
-                                    <li><a href="#">Private agricultural consulting services</a></li>
-                                </ul>
-                                </p>
-                                <a href="#" class="btn btn-secondary">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
+            <div id="Resources" class="content-section agri-resources">
+                <div class="agri-resources-heading">
+                    <div><span class="agri-resource-eyebrow"><i class="fas fa-seedling"></i> FARMER KNOWLEDGE HUB</span><h2>Resources</h2><p>Practical guides and information to help you make better farming decisions.</p></div>
+                    <span class="agri-resources-symbol"><i class="fas fa-book-open"></i></span>
                 </div>
+                <div class="agri-resources-grid">
+                    <article class="agri-resource-card">
+                        <div class="agri-resource-icon"><i class="fas fa-leaf"></i></div>
+                        <span class="agri-resource-category">FARMING PRACTICES</span>
+                        <h3>Agricultural Best Practices</h3>
+                        <p>Improve soil health, crop productivity and farm sustainability with proven techniques.</p>
+                        <ul><li>Rotate crops to maintain soil fertility</li><li>Use integrated pest management</li><li>Monitor soil moisture and crop health</li></ul>
+                        <details class="agri-resource-details"><summary>Explore practices <i class="fas fa-arrow-right"></i></summary><div class="agri-resource-expanded"><strong>Getting started</strong><p>Alternate crop families between growing seasons, inspect plants weekly for early signs of pests, and use soil tests to guide fertilizer application.</p></div></details>
+                    </article>
+                    <article class="agri-resource-card">
+                        <div class="agri-resource-icon"><i class="fas fa-flask"></i></div>
+                        <span class="agri-resource-category">CROP INPUTS</span>
+                        <h3>Fertilizers &amp; Crop Protection</h3>
+                        <p>Understand how to select and use agricultural inputs safely and effectively.</p>
+                        <ul><li>Choose nutrients based on soil testing</li><li>Follow approved product labels</li><li>Use protective equipment when handling chemicals</li></ul>
+                        <details class="agri-resource-details"><summary>View safety guidance <i class="fas fa-arrow-right"></i></summary><div class="agri-resource-expanded"><strong>Safe application</strong><p>Follow the exact instructions on the registered product label, including dosage, application timing, protective equipment and pre-harvest intervals. Consult an agricultural extension professional before using unfamiliar products.</p></div></details>
+                    </article>
+                    <article class="agri-resource-card">
+                        <div class="agri-resource-icon"><i class="fas fa-hands-helping"></i></div>
+                        <span class="agri-resource-category">EXPERT SUPPORT</span>
+                        <h3>Agricultural Extension Services</h3>
+                        <p>Find the right kind of professional guidance for crops, pests and farm management.</p>
+                        <ul><li>Contact your local extension office</li><li>Ask about soil and crop diagnostics</li><li>Seek advice for disease or pest outbreaks</li></ul>
+                        <details class="agri-resource-details"><summary>How to get support <i class="fas fa-arrow-right"></i></summary><div class="agri-resource-expanded"><strong>Before contacting an adviser</strong><p>Prepare your farm location, crop type, planting date, photos of symptoms and details of recent treatments. Contact your state agricultural development programme or local extension office for available services.</p></div></details>
+                    </article>
+                </div>
+                <p class="agri-resources-note"><i class="fas fa-info-circle"></i> General educational guidance only. Always follow local regulations and qualified agricultural advice for chemical use.</p>
             </div>
-
-
 
 
             <!-- Finance -->
