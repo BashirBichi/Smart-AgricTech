@@ -87,6 +87,7 @@ This design provides a clean and intuitive interface for farmers to access impor
     <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Css/brand-refresh.css') }}">
 </head>
 <style>
 
@@ -774,8 +775,11 @@ This design provides a clean and intuitive interface for farmers to access impor
 
 // Logout function
 function logoutUser() {
-    alert("Logging out...");
-    window.location.href = "login.html"; // Redirect to login page
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = "{{ url_for('logout') }}";
+    document.body.appendChild(form);
+    form.submit();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
