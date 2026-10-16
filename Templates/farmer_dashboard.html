@@ -99,6 +99,7 @@ This design provides a clean and intuitive interface for farmers to access impor
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections-ui.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/resources-v2.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-modules.css') }}">
 </head>
 <style>
 
@@ -621,55 +622,22 @@ This design provides a clean and intuitive interface for farmers to access impor
 
 
             <!-- Finance -->
-           <div id="Finance-management" class="content-section">
-                <h2>Microloans and Grants</h2>
-                <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <th>Loan/Grant Name</th>
-                    <th>Description</th>
-                    <th>Eligibility Criteria</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>Microloan X</td>
-                    <td>Loan for small-scale farmers</td>
-                    <td>Must be a registered farmer, minimum 1 year of farming experience</td>
-                    </tr>
-                    <tr>
-                    <td>Grant Y</td>
-                    <td>Grant for organic farming practices</td>
-                    <td>Must be a certified organic farmer, minimum 2 years of organic farming experience</td>
-                    </tr>
-                </tbody>
-                </table>
-                <h2>Financial Management Tools</h2>
-                <ul>
-                <li><a href="#">Budgeting and expense tracking</a></li>
-                <li><a href="#">Cash flow forecasting</a></li>
-                </ul>
-                <h2>Transaction History and Balance</h2>
-                <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <th>Transaction Date</th>
-                    <th>Transaction Amount</th>
-                    <th>Transaction Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>2023-02-15</td>
-                    <td>$100</td>
-                    <td>Sale</td>
-                    </tr>
-                    <tr>
-                    <td>2023-02-20</td>
-                    <td>$50</td>
-                    <td>Purchase</td>
-                    </tr>
-                </tbody>
+           <div id="Finance-management" class="content-section agri-finance">
+             <div class="agri-module-head"><div><span class="agri-module-kicker">FARM FINANCE</span><h2>Finance &amp; Planning</h2><p>Plan farm expenses and explore funding guidance. No live wallet or financing products are connected.</p></div><span class="agri-module-icon"><i class="fas fa-wallet"></i></span></div>
+             <div class="agri-module-grid">
+               <article class="agri-module-card"><span class="agri-module-tag">BUDGETING</span><h3>Farm Budget Planner</h3><p>Estimate expected costs and compare them with projected sales.</p><form id="agri-budget-form"><label>Expected farm income (₦)<input type="number" name="income" min="0" step="0.01" placeholder="e.g. 250000" required></label><label>Estimated expenses (₦)<input type="number" name="expenses" min="0" step="0.01" placeholder="e.g. 150000" required></label><button type="submit" class="btn btn-success">Calculate Budget</button><output id="agri-budget-result" aria-live="polite">Enter your estimates to calculate the projected balance.</output></form></article>
+               <article class="agri-module-card"><span class="agri-module-tag">FUNDING GUIDANCE</span><h3>Loans &amp; Agricultural Grants</h3><p>Prepare the information commonly needed when exploring legitimate funding opportunities.</p><ul><li>Farm registration and identification</li><li>Production plan and estimated costs</li><li>Income records and repayment capacity</li><li>Eligibility criteria from the actual provider</li></ul><details><summary>Before applying</summary><p>Verify the provider, interest rates, fees, repayment terms and eligibility through its official channels. No loan or grant is offered through this section.</p></details></article>
+               <article class="agri-module-card"><span class="agri-module-tag">TRANSACTIONS</span><h3>Transaction Overview</h3><div class="agri-empty-state"><i class="fas fa-receipt"></i><strong>No verified transactions yet</strong><p>Once secure wallet and payment integrations are enabled, your actual transaction records can appear here.</p></div></article>
+             </div>
+           </div>
+           <div id="Community-support" class="content-section agri-community">
+             <div class="agri-module-head"><div><span class="agri-module-kicker">FARMER NETWORK</span><h2>Community &amp; Support</h2><p>Practical ways to connect, learn and get help with agricultural challenges.</p></div><span class="agri-module-icon"><i class="fas fa-users"></i></span></div>
+             <div class="agri-module-grid"><article class="agri-module-card"><span class="agri-module-tag">DISCUSSIONS</span><h3>Farmer Community</h3><p>Share growing experiences, production questions and local farming knowledge.</p><div class="agri-empty-state"><i class="fas fa-comments"></i><strong>Community forum coming soon</strong><p>Posting and direct messaging are not enabled yet.</p></div></article><article class="agri-module-card"><span class="agri-module-tag">EXTENSION ADVICE</span><h3>Get Agricultural Guidance</h3><p>For crop disease, pest outbreaks or input safety, consult your local agricultural extension office.</p><ul><li>Prepare crop type and farm location</li><li>Record symptoms and planting date</li><li>Share clear photos with an adviser</li></ul></article><article class="agri-module-card"><span class="agri-module-tag">PLATFORM HELP</span><h3>Account &amp; Platform Support</h3><p>Need help using Smart AgricTech? Describe the affected dashboard section and any error message when contacting the platform administrator.</p><p class="agri-module-muted">A dedicated support ticket workflow is planned; no ticket is created from this card.</p></article></div>
+           </div>
+           <div id="view-analytics" class="content-section agri-analytics">
+             <div class="agri-module-head"><div><span class="agri-module-kicker">FARM INSIGHTS</span><h2>Analytics &amp; Insights</h2><p>Review useful farming indicators. Live figures will appear when verified records are available.</p></div><span class="agri-module-icon"><i class="fas fa-chart-pie"></i></span></div>
+             <div class="agri-module-grid"><article class="agri-module-card"><span class="agri-module-tag">SALES PERFORMANCE</span><h3>Sales Overview</h3><div class="agri-empty-state"><i class="fas fa-chart-line"></i><strong>No sales data available</strong><p>Sales insights will be calculated from confirmed orders.</p></div></article><article class="agri-module-card"><span class="agri-module-tag">INVENTORY</span><h3>Stock Insights</h3><div class="agri-empty-state"><i class="fas fa-boxes"></i><strong>Awaiting verified inventory data</strong><p>Product stock and movement trends will be available after data integration.</p></div></article><article class="agri-module-card"><span class="agri-module-tag">FINANCIAL HEALTH</span><h3>Budget Insights</h3><p>Use the budget planner under Finance to estimate the difference between projected income and costs.</p><p class="agri-module-muted">No simulated revenue, profit or account balance is displayed as real.</p></article></div>
+           </div>
 <!-- Bootstrap & Chart.js Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -843,6 +811,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
+<script src="{{ url_for('static', filename='js/farmer-finance.js') }}"></script>
 </body>
 
 </html>
