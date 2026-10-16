@@ -347,6 +347,54 @@ def admin_dashboard():
         flash("Unauthorized access.", "danger")
         return redirect(url_for('admin_login'))
 
+@app.route('/api/marketplace/products', methods=['GET', 'POST'])
+def marketplace_products_api():
+    if request.method == 'GET':
+        products = Product.query.filter(Product.owner_id.isnot(None)).order_by(Product.id.desc()).all()
+        return jsonify(products=[dict(id=p.id, name=p.name, description=p.description or '',
+            price=p.price, quantity=p.quantity, seller=p.posted_by,
+            image_url=url_for('static', filename='uploads/' + os.path.basename(p.media_file)) if p.media_file else '')
+            for p in products])
+    owner = session.get('user_id')
+    if not owner:
+        return jsonify(error='Login required to post products'), 401
+    data = request.form
+    name = data.get('name', '').strip()[:100]
+    description = data.get('description', '').strip()[:200]
+    try:
+        price = float(data.get('price', 0))
+        quantity = int(data.get('quantity', 1))
+    except (ValueError, TypeError):
+        return jsonify(error='Invalid price or quantity'), 400
+    if not name or not 0 < price <= 1000000000 or not 0 < quantity <= 1000000:
+        return jsonify(error='Valid product name, price and quantity required'), 400
+    media_file = request.files.get('image')
+    media_path = None
+    if media_file and media_file.filename:
+        if not allowed_file(media_file.filename):
+            return jsonify(error='Unsupported image format'), 400
+        import uuid
+        filename = uuid.uuid4().hex + '_' + secure_filename(media_file.filename)[:80]
+        media_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        media_path = filename
+    product = Product(name=name, description=description, price=price, quantity=quantity,
+                      posted_by=session.get('user_name', ''), owner_id=owner, media_file=media_path)
+    db.session.add(product)
+    db.session.commit()
+    return jsonify(id=product.id, message='Product published'), 201
+
+@app.route('/api/marketplace/products/<int:product_id>', methods=['DELETE'])
+def delete_marketplace_product(product_id):
+    owner = session.get('user_id')
+    if not owner:
+        return jsonify(error='Login required'), 401
+    product = Product.query.filter_by(id=product_id, owner_id=owner).first()
+    if not product:
+        return jsonify(error='Product not found or not owned by you'), 404
+    db.session.delete(product)
+    db.session.commit()
+    return jsonify(message='Product removed')
+
 @app.route('/market_access', methods=['GET', 'POST'])
 def market_access():
     if request.method == 'POST':
