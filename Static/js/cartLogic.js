@@ -8,6 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+    // Keep every navigation badge synchronized with saved cart quantities.
+    function updateCartBadges() {
+        const count = cart.reduce((sum, item) => sum + Math.max(0, Number(item.quantity) || 0), 0);
+        document.querySelectorAll('#cart-badge').forEach(badge => {
+            badge.textContent = String(count);
+            badge.setAttribute('aria-label', count + ' items in cart');
+            badge.style.display = count ? 'inline-flex' : 'none';
+        });
+    }
+
     // ✅ Function to Update Cart UI Instantly
     function updateCartUI() {
         cartItemsList.innerHTML = "";
@@ -55,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Handle "Add to Cart" Button Click (Fix: Ensure Image is Captured)
     document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("add-to-cart")) {
+        if (event.target.closest(".add-to-cart")) {
             const productCard = event.target.closest(".card");
 
             const product = {
@@ -73,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Handle "Remove" Button Click
     cartItemsList.addEventListener("click", function (event) {
-        if (event.target.classList.contains("remove-item")) {
-            const index = event.target.getAttribute("data-index");
+        if (event.target.closest(".remove-item")) {
+            const index = event.target.closest(".remove-item").getAttribute("data-index");
             cart.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(cart));
             updateCartUI();
@@ -104,5 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
         cartContainer.style.display = "none";
     });
 
-    updateCartUI(); // ✅ Initialize Cart UI on Page Load
+    window.addEventListener('storage', function (event) {
+        if (event.key === 'cart') {
+            try { cart = JSON.parse(event.newValue || '[]') || []; } catch (_) { cart = []; }
+            updateCartUI();
+        }
+    });
+    updateCartUI(); // Initialize cart list and badges from saved items
 });
