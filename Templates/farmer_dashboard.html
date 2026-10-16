@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-modules.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farm-management.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-fix.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-app.css') }}">
 </head>
 <style>
 
@@ -58,7 +59,7 @@
             <h5 class="offcanvas-title" id="mobileSidebarLabel">Smart AgricTech</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body"><div class="agri-mobile-nav-intro"><span class="agri-nav-avatar"><i class="fas fa-seedling"></i></span><div><strong>Farmer Workspace</strong><small>Manage your farm, all in one place</small></div></div><label class="agri-nav-search-label" for="agri-nav-search"><i class="fas fa-search"></i><input id="agri-nav-search" type="search" placeholder="Find a section…" autocomplete="off" aria-label="Search dashboard navigation"></label>
             <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
                 <li class="nav-item"><a href="#" class="nav-link" data-section="farm-management"><i class="fas fa-seedling"></i> Farm Management</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
@@ -77,7 +78,14 @@
            </ul>
         </div>
     </div>
-        <!-- Main Content -->
+        <nav class="agri-bottom-nav" aria-label="Quick farmer navigation">
+<button type="button" data-section="home"><i class="fas fa-house"></i><span>Home</span></button>
+<button type="button" data-section="farm-management"><i class="fas fa-seedling"></i><span>My Farms</span></button>
+<button type="button" data-section="marketplace"><i class="fas fa-store"></i><span>Market</span></button>
+<button type="button" data-section="view-analytics"><i class="fas fa-chart-pie"></i><span>Insights</span></button>
+<button type="button" id="agri-bottom-more" aria-label="Open all navigation"><i class="fas fa-bars"></i><span>More</span></button>
+</nav>
+<!-- Main Content -->
         <main class="main-content">
             <!-- Sidebar Toggle (Mobile) -->
             <!-- Header -->
@@ -757,6 +765,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/farmer-finance.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farm-management.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-mobile-fix.js') }}"></script>
+<script src="{{ url_for('static', filename='js/farmer-mobile-app.js') }}"></script>
 </body>
 
 </html>
