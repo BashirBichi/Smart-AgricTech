@@ -1,101 +1,66 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const marketAccessForm = document.getElementById("marketAccessForm");
-    const marketplaceContainer = document.getElementById("marketplaceContainer");
-    const marketSearch = document.getElementById("marketSearch");
-    const searchProductBtn = document.getElementById("searchProduct");
-    const marketplaceNavLink = document.querySelector(".nav-link[data-section='marketplace']");
-    const cartContainer = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    const clearCartBtn = document.getElementById("clear-cart");
-
-    // Function to Store Products in Local Storage
-    function storeProduct(product) {
-        let products = JSON.parse(localStorage.getItem("marketplaceProducts")) || [];
-        products.push(product);
-        localStorage.setItem("marketplaceProducts", JSON.stringify(products));
+    const form = document.getElementById("marketAccessForm");
+    const container = document.getElementById("marketplaceContainer");
+    const search = document.getElementById("marketSearch");
+    const searchButton = document.getElementById("searchProduct");
+    const postButton = document.getElementById("postToMarketplace");
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    let products = [];
+    async function loadMarketplaceProducts() {
+        if (!container) return;
+        try {
+            const response = await fetch('/api/marketplace/products', {credentials:'same-origin'});
+            if (!response.ok) throw Error('Could not load marketplace');
+            products = (await response.json()).products || [];
+            renderProducts();
+        } catch(error) { container.textContent = error.message; }
     }
-
-    // Function to Load Products into Marketplace
-    function loadMarketplaceProducts() {
-        marketplaceContainer.innerHTML = ""; // Clear previous items
-        let products = JSON.parse(localStorage.getItem("marketplaceProducts")) || [];
-
-        products.forEach(product => {
-            const marketplaceProduct = `
-                <div class="col-md-4 mb-4 product-item" data-name="${product.name.toLowerCase()}" id="product-${product.id}">
-                    <div class="card">
-                        <img src="${product.imageUrl}" alt="${product.name}" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">${product.description}</p>
-                            <p class="card-text"><strong>₦${product.price}</strong></p>
-                            <button class="btn btn-primary add-to-cart" 
-                                    data-name="${product.name}"
-                                    data-description="${product.description}"
-                                    data-price="${product.price}"
-                                    data-image="${product.imageUrl}">
-                                Add to Cart
-                            </button>
-                            <button class="btn btn-secondary add-to-favorite" data-id="${product.id}">Add to Favorites</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            marketplaceContainer.insertAdjacentHTML("beforeend", marketplaceProduct);
+    function renderProducts() {
+        if (!container) return;
+        const query = (search?.value || '').toLowerCase().trim();
+        container.replaceChildren();
+        products.filter(p => p.name.toLowerCase().includes(query)).forEach(p => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'col-md-4 mb-4 product-item';
+            wrapper.dataset.name = p.name.toLowerCase();
+            const card = document.createElement('div');
+            card.className = 'card';
+            const image = document.createElement('img');
+            image.className = 'card-img-top';
+            image.src = p.image_url || '/static/images/placeholder.png';
+            image.alt = p.name;
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            const title = document.createElement('h5'); title.className = 'card-title'; title.textContent = p.name;
+            const description = document.createElement('p'); description.className = 'card-text'; description.textContent = p.description;
+            const price = document.createElement('p'); price.className = 'card-text';
+            const strong = document.createElement('strong'); strong.textContent = '₦' + Number(p.price).toLocaleString(); price.append(strong);
+            const button = document.createElement('button'); button.type = 'button'; button.className = 'btn btn-primary add-to-cart'; button.textContent = 'Add to Cart';
+            button.dataset.name = p.name; button.dataset.description = p.description; button.dataset.price = p.price; button.dataset.image = p.image_url || '';
+            body.append(title,description,price,button);card.append(image,body);wrapper.append(card);container.append(wrapper);
         });
+        if (!container.children.length) container.textContent = 'No products found.';
     }
-
-    // Post Product to Marketplace
-    document.getElementById("postToMarketplace").addEventListener("click", function () {
-        const productName = document.getElementById("marketProductName").value.trim();
-        const productDescription = document.getElementById("marketProductDescription").value.trim();
-        const productPrice = document.getElementById("marketProductPrice").value.trim();
-        const productImage = document.getElementById("marketProductImage").files[0];
-
-        if (!productName || !productDescription || !productPrice || !productImage) {
-            alert("Please fill all fields and upload an image.");
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            const imageUrl = event.target.result;
-            const productId = Date.now().toString();
-
-            const product = {
-                id: productId,
-                name: productName,
-                description: productDescription,
-                price: parseFloat(productPrice).toFixed(2),
-                imageUrl: imageUrl
-            };
-
-            storeProduct(product);
-            marketAccessForm.reset();
-            alert("Your product has been posted successfully!");
-            loadMarketplaceProducts(); // Reload marketplace products
-        };
-        reader.readAsDataURL(productImage);
+    postButton?.addEventListener('click', async function(event) {
+        event.preventDefault();
+        const name = document.getElementById('marketProductName')?.value.trim();
+        const description = document.getElementById('marketProductDescription')?.value.trim();
+        const price = document.getElementById('marketProductPrice')?.value;
+        const image = document.getElementById('marketProductImage')?.files[0];
+        if (!name || !price || Number(price) <= 0) { alert('Enter a product name and valid price.'); return; }
+        const data = new FormData(); data.set('name',name);data.set('description',description||'');data.set('price',price);data.set('quantity','1');if(image)data.set('image',image);
+        postButton.disabled = true;
+        try {
+            const response = await fetch('/api/marketplace/products',{method:'POST',body:data,credentials:'same-origin'});
+            const result = await response.json();
+            if(!response.ok)throw Error(result.error||'Could not publish product');
+            form?.reset();await loadMarketplaceProducts();alert('Product published successfully!');
+        } catch(error) { alert(error.message); } finally { postButton.disabled = false; }
     });
-
-    // Display Products in Marketplace when the NavLink is Clicked
-    marketplaceNavLink.addEventListener("click", function () {
-        loadMarketplaceProducts();
-    });
-
-    // Search Products in Marketplace
-    searchProductBtn.addEventListener("click", function () {
-        const searchQuery = marketSearch.value.toLowerCase().trim();
-        const products = document.querySelectorAll(".product-item");
-
-        products.forEach(product => {
-            const productName = product.getAttribute("data-name");
-            product.style.display = productName.includes(searchQuery) ? "block" : "none";
-        });
-    });
-
-    loadMarketplaceProducts(); // Load products when the page loads
-
+    searchButton?.addEventListener('click',renderProducts);
+    search?.addEventListener('input',renderProducts);
+    document.querySelectorAll(".nav-link[data-section='marketplace']").forEach(link=>link.addEventListener('click',loadMarketplaceProducts));
+    loadMarketplaceProducts();
     // CART FUNCTIONALITY
     function updateCartTotal() {
         let cartItems = JSON.parse(localStorage.getItem((window.AGRI_CART_ITEMS_KEY || "cartItems"))) || [];
