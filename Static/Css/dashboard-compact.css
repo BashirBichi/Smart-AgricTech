@@ -1,0 +1,55 @@
+/* Compact, viewport-conscious dashboard presentation.
+   Desktop: put market title and commodity selector on one row. */
+@media(min-width:992px){
+ .dashboard-container .main-content{padding:10px 20px 18px!important}
+ .dashboard-container .main-content .dashboard-header{min-height:52px!important;margin-bottom:10px!important;padding:8px 16px!important;border-radius:12px!important}
+ .dashboard-container .main-content .dashboard-title{font-size:clamp(15px,1.4vw,19px)!important}
+ .dashboard-container .main-content .content-section{padding:14px 18px!important;border-radius:14px!important}
+ #market-trends.content-section{display:none;grid-template-columns:minmax(0,1fr) minmax(180px,260px);gap:8px 18px;align-content:start;align-items:center}
+ #market-trends.content-section[style*="display: block"],#market-trends.content-section[style*="display:block"],#market-trends.content-section[style*="display: grid"],#market-trends.content-section[style*="display:grid"]{display:grid!important}
+ #market-trends>h2{grid-column:1;grid-row:1;font-size:clamp(22px,2vw,27px)!important;letter-spacing:-.8px!important;margin:0!important}
+ #market-trends>h2:after{margin-top:6px!important}
+ #market-trends>.mb-3{grid-column:2;grid-row:1;margin:0!important}
+ #market-trends>.mb-3 label{display:block;margin-bottom:3px!important;font-size:11px!important}
+ #market-trends>.mb-3 select{min-height:35px!important;padding:5px 10px!important}
+ #market-trends>.agri-trading-panel{grid-column:1/-1;margin:3px 0!important;padding:12px 16px!important;border-radius:14px!important}
+ #market-trends .agri-trading-top{padding-bottom:8px!important}
+ #market-trends .agri-market-label{margin-bottom:3px!important}
+ #market-trends #agri-trend-commodity{font-size:15px!important}
+ #market-trends #agri-trend-price{font-size:25px!important}
+ #market-trends .agri-chart-legend{padding:7px 0!important}
+ #market-trends .agri-chart-frame{height:clamp(170px,calc(100dvh - 395px),320px)!important}
+ #market-trends .agri-chart-note{margin-top:4px!important;font-size:10px!important}
+ #market-trends>.btn,#market-trends>button,#market-trends>.text-center{grid-column:1/-1}
+ #market-trends .btn{min-height:33px!important;padding:6px 13px!important}
+ #weather-forecast .weather-heading{margin-bottom:8px!important}
+ #weather-forecast .weather-heading h2{font-size:26px!important}
+ #weather-forecast .weather-heading-icon{width:42px!important;height:42px!important}
+ #weather-forecast .weather-search{padding:10px 14px!important;margin-bottom:9px!important}
+ #weather-forecast .weather-search-controls input,#weather-forecast .weather-search-controls button{min-height:37px!important}
+ #weather-forecast .weather-card{padding:14px 20px!important}
+ #weather-forecast .weather-location-row{margin:5px 0!important}
+ #weather-forecast .weather-location-row img{width:58px!important;height:58px!important}
+ #weather-forecast .weather-temperature{margin-bottom:8px!important}
+ #weather-forecast .weather-temperature h4{font-size:43px!important}
+ #weather-forecast .weather-metrics{padding-top:8px!important;gap:8px!important}
+ #weather-forecast .weather-metric{padding:8px 11px!important}
+}
+@media(min-width:992px) and (max-height:740px){
+ .dashboard-container .main-content{padding-top:7px!important}
+ .dashboard-container .main-content .dashboard-header{margin-bottom:7px!important}
+ .dashboard-container .main-content .content-section{padding:10px 15px!important}
+ #market-trends .agri-chart-frame{height:clamp(150px,calc(100dvh - 360px),260px)!important}
+}
+@media(max-width:991px){
+ #market-trends .agri-chart-frame{height:clamp(225px,42vh,330px)!important}
+ #market-trends .agri-trading-panel{margin:12px 0!important}
+ #market-trends .agri-chart-legend{padding:11px 0!important}
+ #weather-forecast .weather-heading{margin-bottom:12px!important}
+}
+@media(max-width:480px){
+ #market-trends .agri-chart-frame{height:240px!important}
+ #market-trends .agri-trading-top{gap:8px!important}
+ #market-trends .agri-trading-quote{text-align:left!important}
+ #weather-forecast .weather-metric{padding:10px!important}
+}
