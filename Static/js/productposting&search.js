@@ -98,14 +98,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // CART FUNCTIONALITY
     function updateCartTotal() {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let cartItems = JSON.parse(localStorage.getItem((window.AGRI_CART_ITEMS_KEY || "cartItems"))) || [];
         let total = cartItems.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
         cartTotal.innerText = `₦${total.toFixed(2)}`;
     }
 
     function loadCartItems() {
         cartContainer.innerHTML = "";
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let cartItems = JSON.parse(localStorage.getItem((window.AGRI_CART_ITEMS_KEY || "cartItems"))) || [];
 
         cartItems.forEach((item, index) => {
             const cartItem = `
@@ -130,9 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const price = event.target.getAttribute("data-price");
             const image = event.target.getAttribute("data-image");
 
-            let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            let cartItems = JSON.parse(localStorage.getItem((window.AGRI_CART_ITEMS_KEY || "cartItems"))) || [];
             cartItems.push({ name, description, price, image, quantity: 1 });
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            localStorage.setItem((window.AGRI_CART_ITEMS_KEY || "cartItems"), JSON.stringify(cartItems));
 
             loadCartItems(); // Update cart instantly
         }
@@ -141,10 +141,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Remove item from cart
     document.addEventListener("click", function (event) {
         if (event.target.classList.contains("remove-item")) {
-            let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            let cartItems = JSON.parse(localStorage.getItem((window.AGRI_CART_ITEMS_KEY || "cartItems"))) || [];
             const index = event.target.getAttribute("data-index");
             cartItems.splice(index, 1);
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            localStorage.setItem((window.AGRI_CART_ITEMS_KEY || "cartItems"), JSON.stringify(cartItems));
 
             loadCartItems();
         }
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Clear Cart
     clearCartBtn.addEventListener("click", function () {
-        localStorage.removeItem("cartItems");
+        localStorage.removeItem((window.AGRI_CART_ITEMS_KEY || "cartItems"));
         loadCartItems();
         alert("Your cart has been cleared.");
     });
