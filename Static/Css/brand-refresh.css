@@ -1,0 +1,27 @@
+/* Smart AgricTech — presentation-only refinement. Preserve existing workflows. */
+:root{--agri-forest:#174c3b;--agri-green:#23845a;--agri-mint:#e9f6ed;--agri-gold:#d5a744;--agri-ink:#18352e;--agri-line:#dfe9e3;--agri-shadow:0 12px 34px rgba(20,64,47,.09)}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;letter-spacing:-.01em}
+button,.btn,input,select,textarea,.card,.nav-link{transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b8d9b8;outline-offset:2px}
+.btn{border-radius:10px;font-weight:600;padding:.55rem 1rem}
+.btn-primary,.btn-success,.btn-custom{background:#23845a!important;border-color:#23845a!important;color:#fff!important}
+.btn-primary:hover,.btn-success:hover,.btn-custom:hover{background:#176d49!important;border-color:#176d49!important;transform:translateY(-1px)}
+.card,.auth-card,.feature-box,.testimonial-card{border-radius:16px!important;border:1px solid var(--agri-line)!important;box-shadow:var(--agri-shadow)!important}
+.card:hover,.feature-box:hover{box-shadow:0 16px 40px rgba(20,64,47,.13)!important}
+input.form-control,select.form-control,textarea.form-control,.form-select{border-radius:10px!important;border:1px solid #d5e2da!important;min-height:42px}
+input.form-control:focus,select.form-control:focus,textarea.form-control:focus{border-color:var(--agri-green)!important;box-shadow:0 0 0 .2rem rgba(35,132,90,.12)!important}
+.table{border-radius:12px;overflow:hidden;background:#fff;color:var(--agri-ink)}
+.table thead th{background:#eef6f0!important;color:var(--agri-forest)!important;border-color:var(--agri-line)!important;font-weight:700}
+.table td,.table th{padding:.8rem .9rem;vertical-align:middle}
+.sidebar{background:#173f36!important;box-shadow:4px 0 24px rgba(9,37,27,.12)!important}
+.sidebar .nav-link{border-radius:10px!important;margin:2px 0}
+.sidebar .nav-link:hover,.sidebar .nav-link.active{background:rgba(255,255,255,.14)!important;color:#fff!important}
+.dropdown-menu{border-radius:14px;border:1px solid var(--agri-line);box-shadow:var(--agri-shadow)}
+.dropdown-item{border-radius:8px}
+.navbar{box-shadow:0 3px 16px rgba(18,58,42,.08)}
+.badge{border-radius:7px}
+#features,.features,.statistics,.testimonials{scroll-margin-top:80px}
+.feature-box{padding:1.5rem!important}
+.hero-content h1{font-weight:800;line-height:1.12;letter-spacing:-.035em}
+@media(max-width:768px){.main-content{padding:16px!important;margin-left:0!important}.card,.auth-card{border-radius:13px!important}.table-responsive{border-radius:12px}.hero-content h1{font-size:clamp(2rem,7vw,3.25rem)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
