@@ -42,6 +42,129 @@ class Product(db.Model):
     posted_by = db.Column(db.String(100), nullable=False)
     media_file = db.Column(db.String(200))
 
+# Farm Management: records are scoped to the authenticated farmer.
+class Farm(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    name = db.Column(db.String(120), nullable=False)
+    location = db.Column(db.String(180), nullable=False, default='')
+    farm_type = db.Column(db.String(30), nullable=False, default='mixed')
+
+class PoultryBatch(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    farm_id = db.Column(db.Integer, db.ForeignKey('farm.id'), nullable=False, index=True)
+    name = db.Column(db.String(120), nullable=False)
+    bird_type = db.Column(db.String(40), nullable=False)
+    breed = db.Column(db.String(100), nullable=False, default='')
+    initial_count = db.Column(db.Integer, nullable=False)
+    acquired_on = db.Column(db.Date, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+class PoultryDailyRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    batch_id = db.Column(db.Integer, db.ForeignKey('poultry_batch.id'), nullable=False, index=True)
+    recorded_on = db.Column(db.Date, nullable=False)
+    deaths = db.Column(db.Integer, nullable=False, default=0)
+    eggs = db.Column(db.Integer, nullable=False, default=0)
+    feed_kg = db.Column(db.Float, nullable=False, default=0)
+    notes = db.Column(db.String(500), nullable=False, default='')
+
+def farmer_identity():
+    if not session.get('user_id') or session.get('role') != 'farmer':
+        return None
+    return session['user_id']
+
+@app.route('/api/farms', methods=['GET', 'POST'])
+def farms_api():
+    owner = farmer_identity()
+    if owner is None:
+        return jsonify(error='Farmer login required'), 403
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        name = str(data.get('name', '')).strip()[:120]
+        kind = str(data.get('farm_type', 'mixed'))
+        if not name or kind not in ('mixed', 'poultry', 'livestock', 'crops'):
+            return jsonify(error='Enter a farm name and valid farm type'), 400
+        farm = Farm(owner_id=owner, name=name, location=str(data.get('location', '')).strip()[:180], farm_type=kind)
+        db.session.add(farm)
+        db.session.commit()
+        return jsonify(id=farm.id, message='Farm created'), 201
+    rows = Farm.query.filter_by(owner_id=owner).order_by(Farm.id.desc()).all()
+    return jsonify(farms=[dict(id=f.id, name=f.name, location=f.location, farm_type=f.farm_type) for f in rows])
+
+@app.route('/api/poultry/batches', methods=['GET', 'POST'])
+def poultry_batches_api():
+    from datetime import date
+    owner = farmer_identity()
+    if owner is None:
+        return jsonify(error='Farmer login required'), 403
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        try:
+            farm_id = int(data.get('farm_id'))
+            count = int(data.get('initial_count'))
+            acquired = date.fromisoformat(str(data.get('acquired_on', '')))
+        except (ValueError, TypeError):
+            return jsonify(error='Provide valid farm, bird count and acquisition date'), 400
+        farm = Farm.query.filter_by(id=farm_id, owner_id=owner).first()
+        name = str(data.get('name', '')).strip()[:120]
+        bird_type = str(data.get('bird_type', '')).strip()[:40]
+        if not farm or not name or not bird_type or count <= 0 or count > 100000000:
+            return jsonify(error='Invalid farm or poultry batch details'), 400
+        batch = PoultryBatch(farm_id=farm.id, name=name, bird_type=bird_type, breed=str(data.get('breed', '')).strip()[:100], initial_count=count, acquired_on=acquired)
+        db.session.add(batch)
+        db.session.commit()
+        return jsonify(id=batch.id, message='Batch created'), 201
+    batches = (db.session.query(PoultryBatch).join(Farm, Farm.id == PoultryBatch.farm_id)
+               .filter(Farm.owner_id == owner).order_by(PoultryBatch.id.desc()).all())
+    results = []
+    for b in batches:
+        records = PoultryDailyRecord.query.filter_by(batch_id=b.id).all()
+        deaths = sum(r.deaths for r in records)
+        results.append(dict(id=b.id, farm_id=b.farm_id, name=b.name, bird_type=b.bird_type,
+                            breed=b.breed, initial_count=b.initial_count, current_count=b.initial_count-deaths,
+                            deaths=deaths, eggs=sum(r.eggs for r in records),
+                            feed_kg=round(sum(r.feed_kg for r in records), 2),
+                            acquired_on=b.acquired_on.isoformat()))
+    return jsonify(batches=results)
+
+@app.route('/api/poultry/records', methods=['GET', 'POST'])
+def poultry_records_api():
+    from datetime import date
+    owner = farmer_identity()
+    if owner is None:
+        return jsonify(error='Farmer login required'), 403
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        try:
+            batch_id = int(data.get('batch_id'))
+            deaths = int(data.get('deaths', 0))
+            eggs = int(data.get('eggs', 0))
+            feed = float(data.get('feed_kg', 0))
+            recorded = date.fromisoformat(str(data.get('recorded_on', '')))
+        except (ValueError, TypeError):
+            return jsonify(error='Enter valid daily record values'), 400
+        batch = (db.session.query(PoultryBatch).join(Farm, Farm.id == PoultryBatch.farm_id)
+                 .filter(PoultryBatch.id == batch_id, Farm.owner_id == owner).first())
+        if not batch or min(deaths, eggs, feed) < 0 or not (feed < 100000000):
+            return jsonify(error='Invalid batch or quantities'), 400
+        previous = db.session.query(db.func.coalesce(db.func.sum(PoultryDailyRecord.deaths), 0)).filter_by(batch_id=batch_id).scalar()
+        if deaths > batch.initial_count - previous:
+            return jsonify(error='Deaths exceed remaining birds'), 400
+        record = PoultryDailyRecord(batch_id=batch_id, recorded_on=recorded, deaths=deaths,
+                                    eggs=eggs, feed_kg=feed, notes=str(data.get('notes', '')).strip()[:500])
+        db.session.add(record)
+        db.session.commit()
+        return jsonify(id=record.id, message='Daily record saved'), 201
+    records = (db.session.query(PoultryDailyRecord, PoultryBatch.name)
+               .join(PoultryBatch, PoultryBatch.id == PoultryDailyRecord.batch_id)
+               .join(Farm, Farm.id == PoultryBatch.farm_id)
+               .filter(Farm.owner_id == owner)
+               .order_by(PoultryDailyRecord.recorded_on.desc(), PoultryDailyRecord.id.desc()).limit(100).all())
+    return jsonify(records=[dict(id=r.id, batch_id=r.batch_id, batch_name=name,
+                    recorded_on=r.recorded_on.isoformat(), deaths=r.deaths, eggs=r.eggs,
+                    feed_kg=r.feed_kg, notes=r.notes) for r, name in records])
+
 # Utility function to check allowed file types
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
