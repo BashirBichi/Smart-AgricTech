@@ -10,11 +10,11 @@ from flask import Flask, request, jsonify
 # from models import db, ProductName, Product
 
 # Flask app configuration
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app = Flask(__name__, template_folder='Templates', static_folder='Static')
+app.secret_key = os.environ['SECRET_KEY']
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'mov'}
 
 # Database setup
@@ -298,8 +298,8 @@ def delete_product_name(product_id):
 
 
 
-if __name__ == '__main__':
+with app.app_context():
+    db.create_all()
 
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=False)
