@@ -100,6 +100,7 @@ This design provides a clean and intuitive interface for farmers to access impor
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/resources-v2.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-modules.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farm-management.css') }}">
 </head>
 <style>
 
@@ -112,6 +113,7 @@ This design provides a clean and intuitive interface for farmers to access impor
         <!-- Sidebar -->
         <aside class="sidebar">
             <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <li class="nav-item"><a href="#" class="nav-link" data-section="farm-management"><i class="fas fa-seedling"></i> Farm Management</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="Inventory-management"><i class="fas fa-clipboard-list"></i> Inventory</a></li>
@@ -621,6 +623,19 @@ This design provides a clean and intuitive interface for farmers to access impor
             </div>
 
 
+            <section id="farm-management" class="content-section farm-workspace" style="display:none">
+ <div class="agri-module-head"><div><span class="agri-module-kicker">FARM OPERATIONS</span><h2>My Farms &amp; Poultry</h2><p>Manage your farms, register flocks and record daily production. Records are private to your farmer account.</p></div><span class="agri-module-icon"><i class="fas fa-tractor"></i></span></div>
+ <div id="farm-message" role="status" aria-live="polite"></div>
+ <div class="farm-metrics"><article><span>My Farms</span><strong id="fm-farms">0</strong></article><article><span>Active Batches</span><strong id="fm-batches">0</strong></article><article><span>Birds Remaining</span><strong id="fm-birds">0</strong></article><article><span>Eggs Recorded</span><strong id="fm-eggs">0</strong></article></div>
+ <div class="farm-grid">
+  <article class="farm-card"><h3><i class="fas fa-map-marker-alt"></i> Register a Farm</h3><form id="fm-farm-form" class="farm-form"><label>Farm name<input name="name" required maxlength="120" placeholder="e.g. Green Valley Farm"></label><label>Location<input name="location" maxlength="180" placeholder="Town / State"></label><label>Enterprise type<select name="farm_type"><option value="mixed">Mixed farming</option><option value="poultry">Poultry</option><option value="livestock">Livestock</option><option value="crops">Crops</option></select></label><button type="submit">Save Farm</button></form></article>
+  <article class="farm-card"><h3><i class="fas fa-kiwi-bird"></i> Register Poultry Batch</h3><form id="fm-batch-form" class="farm-form"><label>Farm<select name="farm_id" id="fm-batch-farm" required></select></label><label>Batch name<input name="name" maxlength="120" required placeholder="e.g. Layers Batch A"></label><label>Bird type<select name="bird_type"><option>Layers</option><option>Broilers</option><option>Cockerels</option><option>Turkeys</option><option>Ducks</option><option>Other</option></select></label><label>Breed<input name="breed" maxlength="100" placeholder="Optional"></label><label>Number of birds<input name="initial_count" type="number" min="1" step="1" required></label><label>Date acquired<input name="acquired_on" type="date" required></label><button type="submit">Save Batch</button></form></article>
+  <article class="farm-card"><h3><i class="fas fa-clipboard-check"></i> Daily Poultry Record</h3><form id="fm-record-form" class="farm-form"><label>Poultry batch<select name="batch_id" id="fm-record-batch" required></select></label><label>Record date<input name="recorded_on" type="date" required></label><label>Deaths<input name="deaths" type="number" min="0" step="1" value="0" required></label><label>Eggs collected<input name="eggs" type="number" min="0" step="1" value="0" required></label><label>Feed consumed (kg)<input name="feed_kg" type="number" min="0" step="0.01" value="0" required></label><label>Notes<textarea name="notes" maxlength="500" rows="2" placeholder="Health, medication or observations"></textarea></label><button type="submit">Save Daily Record</button></form></article>
+ </div>
+ <div class="farm-grid farm-lists"><article class="farm-card"><h3>Registered Farms</h3><div id="fm-farm-list" class="farm-list">Loading…</div></article><article class="farm-card"><h3>Poultry Batches</h3><div id="fm-batch-list" class="farm-list">Loading…</div></article><article class="farm-card"><h3>Recent Daily Records</h3><div id="fm-record-list" class="farm-list">Loading…</div></article></div>
+ <p class="farm-disclaimer">Egg counts and feed usage are operational records, not verified sales or wallet balances. Livestock and crop operations will be added in subsequent phases.</p>
+</section>
+
             <!-- Finance -->
            <div id="Finance-management" class="content-section agri-finance">
              <div class="agri-module-head"><div><span class="agri-module-kicker">FARM FINANCE</span><h2>Finance &amp; Planning</h2><p>Plan farm expenses and explore funding guidance. No live wallet or financing products are connected.</p></div><span class="agri-module-icon"><i class="fas fa-wallet"></i></span></div>
@@ -812,6 +827,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-finance.js') }}"></script>
+<script src="{{ url_for('static', filename='js/farm-management.js') }}"></script>
 </body>
 
 </html>
