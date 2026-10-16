@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-compact.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-actions.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections-ui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 </head>
 <body>
     <div class="dashboard-container">
@@ -44,6 +45,8 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                         <li><a class="dropdown-item" href="#" data-section="edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
                         <li><a class="dropdown-item" href="#" data-section="view-profile"><i class="fas fa-id-badge"></i> View Profile</a></li>
+                        <li><a class="dropdown-item" href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a class="dropdown-item" href="#" data-section="my-wallet"><i class="fas fa-wallet"></i> My Wallet</a></li>
                         <li><a class="dropdown-item" href="#" data-section="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
                 </div>
@@ -226,5 +229,6 @@
         });
     </script>
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
+<script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
 </body>
 </html>
