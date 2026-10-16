@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-layout.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-compact.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-actions.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections-ui.css') }}">
 </head>
 <style>
     #user-list{
@@ -237,5 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+<script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 </body>
 </html>
