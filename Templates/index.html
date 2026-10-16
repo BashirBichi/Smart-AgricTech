@@ -1,140 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Smart AgricTech</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='Css/brand-refresh.css') }}">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123e31">
+<meta name="description" content="Smart AgricTech connects farmers, processors, marketers and consumers through a smarter agricultural marketplace.">
+<title>Smart AgricTech — Grow better, trade smarter</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/landing-v2.css') }}">
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand text-white" href="#">Smart AgricTech</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <h1 style="padding: 30px; display: block; padding-bottom: 30px; padding-left: 20px; margin-top: 40px; align-items: center; font-family: 'Times New Roman', Times, serif;">Empowering Agriculture with Technology</h1>
-                <p class="lead" style="font-family: 'Times New Roman', Times, serif;">Connecting Farmers, Consumers, and Processors for a Sustainable Future</p>
-                <a href="{{ url_for('login') }}" class="btn btn-custom"><i class="fas fa-leaf"></i> Get Started</a>
-                
-            </div>
-    
-        </div>
-            </div>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-
-        <div class="container">
-            <h2 class="text-center fw-bold" style="font-family: 'Times New Roman', Times, serif;">Why Choose Smart AgricTech?</h2>
-            <div class="row mt-4">
-                <div class="col-md-4 feature-box">
-                    <i class="fas fa-chart-line"></i>
-                    <h4>Market Insights</h4>
-                    <p>Stay ahead with real-time commodity prices and trends.</p>
-                </div>
-                <div class="col-md-4 feature-box">
-                    <i class="fas fa-cloud-sun"></i>
-                    <h4>Weather Forecast</h4>
-                    <p>Access accurate weather predictions for better planning.</p>
-                </div>
-                <div class="col-md-4 feature-box">
-                    <i class="fas fa-users"></i>
-                    <h4>Community Support</h4>
-                    <p>Join a network of farmers and stakeholders.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="statistics py-5 mg-20">
-        <div class="container py-5 ">
-            <div class="row text-center mg-20">
-            <div class="col-md-3" style=" box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <h3 class="display-4 fw-bold text-success" >10+</h3>
-                    <p class="text-muted">Happy Farmers</p>
-                </div>
-                <div class="col-md-3" style=" box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <h3 class="display-4 fw-bold text-success">10+</h3>
-                    <p class="text-muted">Transactions</p>
-                </div>
-                <div class="col-md-3" style=" box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <h3 class="display-4 fw-bold text-success">95%</h3>
-                    <p class="text-muted">Satisfaction Rate</p>
-                </div>
-                <div class="col-md-3" style=" box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <h3 class="display-4 fw-bold text-success">24/7</h3>
-                    <p class="text-muted">Support Available</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials py-5">
-        <div id="container-testimonials" class="container">
-            <h2 class="text-center mb-5">What Our Users Say</h2>
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="testimonial-card mx-auto">
-                            <p class="testimonial-text">"Smart AgricTech has transformed the way I manage my farm. The market insights are invaluable!"</p>
-                            <p class="testimonial-author">- John Doe, Farmer</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="testimonial-card mx-auto">
-                            <p class="testimonial-text">"As a processor, the platform has helped me connect with reliable suppliers efficiently."</p>
-                            <p class="testimonial-author">- Jane Smith, Processor</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="testimonial-card mx-auto">
-                            <p class="testimonial-text">"The community support and resources have been game-changers for my business."</p>
-                            <p class="testimonial-author">- Michael Brown, Marketer</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-
-
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+<header class="site-header" id="top"><div class="wrap header-inner">
+<a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">✳</span><span>Smart<span class="brand-accent">Agric</span>Tech</span></a>
+<nav class="nav-links" id="mainNav" aria-label="Main navigation"><a href="#features">Solutions</a><a href="#how-it-works">How it works</a><a href="#who-its-for">Who it's for</a><a href="#about">About</a></nav>
+<div class="nav-actions"><a class="nav-login" href="{{ url_for('login') }}">Log in</a><a class="btn btn-primary btn-small" href="{{ url_for('login') }}">Get started <span aria-hidden="true">↗</span></a></div>
+<button class="menu-toggle" aria-label="Toggle menu" aria-controls="mainNav" aria-expanded="false" onclick="const n=document.getElementById('mainNav');const o=n.classList.toggle('open');this.setAttribute('aria-expanded',String(o))">☰</button>
+</div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span> GROWING THE FUTURE OF AGRICULTURE</div>
+<h1>Where agriculture meets <em>opportunity.</em></h1>
+<p class="hero-lead">From farm to market, we're bringing the people who grow, process, sell and buy agricultural products closer together — all in one smarter platform.</p>
+<div class="hero-actions"><a class="btn btn-primary btn-large" href="{{ url_for('login') }}">Explore the platform <span>↗</span></a><a class="btn btn-outline btn-large" href="#how-it-works">See how it works <span>→</span></a></div>
+<div class="hero-foot"><span class="mini-icon">✓</span> Built for farmers, processors, marketers &amp; consumers</div>
+</div>
+<div class="hero-visual"><img class="hero-image" src="{{ url_for('static', filename='images/corn-field-mountains_73523-4544.jpg') }}" alt="Lush green agricultural farmland">
+<div class="hero-image-shade"></div><div class="floating-note"><span class="note-icon">↗</span><div><strong>Better connections.</strong><small>Stronger agricultural communities.</small></div></div>
+<div class="visual-label"><span class="visual-pulse"></span> FARM TO FUTURE</div></div>
+</div><div class="hero-bottom wrap"><span>ROOTED IN AGRICULTURE</span><span class="hero-bottom-line"></span><span>POWERED BY CONNECTION</span></div></section>
+<section class="intro-section section" id="about"><div class="wrap"><div class="section-top"><span class="section-kicker">THE BIG PICTURE</span><h2>A better way to move <span>agriculture forward.</span></h2><p>Technology should make agricultural opportunities more accessible. Smart AgricTech brings essential tools and connections into one convenient digital space.</p></div>
+<div class="value-grid"><article class="value-card"><span class="value-number">01 /</span><div class="value-icon">🌾</div><h3>Grow with confidence</h3><p>Give farmers a space to showcase their produce and connect with potential buyers.</p><span class="value-arrow">↗</span></article><article class="value-card"><span class="value-number">02 /</span><div class="value-icon">🤝</div><h3>Connect the market</h3><p>Bring farmers, processors, marketers and consumers into a shared agricultural ecosystem.</p><span class="value-arrow">↗</span></article><article class="value-card"><span class="value-number">03 /</span><div class="value-icon">📊</div><h3>Make informed moves</h3><p>Explore market-related tools and resources designed to support everyday decisions.</p><span class="value-arrow">↗</span></article></div></div></section>
+<section class="feature-section section" id="features"><div class="wrap feature-layout"><div class="feature-image-wrap"><img src="{{ url_for('static', filename='images/paddy-hands-men-with-paddy_1150-17232.jpg') }}" alt="Farmer holding harvested agricultural produce"><div class="image-caption">GROWN WITH PURPOSE <span>✳</span></div></div><div class="feature-copy"><span class="section-kicker">ONE CONNECTED PLATFORM</span><h2>Everything starts with a <span>stronger connection.</span></h2><p>Discover the tools that help agricultural participants find opportunities and stay connected.</p><div class="feature-list"><div><span class="feature-symbol">↗</span><div><h3>Agricultural marketplace</h3><p>Discover and showcase agricultural products in one place.</p></div></div><div><span class="feature-symbol">◈</span><div><h3>Inventory &amp; product listings</h3><p>Organize produce information through dedicated dashboards.</p></div></div><div><span class="feature-symbol">◎</span><div><h3>Community &amp; market tools</h3><p>Access useful resources and connect across the agricultural value chain.</p></div></div></div><a class="text-link" href="{{ url_for('login') }}">Get started with Smart AgricTech <span>↗</span></a></div></div></section>
+<section class="steps-section section" id="how-it-works"><div class="wrap"><div class="section-heading-row"><div><span class="section-kicker">HOW IT WORKS</span><h2>Simple steps. <span>Real possibilities.</span></h2></div><p>Getting started is straightforward, whatever your role in agriculture.</p></div><div class="steps-grid"><article><span class="step-num">01</span><div class="step-line"></div><h3>Create your account</h3><p>Sign up and select the role that best describes your place in agriculture.</p></article><article><span class="step-num">02</span><div class="step-line"></div><h3>Explore your workspace</h3><p>Access a dashboard designed around your role and available tools.</p></article><article><span class="step-num">03</span><div class="step-line"></div><h3>Discover opportunities</h3><p>Explore products, manage listings and connect with the agricultural community.</p></article></div></div></section>
+<section class="audience-section section" id="who-its-for"><div class="wrap"><div class="section-top"><span class="section-kicker">BUILT FOR THE VALUE CHAIN</span><h2>One ecosystem. <span>Many possibilities.</span></h2><p>Whether you grow, process, market or purchase produce, there's a place for you.</p></div><div class="audience-grid"><div><span>🌱</span><h3>Farmers</h3><p>Showcase agricultural produce.</p></div><div><span>⚙️</span><h3>Processors</h3><p>Explore supply opportunities.</p></div><div><span>📦</span><h3>Marketers</h3><p>Connect products to markets.</p></div><div><span>🛒</span><h3>Consumers</h3><p>Discover agricultural products.</p></div></div></div></section>
+<section class="cta-section"><div class="wrap cta-content"><div><span class="cta-eyebrow">LET'S GROW TOGETHER</span><h2>The future of agriculture is <em>connected.</em></h2><p>Join Smart AgricTech and discover a more connected agricultural experience.</p></div><a href="{{ url_for('login') }}" class="btn btn-light btn-large">Get started today <span>↗</span></a></div></section>
+</main>
+<footer class="site-footer"><div class="wrap footer-top"><a class="brand" href="#top"><span class="brand-mark">✳</span><span>Smart<span class="brand-accent">Agric</span>Tech</span></a><p>Connecting agriculture to opportunity.</p><a href="#top">Back to top ↑</a></div><div class="wrap footer-bottom"><span>© Smart AgricTech. All rights reserved.</span><span>Growing together, digitally. 🌱</span></div></footer>
+<script>document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('mainNav').classList.remove('open');document.querySelector('.menu-toggle').setAttribute('aria-expanded','false')}));</script>
+</body></html>
