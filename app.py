@@ -12,7 +12,10 @@ from flask import Flask, request, jsonify
 # Flask app configuration
 app = Flask(__name__, template_folder='Templates', static_folder='Static')
 app.secret_key = os.environ['SECRET_KEY']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
+if database_url.startswith('postgres://'):
+    database_url = 'postgresql://' + database_url[len('postgres://'):]
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'mov'}
@@ -68,6 +71,51 @@ class PoultryDailyRecord(db.Model):
     eggs = db.Column(db.Integer, nullable=False, default=0)
     feed_kg = db.Column(db.Float, nullable=False, default=0)
     notes = db.Column(db.String(500), nullable=False, default='')
+
+class ShoppingCartItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    product_key = db.Column(db.String(250), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.String(500), nullable=False, default='')
+    image = db.Column(db.String(500), nullable=False, default='')
+    price = db.Column(db.Float, nullable=False, default=0)
+    quantity = db.Column(db.Integer, nullable=False, default=1)
+
+@app.route('/api/cart', methods=['GET', 'PUT'])
+def account_cart_api():
+    owner = session.get('user_id')
+    if not owner:
+        return jsonify(error='Login required'), 401
+    if request.method == 'GET':
+        rows = ShoppingCartItem.query.filter_by(owner_id=owner).order_by(ShoppingCartItem.id).all()
+        return jsonify(items=[dict(name=x.name, description=x.description, image=x.image,
+                                   price=x.price, quantity=x.quantity, product_key=x.product_key) for x in rows])
+    payload = request.get_json(silent=True) or {}
+    items = payload.get('items')
+    if not isinstance(items, list) or len(items) > 150:
+        return jsonify(error='Invalid cart'), 400
+    cleaned = []
+    for item in items:
+        if not isinstance(item, dict):
+            return jsonify(error='Invalid cart item'), 400
+        try:
+            price = float(item.get('price', 0))
+            quantity = int(item.get('quantity', 0))
+        except (ValueError, TypeError):
+            return jsonify(error='Invalid price or quantity'), 400
+        if not (0 <= price <= 1000000000 and 1 <= quantity <= 10000):
+            return jsonify(error='Invalid price or quantity'), 400
+        name = str(item.get('name', '')).strip()[:200]
+        if not name:
+            return jsonify(error='Product name required'), 400
+        cleaned.append(ShoppingCartItem(owner_id=owner, product_key=str(item.get('product_key') or name)[:250],
+                                        name=name, description=str(item.get('description') or '')[:500],
+                                        image=str(item.get('image') or '')[:500], price=price, quantity=quantity))
+    ShoppingCartItem.query.filter_by(owner_id=owner).delete()
+    db.session.add_all(cleaned)
+    db.session.commit()
+    return jsonify(message='Cart saved', count=sum(x.quantity for x in cleaned))
 
 def farmer_identity():
     if not session.get('user_id') or session.get('role') != 'farmer':
