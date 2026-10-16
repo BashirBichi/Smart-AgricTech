@@ -1,0 +1,24 @@
+/* Uniform dashboard sections: one visible content viewport and accessible primary actions */
+@media(min-width:769px){
+ .dashboard-container .main-content{height:100dvh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important}
+ .dashboard-container .main-content>.dashboard-header{flex-shrink:0!important}
+ .dashboard-container .main-content>.col-md-9{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin}
+ .dashboard-container .main-content>#profile-content,.dashboard-container .main-content>.col-md-9>#profile-content{max-height:100%!important;overflow-y:auto!important}
+ .dashboard-container .main-content>.agri-viewport-section,.dashboard-container .main-content>.col-md-9>.agri-viewport-section,.dashboard-container .main-content>.col-md-9>#profile-content>.agri-viewport-section{
+   max-height:calc(100dvh - 94px)!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;
+ }
+ .dashboard-container .main-content .agri-viewport-section{padding:14px 18px!important}
+ .dashboard-container .main-content .agri-viewport-section>h2:first-child{position:sticky;top:-14px;z-index:4;background:#fff;margin:0 0 10px!important;padding:7px 0 9px!important}
+ .dashboard-container .main-content .agri-viewport-section .agri-section-actions{position:sticky!important;bottom:0!important;z-index:6!important;background:#fff!important;border-top:1px solid #e3eee4!important;box-shadow:0 -8px 14px rgba(255,255,255,.97)!important;padding:9px 4px!important;margin-top:12px!important;display:flex!important;flex-wrap:wrap;gap:8px;justify-content:flex-start}
+ .dashboard-container .main-content .agri-viewport-section button.agri-section-actions,.dashboard-container .main-content .agri-viewport-section input.agri-section-actions{display:inline-flex!important;background:#25875a!important;color:#fff!important;padding:9px 15px!important;width:auto!important}
+ .dashboard-container .main-content .agri-viewport-section .row{row-gap:12px!important}
+ .dashboard-container .main-content .agri-viewport-section .widget-box,.dashboard-container .main-content .agri-viewport-section .card{padding:15px!important}
+ .dashboard-container .main-content .agri-viewport-section .mb-4{margin-bottom:12px!important}
+ .dashboard-container .main-content .agri-viewport-section .mb-3{margin-bottom:9px!important}
+}
+@media(max-width:768px){
+ .dashboard-container .main-content{height:auto!important;overflow:visible!important}
+ .dashboard-container .main-content .agri-viewport-section{max-height:none!important;overflow:visible!important;padding:13px!important}
+ .dashboard-container .main-content .agri-viewport-section .agri-section-actions{position:sticky!important;bottom:0!important;z-index:7!important;background:#fff!important;padding:9px!important;box-shadow:0 -7px 16px rgba(255,255,255,.95)!important;display:flex;flex-wrap:wrap;gap:8px}
+ .dashboard-container .main-content .agri-viewport-section .agri-section-actions button{min-height:42px}
+}
