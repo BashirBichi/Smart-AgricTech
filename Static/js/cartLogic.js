@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const cartKey = window.AGRI_CART_KEY || "cart";
     const cartNavLink = document.querySelector(".nav-link[data-section='Product-catalog']");
     const cartContainer = document.getElementById("Product-catalog");
     const cartItemsList = document.getElementById("cart-items");
@@ -6,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const clearCartBtn = document.getElementById("clear-cart");
     const proceedCheckoutBtn = document.getElementById("proceed-to-checkout");
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
     // Keep every navigation badge synchronized with saved cart quantities.
     function updateCartBadges() {
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Function to Update Cart UI Instantly
     function updateCartUI() {
+        updateCartBadges();
         cartItemsList.innerHTML = "";
         let total = 0;
 
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cart.push(product);
         }
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem(cartKey, JSON.stringify(cart));
         updateCartUI();
     }
 
@@ -86,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target.closest(".remove-item")) {
             const index = event.target.closest(".remove-item").getAttribute("data-index");
             cart.splice(index, 1);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem(cartKey, JSON.stringify(cart));
             updateCartUI();
         }
     });
@@ -98,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         cart = []; // Reset cart array
-        localStorage.removeItem("cart"); // Remove from localStorage
+        localStorage.removeItem(cartKey); // Remove from localStorage
         updateCartUI(); // Refresh UI
         alert("Your cart has been cleared.");
     });
@@ -115,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     window.addEventListener('storage', function (event) {
-        if (event.key === 'cart') {
+        if (event.key === cartKey) {
             try { cart = JSON.parse(event.newValue || '[]') || []; } catch (_) { cart = []; }
             updateCartUI();
         }
