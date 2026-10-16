@@ -1,87 +1,9 @@
-<!-- Produce Listings:
-A table or grid showing the farmer's current produce listings, including:
-Produce name and description
-Quantity and price
-Status (e.g. "available", "sold", "pending")
-Option to edit or delete existing listings
-Post New Produce:
-A form to post new produce for sale, including:
-Produce name and description
-Quantity and price
-Photos of the produce
-Option to save draft or publish the listing
-Buyer Inquiries and Orders:
-A table or grid showing buyer inquiries and orders, including:
-Buyer name and contact information
-Produce name and quantity
-Status (e.g. "pending", "accepted", "rejected")
-Option to respond to buyer inquiries and manage orders
-Resources
-
-This section provides farmers with access to important resources and information to help them improve their agricultural practices.
-
-Agricultural Best Practices:
-A library of articles and videos on best practices for different crops and farming techniques
-Option to search and filter by topic or crop
-Fertilizers and Pesticides:
-A database of fertilizers and pesticides, including:
-Product name and description
-Usage instructions and safety precautions
-Reviews and ratings from other farmers
-Option to search and filter by product name or type
-Agricultural Extension Services:
-A directory of local agricultural extension services, including:
-Service name and description
-Contact information and location
-Reviews and ratings from other farmers
-Option to search and filter by location or service type
-Finance
-
-This section provides farmers with access to financial tools and services to help them manage their finances.
-
-Microloans and Grants:
-A list of available microloans and grants, including:
-Loan/grant name and description
-Eligibility criteria and application process
-Interest rates and repayment terms
-Option to apply for a loan or grant
-Financial Management Tools:
-A set of tools to help farmers manage their finances, including:
-Budgeting and expense tracking
-Cash flow forecasting
-Financial reporting and analysis
-Option to connect to the farmer's bank account or mobile money wallet
-Transaction History and Balance:
-A record of the farmer's transactions, including:
-Transaction date and amount
-Transaction type (e.g. sale, purchase, loan repayment)
-Balance and available funds
-Option to view detailed transaction history and balance
-Community
-
-This section provides farmers with a platform to connect with other farmers, ask questions, and share knowledge.
-
-Forums and Chat Groups:
-A set of online forums and chat groups for farmers to discuss various topics, including:
-Crop management and best practices
-Market trends and prices
-Agricultural news and policies
-Option to create new topics and respond to existing ones
-Contact Information for Local Agricultural Officers:
-A directory of local agricultural officers, including:
-Officer name and contact information
-Location and area of expertise
-Reviews and ratings from other farmers
-Option to search and filter by location or area of expertise
-This design provides a clean and intuitive interface for farmers to access important information and tools. The layout is organized into clear sections, and the use of icons and images helps to break up the text and make the platform more visually appealing. The platform is also optimized for mobile devices, making it accessible to farmers who may not have access to a computer. --> --> -->
-
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Skeleton </title>
+    <title>Farmer Dashboard | Smart AgricTech</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
@@ -101,6 +23,7 @@ This design provides a clean and intuitive interface for farmers to access impor
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/resources-v2.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-modules.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farm-management.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-fix.css') }}">
 </head>
 <style>
 
@@ -137,13 +60,18 @@ This design provides a clean and intuitive interface for farmers to access impor
         </div>
         <div class="offcanvas-body">
             <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+                <li class="nav-item"><a href="#" class="nav-link" data-section="farm-management"><i class="fas fa-seedling"></i> Farm Management</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i>Weather Forecast</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i>Market Trends</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance"><i class="fas fa-wallet"></i>Finance</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="resources"><i class="fas fa-book-open"></i> Resources</a></li>
-                <li class="nav-item"><a href="#"    class="nav-link" data-section="community"><i class="fas fa-users"></i>Community </a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Inventory-management"><i class="fas fa-clipboard-list"></i> Inventory</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Product-catalog"> <i class="fas fa-shopping-cart">
+                </i><span id="cart-badge" class="badge badge-danger" style="color: rgb(255, 0, 0);">0</span> Cart</a></li> 
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="weather-forecast"><i class="fas fa-cloud-sun"></i> Weather Forecast</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="order-management"><i class="fas fa-box"></i> Order Management</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Finance-management"><i class="fas fa-wallet"></i> Finance</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Resources"><i class="fas fa-book-open"></i> Resources</a></li>
+                <li class="nav-item"><a href="#"    class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community </a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> View Analytics</a></li>
                 <!-- <li class="nav-item"><a href="#logout" class="text-danger nav-link">Logout</a></li> -->
            </ul>
@@ -154,8 +82,8 @@ This design provides a clean and intuitive interface for farmers to access impor
             <!-- Sidebar Toggle (Mobile) -->
             <!-- Header -->
             <header class="dashboard-header">
-                <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
-                    ☰ Menu
+                <button class="btn agri-mobile-menu-toggle d-md-none" type="button" aria-label="Open navigation menu" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                    <i class="fas fa-bars" aria-hidden="true"></i> Menu
                 </button>
                 <h1 class="dashboard-title">Smart AgricTech | Empowering Farmers, Traders & Innovators</h1>
                 <div class="dropdown">
@@ -828,6 +756,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-finance.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farm-management.js') }}"></script>
+<script src="{{ url_for('static', filename='js/farmer-mobile-fix.js') }}"></script>
 </body>
 
 </html>
