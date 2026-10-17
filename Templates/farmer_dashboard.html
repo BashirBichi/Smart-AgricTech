@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/checkout-mobile.css') }}">
 <script>window.AGRI_CART_KEY = "agri:cart:{{ session.get('user_id', 'guest') | tojson }}";window.AGRI_CART_ITEMS_KEY = "agri:cartItems:{{ session.get('user_id', 'guest') | tojson }}";</script>
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farm-operations-v3.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 </head>
 <style>
 
@@ -762,6 +763,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/farmer-home.js') }}"></script>
 <script src="{{ url_for('static', filename='js/checkout-mobile.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farm-operations-v3.js') }}"></script>
+<script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
 </body>
 
 </html>
