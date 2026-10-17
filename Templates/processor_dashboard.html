@@ -24,13 +24,14 @@
 <script>window.AGRI_CART_KEY = "agri:cart:{{ session.get('user_id', 'guest') | tojson }}";window.AGRI_CART_ITEMS_KEY = "agri:cartItems:{{ session.get('user_id', 'guest') | tojson }}";</script>
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/checkout-mobile.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/workspace-insights.css') }}">
 </head>
 <body>
       
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="workspace-insights"><i class="fas fa-chart-line"></i> KPI &amp; Candlestick Analytics</a></li><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
@@ -53,7 +54,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body"><div class="agri-mobile-nav-intro"><span class="agri-nav-avatar"><i class="fas fa-industry"></i></span><div><strong>Processor Workspace</strong><small>Manage products, stock and suppliers</small></div></div><label class="agri-nav-search-label" for="processor-nav-search"><i class="fas fa-search"></i><input id="processor-nav-search" type="search" placeholder="Find a section…" autocomplete="off" aria-label="Search processor navigation"></label>
-            <ul class="nav flex-column"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
+            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="workspace-insights"><i class="fas fa-chart-line"></i> KPI &amp; Candlestick Analytics</a></li><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-access"><i class="fas fa-store"></i> Market Access</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-shop"></i> Market Place</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
@@ -72,7 +73,7 @@
     </div>
         <nav class="agri-bottom-nav" aria-label="Processor quick navigation"><button type="button" data-section="home"><i class="fas fa-house"></i><span>Home</span></button><button type="button" data-section="marketplace"><i class="fas fa-store"></i><span>Market</span></button><button type="button" data-section="Inventory-management"><i class="fas fa-boxes-stacked"></i><span>Inventory</span></button><button type="button" data-section="Product-catalog"><i class="fas fa-cart-shopping"></i><span>Cart <b class="agri-bottom-cart-count" aria-label="Cart items">0</b></span></button><button type="button" id="agri-bottom-more"><i class="fas fa-bars"></i><span>More</span></button></nav>
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content"><section id="workspace-insights" class="content-section workspace-insights" style="display:none"><h2><i class="fas fa-chart-candlestick"></i> Workspace Analytics</h2><p class="insight-lead">Live account KPIs and 30-day activity trends based on stored records.</p><div id="insight-kpis" class="insight-kpi-grid" aria-live="polite"></div><div class="insight-chart-card"><div class="insight-chart-head"><h3>30-Day Activity Candlestick Chart</h3><button type="button" id="insight-refresh"><i class="fas fa-rotate"></i> Refresh</button></div><div id="insight-chart" class="insight-chart-wrap"></div><p id="insight-note">The chart shows recorded activity, not commodity prices.</p></div></section>
             <!-- Sidebar Toggle (Mobile) -->
             <!-- Header -->
             <header class="dashboard-header">
@@ -601,6 +602,7 @@ function logoutUser() {
 <script src="{{ url_for('static', filename='js/processor-mobile.js') }}"></script>
 <script src="{{ url_for('static', filename='js/checkout-mobile.js') }}"></script>
 <script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
+<script src="{{ url_for('static', filename='js/workspace-insights.js') }}"></script>
 </body>
 
 </html>
