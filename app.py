@@ -148,6 +148,63 @@ def farmer_identity():
         return None
     return session['user_id']
 
+@app.route('/api/workspace/analytics')
+def workspace_analytics_api():
+    """Role-aware operational KPIs; candle values are cumulative activity counts, never market prices."""
+    from datetime import datetime, timedelta, timezone
+    uid = session.get('user_id')
+    role = session.get('role')
+    if not uid or role not in ('farmer', 'processor', 'consumer', 'marketer', 'admin'):
+        return jsonify(error='Login required'), 401
+    own_posts = CommunityPost.query.filter_by(author_id=uid)
+    own_messages = CommunityMessage.query.filter_by(author_id=uid)
+    own_cart = ShoppingCartItem.query.filter_by(owner_id=uid)
+    kpis = [
+        dict(label='Community posts', value=own_posts.count(), icon='fa-comments'),
+        dict(label='Messages sent', value=own_messages.count(), icon='fa-paper-plane')
+    ]
+    if role == 'farmer':
+        farms = Farm.query.filter_by(owner_id=uid)
+        operations = FarmOperation.query.filter_by(owner_id=uid)
+        kpis = [
+            dict(label='Registered farms', value=farms.count(), icon='fa-seedling'),
+            dict(label='Farm activities', value=operations.count(), icon='fa-list-check'),
+            dict(label='Completed tasks', value=operations.filter_by(status='completed').count(), icon='fa-circle-check'),
+            dict(label='Upcoming plans', value=operations.filter(FarmOperation.scheduled_on >= datetime.now(timezone.utc).date(), FarmOperation.status != 'completed').count(), icon='fa-calendar')
+        ]
+        events = [(r.created_at, 'activity') for r in operations.all() if r.created_at]
+        metric = 'Farm activities recorded'
+    else:
+        kpis += [dict(label='Cart items', value=sum(x.quantity for x in own_cart.all()), icon='fa-cart-shopping')]
+        if role == 'admin':
+            kpis += [dict(label='Registered users', value=User.query.count(), icon='fa-users'),
+                     dict(label='Product listings', value=Product.query.count(), icon='fa-box')]
+        elif role in ('processor', 'marketer'):
+            user = db.session.get(User, uid)
+            count = Product.query.filter_by(posted_by=user.name).count() if user else 0
+            kpis += [dict(label='Listings by name', value=count, icon='fa-store')]
+        else:
+            kpis += [dict(label='Available listings', value=Product.query.count(), icon='fa-store')]
+        events = [(r.created_at, 'post') for r in own_posts.all() if r.created_at]
+        metric = 'Community posts published'
+    today = datetime.now(timezone.utc).date()
+    days = [(today - timedelta(days=i)) for i in range(29, -1, -1)]
+    counts = {day: 0 for day in days}
+    for timestamp, _ in events:
+        day = timestamp.date()
+        if day in counts:
+            counts[day] += 1
+    prior = sum(1 for timestamp, _ in events if timestamp.date() < days[0])
+    candles = []
+    running = prior
+    for day in days:
+        opened = running
+        running += counts[day]
+        candles.append(dict(date=day.isoformat(), open=opened, high=running,
+                            low=opened, close=running, count=counts[day]))
+    return jsonify(role=role, kpis=kpis, candles=candles, metric=metric,
+                   note='Daily cumulative record counts, not financial or commodity price OHLC. No invented trading prices.')
+
 @app.route('/api/community/posts', methods=['GET', 'POST'])
 def community_posts_api():
     uid = session.get('user_id')
