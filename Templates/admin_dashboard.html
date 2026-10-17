@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/app-notifications.css') }}">
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 </head>
 <style>
     #user-list{
@@ -31,7 +32,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <h2 class="sidebar-title"></h2>
-            <ul class="nav flex-column"><a href="#" class="nav-link" data-section="user-list">Manage Users</a>
+            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a></li><a href="#" class="nav-link" data-section="user-list">Manage Users</a>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends">Manage Trends</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="analytics">View Analytics</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="reports">Generate Reports</a></li>
@@ -243,5 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
+<section id="Community-support" class="content-section" style="display:none"></section>
+<script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
 </body>
 </html>
