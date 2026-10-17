@@ -22,6 +22,7 @@
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/consumer-mobile-v3.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/consumer-home-v4.css') }}">
 </head>
 <style>
 
@@ -150,72 +151,12 @@
             </div>
             
             <div class="col-md-9">
-                <div id="home" class="content-section" data>
-                    <h2>Explore Latest Products</h2>
-                    <p>Discover fresh agricultural commodities directly from farmers and processing companies.</p>
-                    <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Browse Products</a> -->
-
-                    
-                    <div class="row">
-                        <!-- Quick Stats -->
-                        <div class="col-md-4">
-                            <div class="widget-box">
-                                <h3><i class="fas fa-shopping-cart"></i>  Recent Purchases</h3>
-                                <ul class="list-group">
-                                    <li class="list-group-item">Product A - $20.00</li>
-                                    <li class="list-group-item">Product B - $15.00</li>
-                                    <li class="list-group-item">Product C - $30.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="widget-box">
-                                <h3><i class="fas fa-heart"></i>Favorite Items</h3>
-                                <ul class="list-group">
-                                    <li class="list-group-item">Product D</li>
-                                    <li class="list-group-item">Product E</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4">
-                            <div class="widget-box">
-                                <h3><i class="fas fa-clock"></i> Pending Orders</h3>
-                                <ul class="list-group">
-                                    <li class="list-group-item">Order #1234 - Pending</li>
-                                    <li class="list-group-item">Order #5678 - Shipped</li>
-                                </ul>                            
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- Shortcuts -->
-                    <h3>Quick Actions</h3>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-primary btn-block">
-                                <i class="fas fa-shopping-cart"></i> View Orders
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-success btn-block">
-                                <i class="fas fa-eye"></i> Browse Products
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-warning btn-block">
-                                <i class="fas fa-comments"></i> Community Support
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#" class="btn btn-info btn-block" onclick="showBudgetForecasting()">
-                                <i class="fas fa-chart-line"></i> Budget Forecasting Tool
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        
-                <div id="settings" class="content-section" style="display: none;">
+                <div id="home" class="content-section consumer-home-v4">
+ <header class="consumer-welcome"><span class="consumer-eyebrow"><i class="fas fa-leaf"></i> SMART AGRICTECH MARKET</span><h2>Welcome to your marketplace</h2><p>Discover agricultural products, connect with producers and manage your purchases in one place.</p><div class="consumer-welcome-actions"><a href="#" data-section="marketplace" class="consumer-primary-action"><i class="fas fa-store"></i> Explore Marketplace</a><a href="#" data-section="Community-support" class="consumer-secondary-action"><i class="fas fa-users"></i> Community Hub</a></div></header>
+ <div class="consumer-overview"><article><span class="consumer-stat-icon"><i class="fas fa-bag-shopping"></i></span><div><small>My orders</small><strong>Order history</strong><p>View your saved orders</p></div><a href="#" data-section="Order-management" aria-label="Open orders"><i class="fas fa-arrow-right"></i></a></article><article><span class="consumer-stat-icon"><i class="fas fa-cart-shopping"></i></span><div><small>My cart</small><strong>Shopping cart</strong><p>Review items before checkout</p></div><a href="#" data-section="Product-catalog" aria-label="Open cart"><i class="fas fa-arrow-right"></i></a></article><article><span class="consumer-stat-icon"><i class="fas fa-comments"></i></span><div><small>Community</small><strong>Connect &amp; learn</strong><p>Posts and direct messages</p></div><a href="#" data-section="Community-support" aria-label="Open community"><i class="fas fa-arrow-right"></i></a></article></div>
+ <section class="consumer-start"><div><span class="consumer-eyebrow">GET STARTED</span><h3>What would you like to do today?</h3></div><div class="consumer-action-grid"><a href="#" class="btn btn-primary btn-block" data-section="Order-management"><i class="fas fa-receipt"></i><strong>View Orders</strong><small>Track your purchases</small></a><a href="#" class="btn btn-success btn-block" data-section="marketplace"><i class="fas fa-seedling"></i><strong>Browse Products</strong><small>Explore agricultural goods</small></a><a href="#" class="btn btn-warning btn-block" data-section="Community-support"><i class="fas fa-users"></i><strong>Community</strong><small>Meet other members</small></a><a href="#" class="btn btn-info btn-block" data-section="budget-forecasting" onclick="showBudgetForecasting()"><i class="fas fa-chart-pie"></i><strong>Budget Planner</strong><small>Estimate your spending</small></a></div></section>
+ </div>
+ <div id="settings" class="content-section" style="display: none;">
                     <h2>Settings</h2>
                     <p>Manage your account settings here.</p>
                     <button class="btn btn-warning">Change Password</button>
