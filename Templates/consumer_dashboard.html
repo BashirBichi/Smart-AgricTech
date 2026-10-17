@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/consumer-mobile-v3.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/consumer-home-v4.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-fix.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-app.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-home.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/consumer-aligned.css') }}">
 </head>
 <style>
 
@@ -46,7 +47,8 @@
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="Notifications"><i class="fas fa-bell"></i> Notifications</a></li>
                 <li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> Report and Analytics</a></li>
            </ul>
-        </aside>
+        </aside><div class="offcanvas offcanvas-start text-bg-dark d-md-none" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="mobileSidebarLabel">Smart AgricTech</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button></div><div class="offcanvas-body"><div class="agri-mobile-nav-intro"><span class="agri-nav-avatar"><i class="fas fa-basket-shopping"></i></span><div><strong>Consumer Workspace</strong><small>Shop, connect and track orders</small></div></div><label class="agri-nav-search-label" for="consumer-nav-search"><i class="fas fa-search"></i><input id="consumer-nav-search" type="search" placeholder="Find a section…" autocomplete="off" aria-label="Search consumer navigation"></label><ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="home"><i class="fas fa-home"></i> Home</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="marketplace"><i class="fas fa-store"></i> Market Access</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="Product-catalog"> <i class="fas fa-shopping-cart">
+                </i><span id="cart-badge" class="badge badge-danger" style="color: rgb(255, 0, 0);">0</span> Cart</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="Finance-management"><i class="fas fa-wallet"></i> Finance</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="Resources"><i class="fas fa-book-open"></i> Resources</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community </a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="Order-management"><i class="fas fa-box"></i> Order Management</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="Notifications"><i class="fas fa-bell"></i> Notifications</a></li><li class="nav-item"><a href="#"    class="nav-link" data-section="view-analytics"><i class="fas fa-chart-pie"></i> Report and Analytics</a></li></ul></div></div><nav class="agri-bottom-nav" aria-label="Consumer quick navigation"><button type="button" data-section="home"><i class="fas fa-house"></i><span>Home</span></button><button type="button" data-section="marketplace"><i class="fas fa-store"></i><span>Market</span></button><button type="button" data-section="Product-catalog"><i class="fas fa-cart-shopping"></i><span>Cart</span></button><button type="button" data-section="Community-support"><i class="fas fa-users"></i><span>Community</span></button><button type="button" id="agri-bottom-more" aria-label="Open all navigation"><i class="fas fa-bars"></i><span>More</span></button></nav>
             <!-- Sidebar (Bootstrap Offcanvas for Mobile) -->
     <div class="offcanvas offcanvas-start text-bg-dark d-md-none" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
         <div class="offcanvas-header">
@@ -71,7 +73,7 @@
         </div>
     </div>
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content"><button class="btn agri-mobile-menu-toggle d-md-none" type="button" aria-label="Open navigation menu" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar"><i class="fas fa-bars"></i> Menu</button>
             <!-- Sidebar Toggle (Mobile) -->
             <!-- Header -->
             <header class="dashboard-header">
@@ -151,12 +153,25 @@
             </div>
             
             <div class="col-md-9">
-                <div id="home" class="content-section consumer-home-v4">
- <header class="consumer-welcome"><span class="consumer-eyebrow"><i class="fas fa-leaf"></i> SMART AGRICTECH MARKET</span><h2>Welcome to your marketplace</h2><p>Discover agricultural products, connect with producers and manage your purchases in one place.</p><div class="consumer-welcome-actions"><a href="#" data-section="marketplace" class="consumer-primary-action"><i class="fas fa-store"></i> Explore Marketplace</a><a href="#" data-section="Community-support" class="consumer-secondary-action"><i class="fas fa-users"></i> Community Hub</a></div></header>
- <div class="consumer-overview"><article><span class="consumer-stat-icon"><i class="fas fa-bag-shopping"></i></span><div><small>My orders</small><strong>Order history</strong><p>View your saved orders</p></div><a href="#" data-section="Order-management" aria-label="Open orders"><i class="fas fa-arrow-right"></i></a></article><article><span class="consumer-stat-icon"><i class="fas fa-cart-shopping"></i></span><div><small>My cart</small><strong>Shopping cart</strong><p>Review items before checkout</p></div><a href="#" data-section="Product-catalog" aria-label="Open cart"><i class="fas fa-arrow-right"></i></a></article><article><span class="consumer-stat-icon"><i class="fas fa-comments"></i></span><div><small>Community</small><strong>Connect &amp; learn</strong><p>Posts and direct messages</p></div><a href="#" data-section="Community-support" aria-label="Open community"><i class="fas fa-arrow-right"></i></a></article></div>
- <section class="consumer-start"><div><span class="consumer-eyebrow">GET STARTED</span><h3>What would you like to do today?</h3></div><div class="consumer-action-grid"><a href="#" class="btn btn-primary btn-block" data-section="Order-management"><i class="fas fa-receipt"></i><strong>View Orders</strong><small>Track your purchases</small></a><a href="#" class="btn btn-success btn-block" data-section="marketplace"><i class="fas fa-seedling"></i><strong>Browse Products</strong><small>Explore agricultural goods</small></a><a href="#" class="btn btn-warning btn-block" data-section="Community-support"><i class="fas fa-users"></i><strong>Community</strong><small>Meet other members</small></a><a href="#" class="btn btn-info btn-block" data-section="budget-forecasting" onclick="showBudgetForecasting()"><i class="fas fa-chart-pie"></i><strong>Budget Planner</strong><small>Estimate your spending</small></a></div></section>
- </div>
- <div id="settings" class="content-section" style="display: none;">
+                <section id="home" class="content-section agri-consumer-home agri-farmer-home">
+<div class="agri-home-heading"><span class="agri-home-eyebrow">CONSUMER DASHBOARD</span><h2>Welcome to Your Workspace</h2><p>Discover agricultural products, manage purchases and connect with the Smart AgricTech community.</p></div>
+<div class="agri-home-section-title"><h3>Quick Actions</h3><span>Get things done faster</span></div>
+<div class="agri-home-actions">
+<a href="#" data-section="marketplace" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-store"></i></span><strong>Marketplace</strong><small>Explore products</small></a>
+<a href="#" data-section="Product-catalog" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-cart-shopping"></i></span><strong>My Cart</strong><small>Review selections</small></a>
+<a href="#" data-section="Order-management" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-box"></i></span><strong>My Orders</strong><small>Track purchases</small></a>
+<a href="#" data-section="market-trends" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-chart-line"></i></span><strong>Market Trends</strong><small>Explore prices</small></a>
+<a href="#" data-section="Finance-management" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-wallet"></i></span><strong>Finance</strong><small>Manage spending</small></a>
+<a href="#" data-section="Community-support" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-users"></i></span><strong>Community</strong><small>Connect with members</small></a>
+</div>
+<div class="agri-home-section-title"><h3>Workspace Overview</h3><span>Your consumer tools</span></div>
+<div class="agri-home-overview">
+<article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-basket-shopping"></i></span><div><small>Shopping</small><strong>Marketplace</strong><p>Browse farm products and available listings</p></div></article>
+<article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-receipt"></i></span><div><small>Purchases</small><strong>Orders</strong><p>Review your order history and status</p></div></article>
+<article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-people-group"></i></span><div><small>Network</small><strong>Community</strong><p>Join conversations with other members</p></div></article>
+</div>
+</section>
+<div id="settings" class="content-section" style="display: none;">
                     <h2>Settings</h2>
                     <p>Manage your account settings here.</p>
                     <button class="btn btn-warning">Change Password</button>
@@ -819,6 +834,7 @@ function showBudgetForecasting() {
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
 <script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script><script src="{{ url_for('static', filename='js/consumer-aligned.js') }}"></script>
 </body>
 
 </html>
