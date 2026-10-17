@@ -30,6 +30,7 @@
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/checkout-mobile.css') }}">
 <script>window.AGRI_CART_KEY = "agri:cart:{{ session.get('user_id', 'guest') | tojson }}";window.AGRI_CART_ITEMS_KEY = "agri:cartItems:{{ session.get('user_id', 'guest') | tojson }}";</script>
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farm-operations-v3.css') }}">
 </head>
 <style>
 
@@ -532,7 +533,7 @@
 
 
             <section id="farm-management" class="content-section farm-workspace" style="display:none">
- <div class="agri-module-head"><div><span class="agri-module-kicker">FARM OPERATIONS</span><h2>My Farms &amp; Poultry</h2><p>Manage your farms, register flocks and record daily production. Records are private to your farmer account.</p></div><span class="agri-module-icon"><i class="fas fa-tractor"></i></span></div>
+ <div class="agri-module-head"><div><span class="agri-module-kicker">FARM OPERATIONS</span><h2>Complete Farm Management</h2><p>Register farms, manage poultry and coordinate crops, livestock, tasks, warehouses and supplies.</p></div><span class="agri-module-icon"><i class="fas fa-tractor"></i></span></div>
  <div id="farm-message" role="status" aria-live="polite"></div>
  <div class="farm-metrics"><article><span>My Farms</span><strong id="fm-farms">0</strong></article><article><span>Active Batches</span><strong id="fm-batches">0</strong></article><article><span>Birds Remaining</span><strong id="fm-birds">0</strong></article><article><span>Eggs Recorded</span><strong id="fm-eggs">0</strong></article></div>
  <div class="farm-grid">
@@ -541,7 +542,27 @@
   <article class="farm-card"><h3><i class="fas fa-clipboard-check"></i> Daily Poultry Record</h3><form id="fm-record-form" class="farm-form"><label>Poultry batch<select name="batch_id" id="fm-record-batch" required></select></label><label>Record date<input name="recorded_on" type="date" required></label><label>Deaths<input name="deaths" type="number" min="0" step="1" value="0" required></label><label>Eggs collected<input name="eggs" type="number" min="0" step="1" value="0" required></label><label>Feed consumed (kg)<input name="feed_kg" type="number" min="0" step="0.01" value="0" required></label><label>Notes<textarea name="notes" maxlength="500" rows="2" placeholder="Health, medication or observations"></textarea></label><button type="submit" class="fm-primary-submit"><i class="fas fa-check-circle" aria-hidden="true"></i>&nbsp; Save Daily Record</button></form></article>
  </div>
  <div class="farm-grid farm-lists"><article class="farm-card"><h3>Registered Farms</h3><div id="fm-farm-list" class="farm-list">Loading…</div></article><article class="farm-card"><h3>Poultry Batches</h3><div id="fm-batch-list" class="farm-list">Loading…</div></article><article class="farm-card"><h3>Recent Daily Records</h3><div id="fm-record-list" class="farm-list">Loading…</div></article></div>
- <p class="farm-disclaimer">Egg counts and feed usage are operational records, not verified sales or wallet balances. Livestock and crop operations will be added in subsequent phases.</p>
+ <div class="farm-operations-v3">
+ <div class="agri-module-head"><div><span class="agri-module-kicker">FARM FRENZY INSPIRED · REAL FARM OPERATIONS</span><h2>Plan, Grow, Raise &amp; Store</h2><p>Manage cultivation, livestock, field tasks, warehouse stock and farm supplies from one workspace.</p></div><span class="agri-module-icon"><i class="fas fa-seedling"></i></span></div>
+ <div class="farm-ops-summary"><span><strong id="fo-total">0</strong> Operations</span><span><strong id="fo-upcoming">0</strong> Upcoming</span><span><strong id="fo-done">0</strong> Completed</span></div>
+ <div class="farm-ops-grid">
+  <article class="farm-card"><h3><i class="fas fa-calendar-plus"></i> Add Farm Activity</h3>
+   <form id="fo-form" class="farm-form">
+    <label>Farm<select id="fo-farm" name="farm_id" required><option value="">Register a farm first</option></select></label>
+    <label>Activity type<select name="category" required><option value="cultivation">🌱 Cultivation &amp; planting</option><option value="livestock">🐄 Livestock management</option><option value="task">📅 Tasks &amp; farm planning</option><option value="warehouse">🏬 Warehouse &amp; harvested stock</option><option value="supply">🚜 Supplies &amp; inputs</option></select></label>
+    <label>Activity / item name<input name="title" maxlength="120" required placeholder="e.g. Plant maize, 10 bags of fertilizer"></label>
+    <label>Quantity (optional)<input name="quantity" type="number" min="0" step="0.01" placeholder="0"></label>
+    <label>Unit<input name="unit" maxlength="30" placeholder="hectares, heads, bags, kg"></label>
+    <label>Scheduled / expected date<input name="scheduled_on" type="date"></label>
+    <label>Notes<textarea name="details" maxlength="500" rows="2" placeholder="Field, crop variety, supplier, storage location or next steps"></textarea></label>
+    <button type="submit" class="fm-primary-submit">Save Activity</button>
+   </form>
+  </article>
+  <article class="farm-card farm-ops-board"><h3><i class="fas fa-list-check"></i> Farm Operations Board</h3><label class="farm-ops-filter-label">Show activities<select id="fo-filter"><option value="all">All operations</option><option value="cultivation">Cultivation</option><option value="livestock">Livestock</option><option value="task">Tasks</option><option value="warehouse">Warehouse</option><option value="supply">Supplies</option></select></label><div id="fo-message" role="status" aria-live="polite"></div><div id="fo-list" class="farm-ops-list">Loading activities…</div></article>
+ </div>
+ <p class="farm-disclaimer">All activities are saved to your farmer account. Stock entries are manual records, not automated inventory balances or verified transactions.</p>
+</div>
+<p class="farm-disclaimer">Egg counts and feed usage are operational records, not verified sales or wallet balances.</p>
 </section>
 
             <!-- Finance -->
@@ -740,6 +761,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="{{ url_for('static', filename='js/farmer-mobile-app.js') }}"></script>
 <script src="{{ url_for('static', filename='js/farmer-home.js') }}"></script>
 <script src="{{ url_for('static', filename='js/checkout-mobile.js') }}"></script>
+<script src="{{ url_for('static', filename='js/farm-operations-v3.js') }}"></script>
 </body>
 
 </html>
