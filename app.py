@@ -274,7 +274,7 @@ def logout():
 
 @app.route('/farmer_dashboard')
 def farmer_dashboard():
-    if 'user_name' in session:
+    if session.get('user_id') and session.get('role') == 'farmer':
         return render_template(
             'farmer_dashboard.html',
             name=session['user_name'],
@@ -286,7 +286,7 @@ def farmer_dashboard():
 
 @app.route('/processor_dashboard')
 def processor_dashboard():
-    if 'user_name' in session:
+    if session.get('user_id') and session.get('role') == 'processor':
         return render_template(
             'processor_dashboard.html',
             name=session['user_name'],
@@ -298,7 +298,7 @@ def processor_dashboard():
 
 @app.route('/consumer_dashboard')
 def consumer_dashboard():
-    if 'user_name' in session:
+    if session.get('user_id') and session.get('role') == 'consumer':
         return render_template(
             'consumer_dashboard.html',
             name=session['user_name'],
@@ -309,7 +309,7 @@ def consumer_dashboard():
         return redirect(url_for('index'))
 @app.route('/marketer_dashboard')
 def marketer_dashboard():
-    if 'user_name' in session:
+    if session.get('user_id') and session.get('role') == 'marketer':
         return render_template(
             'marketer_dashboard.html',
             name=session['user_name'],
