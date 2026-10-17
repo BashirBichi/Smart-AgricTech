@@ -21,12 +21,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/app-notifications.css') }}">
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/workspace-insights.css') }}">
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a></li>
+            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="workspace-insights"><i class="fas fa-chart-line"></i> KPI &amp; Candlestick Analytics</a></li><li class="nav-item"><a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a></li>
                 <li class="nav-item"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-section="product-listings"><i class="fas fa-list"></i> Product Listings</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
@@ -37,7 +38,7 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content"><section id="workspace-insights" class="content-section workspace-insights" style="display:none"><h2><i class="fas fa-chart-candlestick"></i> Workspace Analytics</h2><p class="insight-lead">Live account KPIs and 30-day activity trends based on stored records.</p><div id="insight-kpis" class="insight-kpi-grid" aria-live="polite"></div><div class="insight-chart-card"><div class="insight-chart-head"><h3>30-Day Activity Candlestick Chart</h3><button type="button" id="insight-refresh"><i class="fas fa-rotate"></i> Refresh</button></div><div id="insight-chart" class="insight-chart-wrap"></div><p id="insight-note">The chart shows recorded activity, not commodity prices.</p></div></section>
             <!-- Header -->
             <header class="dashboard-header">
                 <h1>Marketer/Trader Dashboard</h1>
@@ -235,5 +236,6 @@
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
 <section id="Community-support" class="content-section" style="display:none"></section>
 <script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
+<script src="{{ url_for('static', filename='js/workspace-insights.js') }}"></script>
 </body>
 </html>
