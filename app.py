@@ -53,6 +53,19 @@ class Farm(db.Model):
     location = db.Column(db.String(180), nullable=False, default='')
     farm_type = db.Column(db.String(30), nullable=False, default='mixed')
 
+class FarmOperation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    farm_id = db.Column(db.Integer, db.ForeignKey('farm.id'), nullable=False, index=True)
+    category = db.Column(db.String(24), nullable=False)
+    title = db.Column(db.String(120), nullable=False)
+    details = db.Column(db.String(500), nullable=False, default='')
+    quantity = db.Column(db.Float, nullable=False, default=0)
+    unit = db.Column(db.String(30), nullable=False, default='')
+    scheduled_on = db.Column(db.Date, nullable=True)
+    status = db.Column(db.String(20), nullable=False, default='planned')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
 class PoultryBatch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     farm_id = db.Column(db.Integer, db.ForeignKey('farm.id'), nullable=False, index=True)
@@ -121,6 +134,55 @@ def farmer_identity():
     if not session.get('user_id') or session.get('role') != 'farmer':
         return None
     return session['user_id']
+
+@app.route('/api/farm/operations', methods=['GET', 'POST'])
+def farm_operations_api():
+    from datetime import date
+    owner = farmer_identity()
+    if owner is None:
+        return jsonify(error='Farmer login required'), 403
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        try:
+            farm_id = int(data.get('farm_id'))
+            quantity = float(data.get('quantity') or 0)
+            day = date.fromisoformat(str(data['scheduled_on'])) if data.get('scheduled_on') else None
+        except (ValueError, TypeError, OverflowError):
+            return jsonify(error='Invalid farm, quantity or date'), 400
+        farm = Farm.query.filter_by(id=farm_id, owner_id=owner).first()
+        category = str(data.get('category', '')).strip()
+        title = str(data.get('title', '')).strip()[:120]
+        if not farm or category not in ('cultivation', 'livestock', 'task', 'warehouse', 'supply') or not title or not 0 <= quantity <= 1000000000:
+            return jsonify(error='Check farm and operation details'), 400
+        record = FarmOperation(owner_id=owner, farm_id=farm.id, category=category, title=title,
+            details=str(data.get('details', '')).strip()[:500], quantity=quantity,
+            unit=str(data.get('unit', '')).strip()[:30], scheduled_on=day)
+        db.session.add(record)
+        db.session.commit()
+        return jsonify(id=record.id, message='Farm operation saved'), 201
+    rows = FarmOperation.query.filter_by(owner_id=owner).order_by(FarmOperation.id.desc()).limit(300).all()
+    return jsonify(operations=[dict(id=o.id, farm_id=o.farm_id, category=o.category, title=o.title,
+        details=o.details, quantity=o.quantity, unit=o.unit, scheduled_on=o.scheduled_on.isoformat() if o.scheduled_on else None,
+        status=o.status) for o in rows])
+
+@app.route('/api/farm/operations/<int:operation_id>', methods=['PATCH', 'DELETE'])
+def farm_operation_update_api(operation_id):
+    owner = farmer_identity()
+    if owner is None:
+        return jsonify(error='Farmer login required'), 403
+    record = FarmOperation.query.filter_by(id=operation_id, owner_id=owner).first()
+    if not record:
+        return jsonify(error='Operation not found'), 404
+    if request.method == 'DELETE':
+        db.session.delete(record)
+        db.session.commit()
+        return jsonify(message='Operation deleted')
+    status = str((request.get_json(silent=True) or {}).get('status', ''))
+    if status not in ('planned', 'in_progress', 'completed'):
+        return jsonify(error='Invalid status'), 400
+    record.status = status
+    db.session.commit()
+    return jsonify(message='Status updated')
 
 @app.route('/api/farms', methods=['GET', 'POST'])
 def farms_api():
