@@ -20,12 +20,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/app-notifications.css') }}">
 <script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <ul class="nav flex-column">
+            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a></li>
                 <li class="nav-item"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-section="product-listings"><i class="fas fa-list"></i> Product Listings</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
@@ -232,5 +233,7 @@
     </script>
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
+<section id="Community-support" class="content-section" style="display:none"></section>
+<script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
 </body>
 </html>
