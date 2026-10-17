@@ -46,6 +46,19 @@ class Product(db.Model):
     media_file = db.Column(db.String(200))
 
 # Farm Management: records are scoped to the authenticated farmer.
+class CommunityPost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    body = db.Column(db.String(2000), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+class CommunityMessage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    body = db.Column(db.String(2000), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
 class Farm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
@@ -134,6 +147,60 @@ def farmer_identity():
     if not session.get('user_id') or session.get('role') != 'farmer':
         return None
     return session['user_id']
+
+@app.route('/api/community/posts', methods=['GET', 'POST'])
+def community_posts_api():
+    uid = session.get('user_id')
+    if not uid:
+        return jsonify(error='Login required'), 401
+    if request.method == 'POST':
+        body = str((request.get_json(silent=True) or {}).get('body', '')).strip()
+        if not 1 <= len(body) <= 2000:
+            return jsonify(error='Post must be 1–2000 characters'), 400
+        db.session.add(CommunityPost(author_id=uid, body=body))
+        db.session.commit()
+        return jsonify(message='Post published'), 201
+    rows = (db.session.query(CommunityPost, User).join(User, User.id == CommunityPost.author_id)
+            .order_by(CommunityPost.id.desc()).limit(80).all())
+    return jsonify(posts=[dict(id=p.id, body=p.body, author=u.name, role=u.role,
+        created_at=p.created_at.isoformat() if p.created_at else '') for p,u in rows])
+
+@app.route('/api/community/members')
+def community_members_api():
+    uid = session.get('user_id')
+    if not uid:
+        return jsonify(error='Login required'), 401
+    members = User.query.filter(User.id != uid).order_by(User.name).limit(200).all()
+    return jsonify(members=[dict(id=u.id, name=u.name, role=u.role) for u in members])
+
+@app.route('/api/community/messages', methods=['GET', 'POST'])
+def community_messages_api():
+    uid = session.get('user_id')
+    if not uid:
+        return jsonify(error='Login required'), 401
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        try:
+            recipient = int(data.get('recipient_id'))
+        except (ValueError, TypeError):
+            return jsonify(error='Choose a member'), 400
+        body = str(data.get('body', '')).strip()
+        if not 1 <= len(body) <= 2000 or recipient == uid or not db.session.get(User, recipient):
+            return jsonify(error='Invalid recipient or message'), 400
+        db.session.add(CommunityMessage(author_id=uid, recipient_id=recipient, body=body))
+        db.session.commit()
+        return jsonify(message='Message sent'), 201
+    try:
+        other = int(request.args.get('member_id', ''))
+    except (ValueError, TypeError):
+        return jsonify(error='Choose a member'), 400
+    rows = (CommunityMessage.query.filter(
+        db.or_(db.and_(CommunityMessage.author_id == uid, CommunityMessage.recipient_id == other),
+               db.and_(CommunityMessage.author_id == other, CommunityMessage.recipient_id == uid)))
+        .order_by(CommunityMessage.id.desc()).limit(100).all())
+    names = {u.id:u.name for u in User.query.filter(User.id.in_([uid,other])).all()}
+    return jsonify(messages=[dict(id=m.id, body=m.body, author=names.get(m.author_id,'Member'),
+        mine=m.author_id==uid, created_at=m.created_at.isoformat() if m.created_at else '') for m in reversed(rows)])
 
 @app.route('/api/farm/operations', methods=['GET', 'POST'])
 def farm_operations_api():
