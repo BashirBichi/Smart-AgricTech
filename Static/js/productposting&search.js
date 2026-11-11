@@ -6,12 +6,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const postButton = document.getElementById("postToMarketplace");
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     let products = [];
+    async function readApiJson(response) {
+        const body = await response.text();
+        let payload;
+        try {
+            payload = body ? JSON.parse(body) : {};
+        } catch (_) {
+            const status = response.status || 'unknown';
+            throw new Error(response.ok
+                ? 'The server returned an invalid response. Please retry.'
+                : `Product service error (HTTP ${status}). The server returned an HTML error page instead of JSON.`);
+        }
+        if (!response.ok) {
+            throw new Error(payload.error || payload.message || `Request failed (HTTP ${response.status}).`);
+        }
+        return payload;
+    }
     async function loadMarketplaceProducts() {
         if (!container) return;
         try {
             const response = await fetch('/api/marketplace/products', {credentials:'same-origin'});
-            if (!response.ok) throw Error('Could not load marketplace');
-            products = (await response.json()).products || [];
+            const payload = await readApiJson(response);
+            products = Array.isArray(payload.products) ? payload.products : [];
             renderProducts();
         } catch(error) { container.textContent = error.message; }
     }
@@ -52,8 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         postButton.disabled = true;
         try {
             const response = await fetch('/api/marketplace/products',{method:'POST',body:data,credentials:'same-origin'});
-            const result = await response.json();
-            if(!response.ok)throw Error(result.error||'Could not publish product');
+            const result = await readApiJson(response);
             form?.reset();await loadMarketplaceProducts();alert('Product published successfully!');
         } catch(error) { alert(error.message); } finally { postButton.disabled = false; }
     });
