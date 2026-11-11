@@ -186,7 +186,16 @@ async function handleRecordAction(e){
     ['data-print-waybill','/api/marketer/business/waybills/',waybillDocument]
   ];
   for(const [attr,url,doc] of printConfig){
-    if(b.hasAttribute(attr)){try{const d=await api(url.replace(/\/$/,'')+'/'+b.getAttribute(attr));const key=Object.keys(d)[0];const row=d[key]||d;printDocument(key,doc(row))}catch(err){alert('Document data could not be loaded: '+err.message)}return}
+    if(b.hasAttribute(attr)){
+      try{
+        const d=await api(url);
+        const key=Object.keys(d)[0];
+        const row=(d[key]||[]).find(x=>String(x.id)===b.getAttribute(attr));
+        if(!row)throw Error('Record not found');
+        printDocument(key,doc(row));
+      }catch(err){alert('Document data could not be loaded: '+err.message)}
+      return
+    }
   }
 }
 document.getElementById('invoice-table')?.addEventListener('click',handleRecordAction);
