@@ -68,3 +68,50 @@
   .marketer-shell .content-section{border-radius:16px!important}
 }
 @media(min-width:768px){.marketer-shell .agri-bottom-nav{display:none!important}}
+
+/* Match the Processor dashboard header structure exactly on mobile */
+@media(max-width:767.98px){
+  .marketer-shell .dashboard-header.marketer-header{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:0 12px!important;
+    padding:18px 20px 20px!important;
+    min-height:0!important;
+  }
+  .marketer-shell .dashboard-header.marketer-header>.agri-mobile-menu-toggle{
+    order:1!important;
+    flex:0 0 auto!important;
+    min-height:64px!important;
+    padding:12px 20px!important;
+    font-size:20px!important;
+  }
+  .marketer-shell .dashboard-header.marketer-header>.dropdown{
+    order:2!important;
+    margin-left:auto!important;
+    flex:0 0 auto!important;
+  }
+  .marketer-shell .dashboard-header.marketer-header>.dropdown .marketer-profile-button{
+    min-height:64px!important;
+    font-size:18px!important;
+    padding:12px 20px!important;
+  }
+  .marketer-shell .dashboard-header.marketer-header>.dashboard-title{
+    order:3!important;
+    display:block!important;
+    flex:0 0 100%!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:34px 0 0!important;
+    padding:0!important;
+    color:#164b32!important;
+    font-size:26px!important;
+    font-weight:800!important;
+    line-height:1.35!important;
+    letter-spacing:-.45px!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+  }
+}
