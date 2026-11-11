@@ -41,6 +41,37 @@
   </nav>
 </aside>
 
+<div class="offcanvas offcanvas-start text-bg-dark d-md-none marketer-mobile-drawer" tabindex="-1" id="marketerMobileSidebar" aria-labelledby="marketerMobileSidebarLabel">
+  <div class="offcanvas-header">
+    <div class="agri-mobile-nav-intro"><span class="agri-nav-avatar"><i class="fas fa-store"></i></span><div><strong>Marketer Workspace</strong><small>Sell, manage and grow your business</small></div></div>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <label class="agri-nav-search-label" for="marketer-nav-search"><i class="fas fa-search"></i><input id="marketer-nav-search" type="search" placeholder="Find a section..." autocomplete="off" aria-label="Search marketer navigation"></label>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-house"></i> Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="business-overview"><i class="fas fa-gauge-high"></i> Business Overview</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="product-listings"><i class="fas fa-boxes-stacked"></i> Product Listings</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="buyer-inquiries"><i class="fas fa-users"></i> Customers & Inquiries</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="invoices"><i class="fas fa-file-invoice-dollar"></i> Invoices</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="receipts"><i class="fas fa-receipt"></i> Receipts</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="waybills"><i class="fas fa-truck-fast"></i> Waybills</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="payroll"><i class="fas fa-users-gear"></i> Payroll</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="business-finance"><i class="fas fa-wallet"></i> Business Finance</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="workspace-insights"><i class="fas fa-chart-candlestick"></i> KPI & Analytics</a></li>
+    </ul>
+  </div>
+</div>
+<nav class="agri-bottom-nav marketer-bottom-nav" aria-label="Marketer quick navigation">
+  <button type="button" data-section="home"><i class="fas fa-house"></i><span>Home</span></button>
+  <button type="button" data-section="product-listings"><i class="fas fa-boxes-stacked"></i><span>Products</span></button>
+  <button type="button" data-section="invoices"><i class="fas fa-file-invoice-dollar"></i><span>Invoices</span></button>
+  <button type="button" data-section="business-finance"><i class="fas fa-wallet"></i><span>Finance</span></button>
+  <button type="button" id="marketer-bottom-more" aria-label="Open all navigation"><i class="fas fa-bars"></i><span>More</span></button>
+</nav>
+
 <main class="main-content">
 <section id="workspace-insights" class="content-section workspace-insights" style="display:none">
   <h2><i class="fas fa-chart-candlestick"></i> Workspace Analytics</h2>
@@ -50,6 +81,7 @@
 </section>
 
 <header class="dashboard-header marketer-header">
+  <button class="btn agri-mobile-menu-toggle d-md-none" type="button" aria-label="Open navigation menu" data-bs-toggle="offcanvas" data-bs-target="#marketerMobileSidebar" aria-controls="marketerMobileSidebar"><i class="fas fa-bars"></i><span class="d-none d-sm-inline">Menu</span></button>
   <div class="marketer-mobile-title"><span class="marketer-header-icon"><i class="fas fa-store"></i></span><div><span class="eyebrow">MARKETER WORKSPACE</span><h1>Business & Market Operations</h1></div></div>
   <div class="dropdown">
     <button class="profile-menu dropdown-toggle marketer-profile-button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle"></i> {{ name }} </button>
@@ -120,8 +152,9 @@
 </section>
 
 <section id="buyer-inquiries" class="content-section" style="display:none">
-  <div class="section-heading"><div><span class="eyebrow">CUSTOMER RELATIONSHIPS</span><h2>Customers & Inquiries</h2><p>Keep customer conversations and commercial requests close to your sales workflow.</p></div></div>
-  <div class="marketer-panel empty-state-panel"><i class="fas fa-comments"></i><h3>Customer workspace</h3><p>Marketplace inquiries and community conversations remain connected to your account. Use Community for direct conversations while business documents stay in the business workspace.</p><button class="btn btn-primary" data-section="Community-support">Open Community</button></div>
+  <div class="section-heading"><div><span class="eyebrow">CUSTOMER RELATIONSHIPS</span><h2>Customers & Inquiries</h2><p>Customers are built automatically from your invoices and receipts so your sales activity stays connected.</p></div></div>
+  <div id="customer-kpis" class="marketer-kpi-grid"></div>
+  <div class="marketer-panel"><div class="panel-heading"><div><h3>Customer register</h3><span>Unique customers found in your saved business records</span></div><button class="btn btn-outline-primary" data-section="invoices"><i class="fas fa-file-invoice"></i> New Invoice</button></div><div class="table-wrap"><table class="business-table"><thead><tr><th>Customer</th><th>Invoices</th><th>Payments</th><th>Value</th><th>Last activity</th></tr></thead><tbody id="customer-table"></tbody></table></div></div>
 </section>
 
 <section id="invoices" class="content-section" style="display:none">
