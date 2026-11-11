@@ -1018,7 +1018,7 @@ def admin_dashboard():
 @app.route('/api/marketplace/products', methods=['GET', 'POST'])
 def marketplace_products_api():
     if request.method == 'GET':
-        products = Product.query.filter(Product.owner_id.isnot(None)).order_by(Product.id.desc()).all()
+        products = Product.query.order_by(Product.id.desc()).all()
         return jsonify(products=[dict(id=p.id, name=p.name, description=p.description or '',
             price=p.price, quantity=p.quantity, seller=p.posted_by,
             image_url=url_for('static', filename='uploads/' + os.path.basename(p.media_file)) if p.media_file else '')
