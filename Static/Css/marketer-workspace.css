@@ -115,3 +115,15 @@
     text-overflow:clip!important;
   }
 }
+
+/* Typography parity with processor dashboard (dashboard-sections.css) */
+@media(max-width:767.98px){
+  .marketer-shell .dashboard-header.marketer-header>.dashboard-title{
+    font-family:"Manrope",sans-serif!important;
+    font-size:17px!important;
+    font-weight:800!important;
+    line-height:1.4!important;
+    letter-spacing:-.035em!important;
+    color:var(--ag-forest,#164b32)!important;
+  }
+}
