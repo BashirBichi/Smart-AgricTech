@@ -6,6 +6,7 @@ import os
 from werkzeug.utils import secure_filename
 from flask_login import current_user, login_required
 from flask import Flask, jsonify
+from sqlalchemy import inspect, text
 from flask import Flask, request, jsonify
 # from models import db, ProductName, Product
 
@@ -44,6 +45,8 @@ class Product(db.Model):
     description = db.Column(db.String(200))
     posted_by = db.Column(db.String(100), nullable=False)
     media_file = db.Column(db.String(200))
+    # Nullable for backward compatibility with products created before ownership tracking.
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True, index=True)
 
 # Farm Management: records are scoped to the authenticated farmer.
 class CommunityPost(db.Model):
@@ -1185,8 +1188,36 @@ def delete_product_name(product_id):
 
 
 
+def migrate_product_owner_id() -> None:
+    """Add product ownership safely to existing databases and retain legacy listings."""
+    columns = {column["name"] for column in inspect(db.engine).get_columns("product")}
+    if "owner_id" not in columns:
+        with db.engine.begin() as connection:
+            connection.execute(
+                text('ALTER TABLE product ADD COLUMN owner_id INTEGER REFERENCES "user" ("id")')
+            )
+
+    indexes = {index["name"] for index in inspect(db.engine).get_indexes("product")}
+    if "ix_product_owner_id" not in indexes:
+        with db.engine.begin() as connection:
+            connection.execute(text("CREATE INDEX ix_product_owner_id ON product (owner_id)"))
+
+    with db.engine.begin() as connection:
+        connection.execute(text("""
+            UPDATE product
+               SET owner_id = (
+                   SELECT "id" FROM "user"
+                    WHERE "user"."name" = product.posted_by
+                    ORDER BY "id"
+                    LIMIT 1
+               )
+             WHERE owner_id IS NULL
+        """))
+
+
 with app.app_context():
     db.create_all()
+    migrate_product_owner_id()
 
 if __name__ == '__main__':
     app.run(debug=False)
