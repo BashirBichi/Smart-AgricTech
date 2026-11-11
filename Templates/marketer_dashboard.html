@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/workspace-insights.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-app.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-home.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/marketer-workspace.css') }}">
 </head>
 <body>
@@ -98,24 +99,30 @@
 </header>
 
 
-<section id="home" class="content-section marketer-home">
-  <div class="marketer-hero">
-    <div><span class="eyebrow">SMART AGRICTECH BUSINESS DESK</span><h2>Welcome back, {{ name }}.</h2><p>Run your agricultural trading business from one workspace. Sell products, manage customers, issue documents and keep your business records organized.</p></div>
-    <div class="hero-badge"><i class="fas fa-store"></i><span>Sales & Operations</span></div>
+<section id="home" class="content-section agri-processor-home">
+  <div class="agri-home-heading">
+    <span class="agri-home-eyebrow">MARKETER DASHBOARD</span>
+    <h2>Welcome to Your Workspace</h2>
+    <p>Manage sales, customers, products and business operations in one place.</p>
   </div>
-  <div class="section-heading"><div><span class="eyebrow">BUSINESS SNAPSHOT</span><h3>Today's workspace</h3></div><button class="btn btn-outline-primary" type="button" data-section="business-overview"><i class="fas fa-arrow-right"></i> Open overview</button></div>
-  <div id="home-kpis" class="marketer-kpi-grid"></div>
-  <div class="marketer-home-grid">
-    <div class="marketer-panel"><div class="panel-heading"><div><h3>Quick actions</h3><span>Common business tasks</span></div></div><div class="quick-action-grid">
-      <button data-section="product-listings"><i class="fas fa-box-open"></i><strong>List Product</strong><small>Tools, machinery, fertilizer and more</small></button>
-      <button data-section="invoices"><i class="fas fa-file-invoice"></i><strong>Create Invoice</strong><small>Bill a customer</small></button>
-      <button data-section="receipts"><i class="fas fa-receipt"></i><strong>Record Receipt</strong><small>Track money received</small></button>
-      <button data-section="waybills"><i class="fas fa-truck"></i><strong>Create Waybill</strong><small>Prepare a shipment</small></button>
-      <button data-section="payroll"><i class="fas fa-users-gear"></i><strong>Run Payroll</strong><small>Manage staff payments</small></button>
-      <button data-section="business-finance"><i class="fas fa-chart-pie"></i><strong>Review Finance</strong><small>Sales and collections</small></button>
-    </div></div>
-    <div class="marketer-panel marketer-profile-card"><div class="panel-heading"><div><h3>Business identity</h3><span>Used on business documents</span></div><button class="icon-button" data-section="business-overview" aria-label="Edit business profile"><i class="fas fa-pen"></i></button></div><div id="home-business-profile"><div class="empty-state">Loading business profile...</div></div></div>
+  <div class="agri-home-section-title"><h3>Quick Actions</h3><span>Get things done faster</span></div>
+  <div class="agri-home-actions">
+    <a href="#" data-section="product-listings" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-boxes-stacked"></i></span><strong>Products</strong><small>Manage listings</small></a>
+    <a href="#" data-section="invoices" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-file-invoice-dollar"></i></span><strong>Invoices</strong><small>Bill customers</small></a>
+    <a href="#" data-section="receipts" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-receipt"></i></span><strong>Receipts</strong><small>Track payments</small></a>
+    <a href="#" data-section="waybills" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-truck-fast"></i></span><strong>Waybills</strong><small>Manage deliveries</small></a>
+    <a href="#" data-section="payroll" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-users-gear"></i></span><strong>Payroll</strong><small>Manage staff</small></a>
+    <a href="#" data-section="business-finance" class="agri-home-action"><span class="agri-home-action-icon"><i class="fas fa-chart-pie"></i></span><strong>Finance</strong><small>Review performance</small></a>
   </div>
+  <div class="agri-home-section-title"><h3>Business Overview</h3><span>Marketer tools</span></div>
+  <div id="home-kpis" class="agri-home-overview">
+    <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-boxes-stacked"></i></span><span>Products</span><strong class="agri-home-stat-word" id="home-products-value">0</strong><small>Active listings</small></article>
+    <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-file-invoice-dollar"></i></span><span>Invoices</span><strong class="agri-home-stat-word" id="home-invoices-value">0</strong><small>Business invoices</small></article>
+    <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-money-bill-transfer"></i></span><span>Collected</span><strong class="agri-home-stat-word" id="home-collected-value">₦0.00</strong><small>Payments received</small></article>
+    <article class="agri-home-stat"><span class="agri-home-stat-icon"><i class="fas fa-hourglass-half"></i></span><span>Outstanding</span><strong class="agri-home-stat-word" id="home-outstanding-value">₦0.00</strong><small>Receivables</small></article>
+  </div>
+  <p class="agri-home-footnote">Live business records, collections and delivery activity are shown only when verified records are available.</p>
+  <div id="home-business-profile" class="marketer-home-business-profile"></div>
 </section>
 
 <section id="business-overview" class="content-section" style="display:none">
