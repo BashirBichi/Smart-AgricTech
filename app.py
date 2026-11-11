@@ -98,6 +98,80 @@ class PoultryDailyRecord(db.Model):
     feed_kg = db.Column(db.Float, nullable=False, default=0)
     notes = db.Column(db.String(500), nullable=False, default='')
 
+
+class BusinessProfile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, unique=True, index=True)
+    business_name = db.Column(db.String(160), nullable=False, default='')
+    phone = db.Column(db.String(40), nullable=False, default='')
+    address = db.Column(db.String(240), nullable=False, default='')
+    tax_id = db.Column(db.String(80), nullable=False, default='')
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
+
+
+class BusinessInvoice(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    invoice_number = db.Column(db.String(50), nullable=False, index=True)
+    customer_name = db.Column(db.String(160), nullable=False)
+    customer_email = db.Column(db.String(160), nullable=False, default='')
+    item_summary = db.Column(db.String(500), nullable=False)
+    quantity = db.Column(db.Float, nullable=False, default=1)
+    unit_price = db.Column(db.Float, nullable=False, default=0)
+    tax_rate = db.Column(db.Float, nullable=False, default=0)
+    subtotal = db.Column(db.Float, nullable=False, default=0)
+    tax = db.Column(db.Float, nullable=False, default=0)
+    total = db.Column(db.Float, nullable=False, default=0)
+    issue_date = db.Column(db.Date, nullable=False)
+    due_date = db.Column(db.Date, nullable=True)
+    status = db.Column(db.String(20), nullable=False, default='draft')
+    notes = db.Column(db.String(1000), nullable=False, default='')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+
+class BusinessReceipt(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    receipt_number = db.Column(db.String(50), nullable=False, index=True)
+    invoice_number = db.Column(db.String(50), nullable=False, default='')
+    customer_name = db.Column(db.String(160), nullable=False)
+    amount = db.Column(db.Float, nullable=False, default=0)
+    payment_method = db.Column(db.String(40), nullable=False, default='Bank transfer')
+    received_on = db.Column(db.Date, nullable=False)
+    notes = db.Column(db.String(1000), nullable=False, default='')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+
+class BusinessPayroll(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    employee_name = db.Column(db.String(160), nullable=False)
+    role_title = db.Column(db.String(100), nullable=False, default='')
+    pay_period = db.Column(db.String(40), nullable=False)
+    basic_salary = db.Column(db.Float, nullable=False, default=0)
+    allowances = db.Column(db.Float, nullable=False, default=0)
+    deductions = db.Column(db.Float, nullable=False, default=0)
+    net_pay = db.Column(db.Float, nullable=False, default=0)
+    status = db.Column(db.String(20), nullable=False, default='pending')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+
+class BusinessWaybill(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
+    waybill_number = db.Column(db.String(50), nullable=False, index=True)
+    customer_name = db.Column(db.String(160), nullable=False)
+    origin = db.Column(db.String(180), nullable=False)
+    destination = db.Column(db.String(180), nullable=False)
+    dispatch_date = db.Column(db.Date, nullable=False)
+    items_summary = db.Column(db.String(700), nullable=False)
+    vehicle = db.Column(db.String(100), nullable=False, default='')
+    driver = db.Column(db.String(120), nullable=False, default='')
+    status = db.Column(db.String(24), nullable=False, default='pending')
+    notes = db.Column(db.String(1000), nullable=False, default='')
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+
 class ShoppingCartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
@@ -398,6 +472,297 @@ def poultry_records_api():
     return jsonify(records=[dict(id=r.id, batch_id=r.batch_id, batch_name=name,
                     recorded_on=r.recorded_on.isoformat(), deaths=r.deaths, eggs=r.eggs,
                     feed_kg=r.feed_kg, notes=r.notes) for r, name in records])
+
+
+def marketer_identity():
+    if not session.get('user_id') or session.get('role') != 'marketer':
+        return None
+    return session['user_id']
+
+
+def _business_user():
+    owner = marketer_identity()
+    if owner is None:
+        return None, None
+    return owner, db.session.get(User, owner)
+
+
+def _next_business_number(model, owner_id, prefix):
+    count = model.query.filter_by(owner_id=owner_id).count() + 1
+    return f"{prefix}-{count:05d}"
+
+
+@app.route('/api/marketer/business/summary')
+def marketer_business_summary():
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+
+    listings = Product.query.filter_by(posted_by=user.name).count()
+    invoices = BusinessInvoice.query.filter_by(owner_id=owner).all()
+    receipts = BusinessReceipt.query.filter_by(owner_id=owner).all()
+    payroll = BusinessPayroll.query.filter_by(owner_id=owner).all()
+    waybills = BusinessWaybill.query.filter_by(owner_id=owner).all()
+
+    invoiced = sum(float(x.total or 0) for x in invoices)
+    collected = sum(float(x.amount or 0) for x in receipts)
+    outstanding = sum(float(x.total or 0) for x in invoices if x.status in ('sent', 'overdue'))
+    payroll_due = sum(float(x.net_pay or 0) for x in payroll if x.status in ('pending', 'approved'))
+    pending_waybills = sum(1 for x in waybills if x.status in ('pending', 'in_transit'))
+
+    return jsonify(
+        listings=listings,
+        invoices=len(invoices),
+        invoiced=invoiced,
+        collected=collected,
+        outstanding=outstanding,
+        payroll_due=payroll_due,
+        employees=len({x.employee_name for x in payroll}),
+        waybills=len(waybills),
+        pending_waybills=pending_waybills
+    )
+
+
+@app.route('/api/marketer/business/profile', methods=['GET', 'POST'])
+def marketer_business_profile():
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+
+    profile = BusinessProfile.query.filter_by(owner_id=owner).first()
+    if request.method == 'GET':
+        if not profile:
+            return jsonify(business_name='', phone='', address='', tax_id='')
+        return jsonify(
+            business_name=profile.business_name,
+            phone=profile.phone,
+            address=profile.address,
+            tax_id=profile.tax_id
+        )
+
+    data = request.get_json(silent=True) or {}
+    business_name = str(data.get('business_name', '')).strip()[:160]
+    phone = str(data.get('phone', '')).strip()[:40]
+    address = str(data.get('address', '')).strip()[:240]
+    tax_id = str(data.get('tax_id', '')).strip()[:80]
+
+    if not business_name:
+        return jsonify(error='Business name is required'), 400
+
+    if not profile:
+        profile = BusinessProfile(owner_id=owner)
+        db.session.add(profile)
+
+    profile.business_name = business_name
+    profile.phone = phone
+    profile.address = address
+    profile.tax_id = tax_id
+    db.session.commit()
+    return jsonify(message='Business profile saved')
+
+
+@app.route('/api/marketer/business/invoices', methods=['GET', 'POST'])
+def marketer_business_invoices():
+    owner, user = _business_user()
+    if owner is None:
+        return jsonify(error='Marketer login required'), 403
+
+    if request.method == 'POST':
+        from datetime import date
+        data = request.get_json(silent=True) or {}
+        customer = str(data.get('customer_name', '')).strip()[:160]
+        item_summary = str(data.get('item_summary', '')).strip()[:500]
+        try:
+            quantity = float(data.get('quantity', 1))
+            unit_price = float(data.get('unit_price', 0))
+            tax_rate = float(data.get('tax_rate', 0))
+            issue_date = date.fromisoformat(str(data.get('issue_date') or date.today().isoformat()))
+            due_date = date.fromisoformat(str(data['due_date'])) if data.get('due_date') else None
+        except (TypeError, ValueError, OverflowError):
+            return jsonify(error='Enter valid invoice amounts and dates'), 400
+
+        if not customer or not item_summary or not (0 < quantity <= 1000000) or not (0 <= unit_price <= 1000000000) or not (0 <= tax_rate <= 100):
+            return jsonify(error='Check customer, item, quantity, price and tax rate'), 400
+        if due_date and due_date < issue_date:
+            return jsonify(error='Due date cannot be before issue date'), 400
+
+        subtotal = round(quantity * unit_price, 2)
+        tax = round(subtotal * tax_rate / 100, 2)
+        total = round(subtotal + tax, 2)
+        status = str(data.get('status', 'draft')).strip().lower()
+        if status not in ('draft', 'sent', 'paid', 'overdue'):
+            return jsonify(error='Invalid invoice status'), 400
+
+        invoice = BusinessInvoice(
+            owner_id=owner,
+            invoice_number=_next_business_number(BusinessInvoice, owner, 'INV'),
+            customer_name=customer,
+            customer_email=str(data.get('customer_email', '')).strip()[:160],
+            item_summary=item_summary,
+            quantity=quantity,
+            unit_price=unit_price,
+            tax_rate=tax_rate,
+            subtotal=subtotal,
+            tax=tax,
+            total=total,
+            issue_date=issue_date,
+            due_date=due_date,
+            status=status,
+            notes=str(data.get('notes', '')).strip()[:1000]
+        )
+        db.session.add(invoice)
+        db.session.commit()
+        return jsonify(message='Invoice created', id=invoice.id, invoice_number=invoice.invoice_number), 201
+
+    rows = BusinessInvoice.query.filter_by(owner_id=owner).order_by(BusinessInvoice.id.desc()).limit(200).all()
+    return jsonify(invoices=[dict(
+        id=x.id, invoice_number=x.invoice_number, customer_name=x.customer_name,
+        customer_email=x.customer_email, item_summary=x.item_summary, quantity=x.quantity,
+        unit_price=x.unit_price, tax_rate=x.tax_rate, subtotal=x.subtotal, tax=x.tax,
+        total=x.total, issue_date=x.issue_date.isoformat(), due_date=x.due_date.isoformat() if x.due_date else '',
+        status=x.status, notes=x.notes
+    ) for x in rows])
+
+
+@app.route('/api/marketer/business/receipts', methods=['GET', 'POST'])
+def marketer_business_receipts():
+    owner, user = _business_user()
+    if owner is None:
+        return jsonify(error='Marketer login required'), 403
+
+    if request.method == 'POST':
+        from datetime import date
+        data = request.get_json(silent=True) or {}
+        customer = str(data.get('customer_name', '')).strip()[:160]
+        try:
+            amount = float(data.get('amount', 0))
+            received_on = date.fromisoformat(str(data.get('received_on') or date.today().isoformat()))
+        except (TypeError, ValueError, OverflowError):
+            return jsonify(error='Enter a valid receipt amount and date'), 400
+        if not customer or not 0 < amount <= 1000000000:
+            return jsonify(error='Customer and a positive amount are required'), 400
+
+        receipt = BusinessReceipt(
+            owner_id=owner,
+            receipt_number=_next_business_number(BusinessReceipt, owner, 'RCT'),
+            invoice_number=str(data.get('invoice_number', '')).strip()[:50],
+            customer_name=customer,
+            amount=amount,
+            payment_method=str(data.get('payment_method', 'Bank transfer')).strip()[:40],
+            received_on=received_on,
+            notes=str(data.get('notes', '')).strip()[:1000]
+        )
+        db.session.add(receipt)
+        db.session.commit()
+        return jsonify(message='Receipt recorded', id=receipt.id, receipt_number=receipt.receipt_number), 201
+
+    rows = BusinessReceipt.query.filter_by(owner_id=owner).order_by(BusinessReceipt.id.desc()).limit(200).all()
+    return jsonify(receipts=[dict(
+        id=x.id, receipt_number=x.receipt_number, invoice_number=x.invoice_number,
+        customer_name=x.customer_name, amount=x.amount, payment_method=x.payment_method,
+        received_on=x.received_on.isoformat(), notes=x.notes
+    ) for x in rows])
+
+
+@app.route('/api/marketer/business/payroll', methods=['GET', 'POST'])
+def marketer_business_payroll():
+    owner, user = _business_user()
+    if owner is None:
+        return jsonify(error='Marketer login required'), 403
+
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or {}
+        employee = str(data.get('employee_name', '')).strip()[:160]
+        period = str(data.get('pay_period', '')).strip()[:40]
+        role_title = str(data.get('role_title', '')).strip()[:100]
+        try:
+            basic = float(data.get('basic_salary', 0))
+            allowances = float(data.get('allowances', 0))
+            deductions = float(data.get('deductions', 0))
+        except (TypeError, ValueError, OverflowError):
+            return jsonify(error='Enter valid payroll amounts'), 400
+
+        net = round(basic + allowances - deductions, 2)
+        if not employee or not period or basic < 0 or allowances < 0 or deductions < 0 or net < 0:
+            return jsonify(error='Check employee and payroll amounts'), 400
+
+        status = str(data.get('status', 'pending')).strip().lower()
+        if status not in ('pending', 'approved', 'paid'):
+            return jsonify(error='Invalid payroll status'), 400
+
+        row = BusinessPayroll(
+            owner_id=owner,
+            employee_name=employee,
+            role_title=role_title,
+            pay_period=period,
+            basic_salary=basic,
+            allowances=allowances,
+            deductions=deductions,
+            net_pay=net,
+            status=status
+        )
+        db.session.add(row)
+        db.session.commit()
+        return jsonify(message='Payroll entry saved', id=row.id), 201
+
+    rows = BusinessPayroll.query.filter_by(owner_id=owner).order_by(BusinessPayroll.id.desc()).limit(300).all()
+    return jsonify(payroll=[dict(
+        id=x.id, employee_name=x.employee_name, role_title=x.role_title,
+        pay_period=x.pay_period, basic_salary=x.basic_salary, allowances=x.allowances,
+        deductions=x.deductions, net_pay=x.net_pay, status=x.status
+    ) for x in rows])
+
+
+@app.route('/api/marketer/business/waybills', methods=['GET', 'POST'])
+def marketer_business_waybills():
+    owner, user = _business_user()
+    if owner is None:
+        return jsonify(error='Marketer login required'), 403
+
+    if request.method == 'POST':
+        from datetime import date
+        data = request.get_json(silent=True) or {}
+        customer = str(data.get('customer_name', '')).strip()[:160]
+        origin = str(data.get('origin', '')).strip()[:180]
+        destination = str(data.get('destination', '')).strip()[:180]
+        items = str(data.get('items_summary', '')).strip()[:700]
+        try:
+            dispatch_date = date.fromisoformat(str(data.get('dispatch_date') or date.today().isoformat()))
+        except (TypeError, ValueError, OverflowError):
+            return jsonify(error='Enter a valid dispatch date'), 400
+
+        if not customer or not origin or not destination or not items:
+            return jsonify(error='Customer, route and shipment items are required'), 400
+
+        status = str(data.get('status', 'pending')).strip().lower()
+        if status not in ('pending', 'in_transit', 'delivered', 'cancelled'):
+            return jsonify(error='Invalid waybill status'), 400
+
+        row = BusinessWaybill(
+            owner_id=owner,
+            waybill_number=_next_business_number(BusinessWaybill, owner, 'WB'),
+            customer_name=customer,
+            origin=origin,
+            destination=destination,
+            dispatch_date=dispatch_date,
+            items_summary=items,
+            vehicle=str(data.get('vehicle', '')).strip()[:100],
+            driver=str(data.get('driver', '')).strip()[:120],
+            status=status,
+            notes=str(data.get('notes', '')).strip()[:1000]
+        )
+        db.session.add(row)
+        db.session.commit()
+        return jsonify(message='Waybill created', id=row.id, waybill_number=row.waybill_number), 201
+
+    rows = BusinessWaybill.query.filter_by(owner_id=owner).order_by(BusinessWaybill.id.desc()).limit(300).all()
+    return jsonify(waybills=[dict(
+        id=x.id, waybill_number=x.waybill_number, customer_name=x.customer_name,
+        origin=x.origin, destination=x.destination, dispatch_date=x.dispatch_date.isoformat(),
+        items_summary=x.items_summary, vehicle=x.vehicle, driver=x.driver, status=x.status,
+        notes=x.notes
+    ) for x in rows])
+
 
 # Utility function to check allowed file types
 def allowed_file(filename):
