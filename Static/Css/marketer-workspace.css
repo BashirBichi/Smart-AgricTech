@@ -38,3 +38,33 @@
  .marketer-shell .section-heading .btn{width:auto}
  .marketer-shell .business-table{min-width:700px}
 }
+
+/* Shared Smart AgricTech mobile shell parity */
+.marketer-shell .agri-bottom-nav{position:fixed;display:none;bottom:0;left:0;right:0;z-index:1040}
+.marketer-shell .dashboard-header{display:flex;align-items:center;gap:14px}
+.marketer-shell .dashboard-header .dashboard-title{margin:0;flex:1;min-width:0}
+@media(max-width:767.98px){
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))!important}
+  .marketer-shell .main-content{padding:10px 12px 18px!important}
+  .marketer-shell .dashboard-header{background:linear-gradient(135deg,#f7fcf9,#fff)!important;border:1px solid #e0eee5!important;border-radius:18px!important;box-shadow:0 8px 28px #0c422014!important;margin-bottom:14px!important;padding:16px 18px!important;min-height:76px}
+  .marketer-shell .dashboard-header .dashboard-title{font-weight:800!important;color:#164b32!important;letter-spacing:-.5px;font-size:24px!important;line-height:1.2!important}
+  .marketer-shell .agri-mobile-menu-toggle{background:#0f7a49!important;color:#fff!important;border:0!important;border-radius:12px!important;padding:11px 16px!important;font-weight:800!important;white-space:nowrap}
+  .marketer-shell .marketer-profile-button{background:#eef6ef!important;border:1px solid #dbe9df!important;border-radius:14px!important;padding:12px 14px!important;color:#173c2d!important;font-weight:800!important;white-space:nowrap}
+  .marketer-shell .marketer-profile-button i{display:none}
+  .marketer-shell .marketer-hero{border-radius:30px!important;padding:30px 28px!important;min-height:0!important}
+  .marketer-shell .marketer-hero h2{font-size:35px!important;line-height:1.05!important}
+  .marketer-shell .marketer-hero p{font-size:16px!important;line-height:1.8!important;color:#b8b9b8!important}
+  .marketer-shell .hero-badge{margin-top:22px!important}
+  .marketer-shell .section-heading{margin:30px 0 18px!important}
+  .marketer-shell .section-heading h3{font-size:30px!important}
+  .marketer-shell .marketer-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  .marketer-shell .mk-kpi{min-height:150px!important;padding:20px!important;border-radius:20px!important}
+  .marketer-shell .mk-kpi strong{font-size:25px!important}
+  .marketer-shell .marketer-home-grid,.marketer-shell .marketer-two-column{grid-template-columns:1fr!important}
+  .marketer-shell .agri-bottom-nav{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));background:#fff;box-shadow:0 -7px 28px #103f2a1a;border-top:1px solid #dce9df;padding:7px 6px calc(7px + env(safe-area-inset-bottom,0px));gap:2px}
+  .marketer-shell .agri-bottom-nav button{background:none;border:0;border-radius:12px;color:#6a8274;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;min-height:51px;font-size:10px;font-weight:750}
+  .marketer-shell .agri-bottom-nav button i{font-size:19px}
+  .marketer-shell .agri-bottom-nav button.active{background:#e5f5ea;color:#0e7c46}
+  .marketer-shell .content-section{border-radius:16px!important}
+}
+@media(min-width:768px){.marketer-shell .agri-bottom-nav{display:none!important}}
