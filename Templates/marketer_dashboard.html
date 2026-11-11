@@ -1,241 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketer/Trader Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
-
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='Css/brand-refresh.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-v2.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections.css') }}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#103e31">
+<title>Marketer Workspace | Smart AgricTech</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/brand-refresh.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-v2.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-layout.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-compact.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-actions.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/dashboard-sections-ui.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='Css/app-notifications.css') }}">
-<script src="{{ url_for('static', filename='js/app-notifications.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/workspace-insights.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/marketer-workspace.css') }}">
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <ul class="nav flex-column"><li class="nav-item"><a href="#" class="nav-link" data-section="workspace-insights"><i class="fas fa-chart-line"></i> KPI &amp; Candlestick Analytics</a></li><li class="nav-item"><a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a></li>
-                <li class="nav-item"><a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-section="product-listings"><i class="fas fa-list"></i> Product Listings</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-section="buyer-inquiries"><i class="fas fa-comments"></i> Buyer Inquiries</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-section="finance"><i class="fas fa-wallet"></i> Finance</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-section="community"><i class="fas fa-users"></i> Community</a></li>
-            </ul>
-        </aside>
+<div class="dashboard-container marketer-shell">
+<aside class="sidebar marketer-sidebar">
+  <div class="marketer-brand"><span class="marketer-brand-mark">✳</span><div><strong>Smart AgricTech</strong><small>Marketer Workspace</small></div></div>
+  <nav class="nav flex-column marketer-nav" aria-label="Marketer navigation">
+    <a href="#" class="nav-link active" data-section="home"><i class="fas fa-house"></i> Home</a>
+    <a href="#" class="nav-link" data-section="business-overview"><i class="fas fa-gauge-high"></i> Business Overview</a>
+    <a href="#" class="nav-link" data-section="product-listings"><i class="fas fa-boxes-stacked"></i> Product Listings</a>
+    <a href="#" class="nav-link" data-section="buyer-inquiries"><i class="fas fa-comments"></i> Customers & Inquiries</a>
+    <a href="#" class="nav-link" data-section="invoices"><i class="fas fa-file-invoice-dollar"></i> Invoices</a>
+    <a href="#" class="nav-link" data-section="receipts"><i class="fas fa-receipt"></i> Receipts</a>
+    <a href="#" class="nav-link" data-section="waybills"><i class="fas fa-truck-fast"></i> Waybills</a>
+    <a href="#" class="nav-link" data-section="payroll"><i class="fas fa-users-gear"></i> Payroll</a>
+    <a href="#" class="nav-link" data-section="business-finance"><i class="fas fa-wallet"></i> Business Finance</a>
+    <a href="#" class="nav-link" data-section="market-trends"><i class="fas fa-chart-line"></i> Market Trends</a>
+    <a href="#" class="nav-link" data-section="Community-support"><i class="fas fa-users"></i> Community</a>
+    <a href="#" class="nav-link" data-section="workspace-insights"><i class="fas fa-chart-candlestick"></i> KPI & Analytics</a>
+  </nav>
+</aside>
 
-        <!-- Main Content -->
-        <main class="main-content"><section id="workspace-insights" class="content-section workspace-insights" style="display:none"><h2><i class="fas fa-chart-candlestick"></i> Workspace Analytics</h2><p class="insight-lead">Live account KPIs and 30-day activity trends based on stored records.</p><div id="insight-kpis" class="insight-kpi-grid" aria-live="polite"></div><div class="insight-chart-card"><div class="insight-chart-head"><h3>30-Day Activity Candlestick Chart</h3><button type="button" id="insight-refresh"><i class="fas fa-rotate"></i> Refresh</button></div><div id="insight-chart" class="insight-chart-wrap"></div><p id="insight-note">The chart shows recorded activity, not commodity prices.</p></div></section>
-            <!-- Header -->
-            <header class="dashboard-header">
-                <h1>Marketer/Trader Dashboard</h1>
-                <div class="dropdown">
-                    <span class="profile-menu dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        👤 Profile
-                    </span>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item" href="#" data-section="edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
-                        <li><a class="dropdown-item" href="#" data-section="view-profile"><i class="fas fa-id-badge"></i> View Profile</a></li>
-                        <li><a class="dropdown-item" href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
-                        <li><a class="dropdown-item" href="#" data-section="my-wallet"><i class="fas fa-wallet"></i> My Wallet</a></li>
-                        <li><a class="dropdown-item" href="#" data-section="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                    </ul>
-                </div>
-            </header>
+<main class="main-content">
+<section id="workspace-insights" class="content-section workspace-insights" style="display:none">
+  <h2><i class="fas fa-chart-candlestick"></i> Workspace Analytics</h2>
+  <p class="insight-lead">Operational activity for this marketer account.</p>
+  <div id="insight-kpis" class="insight-kpi-grid" aria-live="polite"></div>
+  <div class="insight-chart-card"><div class="insight-chart-head"><h3>30-Day Activity</h3><button type="button" id="insight-refresh"><i class="fas fa-rotate"></i> Refresh</button></div><div id="insight-chart" class="insight-chart-wrap"></div><p id="insight-note">Recorded activity only.</p></div>
+</section>
 
-            <!-- Content Sections -->
-            <div class="content-section" id="home">
-                <h2>Welcome to Your Dashboard</h2>
-                <p>Manage your marketing and trading activities efficiently with Smart AgricTech.</p>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="widget-box">
-                            <h3><i class="fas fa-list"></i> Active Listings</h3>
-                            <p><strong>15 Products</strong> currently listed</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="widget-box">
-                            <h3><i class="fas fa-comments"></i> New Inquiries</h3>
-                            <p><strong>5 New</strong> buyer inquiries</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="widget-box">
-                            <h3><i class="fas fa-chart-line"></i> Market Trends</h3>
-                            <p><strong>Updated</strong> market insights</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<header class="dashboard-header marketer-header">
+  <div class="marketer-mobile-title"><span class="marketer-header-icon"><i class="fas fa-store"></i></span><div><span class="eyebrow">MARKETER WORKSPACE</span><h1>Business & Market Operations</h1></div></div>
+  <div class="dropdown">
+    <button class="profile-menu dropdown-toggle marketer-profile-button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle"></i> {{ name }} </button>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+      <li><a class="dropdown-item" href="#" data-section="view-profile"><i class="fas fa-id-badge"></i> View Profile</a></li>
+      <li><a class="dropdown-item" href="#" data-section="edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+      <li><a class="dropdown-item" href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a class="dropdown-item" href="#" data-section="my-wallet"><i class="fas fa-wallet"></i> My Wallet</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-danger" href="#" data-section="logout"><i class="fas fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </div>
+</header>
 
-            <!-- Product Listings Section -->
-            <div class="content-section" id="product-listings" style="display: none;">
-                <h2>Product Listings</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Data rows will be populated dynamically -->
-                    </tbody>
-                </table>
-            </div>
+<div class="marketer-mobile-nav">
+  <button type="button" data-section="home"><i class="fas fa-house"></i><span>Home</span></button>
+  <button type="button" data-section="product-listings"><i class="fas fa-boxes-stacked"></i><span>Products</span></button>
+  <button type="button" data-section="invoices"><i class="fas fa-file-invoice-dollar"></i><span>Invoices</span></button>
+  <button type="button" data-section="waybills"><i class="fas fa-truck-fast"></i><span>Waybills</span></button>
+  <button type="button" data-section="business-finance"><i class="fas fa-wallet"></i><span>Finance</span></button>
+</div>
 
-            <!-- Market Trends Section -->
-            <div class="content-section" id="market-trends" style="display: none;">
-                <h2>Market Trends</h2>
-                <canvas id="marketTrendsChart"></canvas>
-            </div>
+<section id="home" class="content-section marketer-home">
+  <div class="marketer-hero">
+    <div><span class="eyebrow">SMART AGRICTECH BUSINESS DESK</span><h2>Welcome back, {{ name }}.</h2><p>Run your agricultural trading business from one workspace. Sell products, manage customers, issue documents and keep your business records organized.</p></div>
+    <div class="hero-badge"><i class="fas fa-store"></i><span>Sales & Operations</span></div>
+  </div>
+  <div class="section-heading"><div><span class="eyebrow">BUSINESS SNAPSHOT</span><h3>Today's workspace</h3></div><button class="btn btn-outline-primary" type="button" data-section="business-overview"><i class="fas fa-arrow-right"></i> Open overview</button></div>
+  <div id="home-kpis" class="marketer-kpi-grid"></div>
+  <div class="marketer-home-grid">
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Quick actions</h3><span>Common business tasks</span></div></div><div class="quick-action-grid">
+      <button data-section="product-listings"><i class="fas fa-box-open"></i><strong>List Product</strong><small>Tools, machinery, fertilizer and more</small></button>
+      <button data-section="invoices"><i class="fas fa-file-invoice"></i><strong>Create Invoice</strong><small>Bill a customer</small></button>
+      <button data-section="receipts"><i class="fas fa-receipt"></i><strong>Record Receipt</strong><small>Track money received</small></button>
+      <button data-section="waybills"><i class="fas fa-truck"></i><strong>Create Waybill</strong><small>Prepare a shipment</small></button>
+      <button data-section="payroll"><i class="fas fa-users-gear"></i><strong>Run Payroll</strong><small>Manage staff payments</small></button>
+      <button data-section="business-finance"><i class="fas fa-chart-pie"></i><strong>Review Finance</strong><small>Sales and collections</small></button>
+    </div></div>
+    <div class="marketer-panel marketer-profile-card"><div class="panel-heading"><div><h3>Business identity</h3><span>Used on business documents</span></div><button class="icon-button" data-section="business-overview" aria-label="Edit business profile"><i class="fas fa-pen"></i></button></div><div id="home-business-profile"><div class="empty-state">Loading business profile...</div></div></div>
+  </div>
+</section>
 
-            <!-- Buyer Inquiries Section -->
-            <div class="content-section" id="buyer-inquiries" style="display: none;">
-                <h2>Buyer Inquiries</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Buyer Name</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Data rows will be populated dynamically -->
-                    </tbody>
-                </table>
-            </div>
+<section id="business-overview" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">BUSINESS CONTROL CENTER</span><h2>Business Overview</h2><p>Monitor sales documents, cash collection, staffing and deliveries.</p></div><button class="btn btn-primary" data-section="business-profile"><i class="fas fa-building"></i> Business Profile</button></div>
+  <div id="overview-kpis" class="marketer-kpi-grid"></div>
+  <div class="marketer-two-column">
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Document workflow</h3><span>From sale to delivery</span></div></div><div class="workflow-grid"><div><span>01</span><strong>Invoice</strong><small>Issue customer billing</small></div><div><span>02</span><strong>Receipt</strong><small>Record collection</small></div><div><span>03</span><strong>Waybill</strong><small>Dispatch goods</small></div><div><span>04</span><strong>Finance</strong><small>Review performance</small></div></div></div>
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Operational status</h3><span>Live records in this account</span></div></div><div id="overview-status" class="status-list"></div></div>
+  </div>
+</section>
 
-            <!-- Finance Section -->
-            <div class="content-section" id="finance" style="display: none;">
-                <h2>Finance</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Transaction History</h3>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Data rows will be populated dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Financial Overview</h3>
-                        <p>Balance: <strong>$10,000</strong></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Community Section -->
-            <div class="content-section" id="community" style="display: none;">
-                <h2>Community</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Forums</h3>
-                        <ul>
-                            <li><a href="#">Market Trends Discussion</a></li>
-                            <li><a href="#">Best Practices</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Events</h3>
-                        <ul>
-                            <li><a href="#">Webinar: Market Insights</a></li>
-                            <li><a href="#">Workshop: Financial Management</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </main>
+<section id="product-listings" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">SALES CATALOG</span><h2>Product Listings</h2><p>Sell agricultural tools, machinery, fertilizer, inputs and other products.</p></div></div>
+  <div class="marketer-two-column">
+    <div class="marketer-panel">
+      <div class="panel-heading"><div><h3>Add product</h3><span>Publish an item to the marketplace</span></div></div>
+      <form id="marketer-product-form" class="business-form" enctype="multipart/form-data">
+        <label>Product name<input name="name" required maxlength="100" placeholder="e.g. Knapsack sprayer"></label>
+        <label>Description<textarea name="description" maxlength="200" rows="3" placeholder="Short product description"></textarea></label>
+        <div class="form-grid-2"><label>Price (₦)<input name="price" type="number" min="0.01" step="0.01" required></label><label>Quantity<input name="quantity" type="number" min="1" step="1" required></label></div>
+        <label>Product image<input name="image" type="file" accept="image/*"></label>
+        <div id="product-form-status" class="form-status" role="status"></div>
+        <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> Publish Product</button>
+      </form>
     </div>
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>My catalog</h3><span id="product-count">Loading...</span></div></div><div id="product-list" class="record-list"></div></div>
+  </div>
+</section>
 
-    <!-- Bootstrap & Chart.js Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const menuLinks = document.querySelectorAll('.nav-link[data-section]');
-            const sections = document.querySelectorAll('.content-section');
+<section id="buyer-inquiries" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">CUSTOMER RELATIONSHIPS</span><h2>Customers & Inquiries</h2><p>Keep customer conversations and commercial requests close to your sales workflow.</p></div></div>
+  <div class="marketer-panel empty-state-panel"><i class="fas fa-comments"></i><h3>Customer workspace</h3><p>Marketplace inquiries and community conversations remain connected to your account. Use Community for direct conversations while business documents stay in the business workspace.</p><button class="btn btn-primary" data-section="Community-support">Open Community</button></div>
+</section>
 
-            // Function to hide all sections
-            function hideAllSections() {
-                sections.forEach(section => section.style.display = 'none');
-            }
+<section id="invoices" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">SALES DOCUMENTS</span><h2>Invoices</h2><p>Create customer invoices and track their status.</p></div></div>
+  <div class="marketer-two-column">
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>New invoice</h3><span>Amounts are calculated before saving</span></div></div>
+      <form id="invoice-form" class="business-form">
+        <label>Customer name<input name="customer_name" required maxlength="160"></label>
+        <label>Customer email<input name="customer_email" type="email" maxlength="160"></label>
+        <label>Item / service description<input name="item_summary" required maxlength="500" placeholder="e.g. 10 bags NPK fertilizer"></label>
+        <div class="form-grid-2"><label>Quantity<input name="quantity" type="number" min="0.01" step="0.01" value="1" required></label><label>Unit price (₦)<input name="unit_price" type="number" min="0" step="0.01" required></label></div>
+        <div class="form-grid-2"><label>Tax rate (%)<input name="tax_rate" type="number" min="0" max="100" step="0.01" value="0"></label><label>Due date<input name="due_date" type="date"></label></div>
+        <label>Status<select name="status"><option value="draft">Draft</option><option value="sent">Sent</option><option value="paid">Paid</option><option value="overdue">Overdue</option></select></label>
+        <label>Notes<textarea name="notes" rows="3" maxlength="1000"></textarea></label>
+        <div id="invoice-form-status" class="form-status"></div><button class="btn btn-primary" type="submit"><i class="fas fa-file-invoice"></i> Create Invoice</button>
+      </form>
+    </div>
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Invoice register</h3><span>Latest business invoices</span></div></div><div class="table-wrap"><table class="business-table"><thead><tr><th>Invoice</th><th>Customer</th><th>Total</th><th>Status</th><th>Due</th></tr></thead><tbody id="invoice-table"></tbody></table></div></div>
+  </div>
+</section>
 
-            // Function to show a specific section
-            function showSection(sectionId) {
-                hideAllSections();
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                }
-            }
+<section id="receipts" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">CASH COLLECTION</span><h2>Receipts</h2><p>Record payments received from customers.</p></div></div>
+  <div class="marketer-two-column">
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Record payment</h3><span>Create a receipt against a sale</span></div></div>
+      <form id="receipt-form" class="business-form">
+        <label>Customer name<input name="customer_name" required maxlength="160"></label>
+        <div class="form-grid-2"><label>Invoice number<input name="invoice_number" placeholder="Optional"></label><label>Amount received (₦)<input name="amount" type="number" min="0.01" step="0.01" required></label></div>
+        <div class="form-grid-2"><label>Payment method<select name="payment_method"><option>Bank transfer</option><option>Cash</option><option>POS</option><option>Card</option><option>Mobile money</option></select></label><label>Received on<input name="received_on" type="date" required></label></div>
+        <label>Notes<textarea name="notes" rows="3" maxlength="1000"></textarea></label>
+        <div id="receipt-form-status" class="form-status"></div><button class="btn btn-primary" type="submit"><i class="fas fa-receipt"></i> Record Receipt</button>
+      </form>
+    </div>
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Receipt register</h3><span>Payments recorded by this account</span></div></div><div class="table-wrap"><table class="business-table"><thead><tr><th>Receipt</th><th>Customer</th><th>Amount</th><th>Method</th><th>Date</th></tr></thead><tbody id="receipt-table"></tbody></table></div></div>
+  </div>
+</section>
 
-            // Sidebar Navigation Links
-            menuLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showSection(link.getAttribute('data-section'));
+<section id="waybills" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">LOGISTICS</span><h2>Waybills</h2><p>Prepare dispatch documents and track delivery status.</p></div></div>
+  <div class="marketer-two-column">
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Create waybill</h3><span>Keep shipment information with the sale</span></div></div>
+      <form id="waybill-form" class="business-form">
+        <label>Customer / consignee<input name="customer_name" required maxlength="160"></label>
+        <div class="form-grid-2"><label>Origin<input name="origin" required maxlength="180"></label><label>Destination<input name="destination" required maxlength="180"></label></div>
+        <label>Items / shipment summary<textarea name="items_summary" rows="3" required maxlength="700" placeholder="Products, quantities and units"></textarea></label>
+        <div class="form-grid-2"><label>Dispatch date<input name="dispatch_date" type="date" required></label><label>Status<select name="status"><option value="pending">Pending</option><option value="in_transit">In transit</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled</option></select></label></div>
+        <div class="form-grid-2"><label>Vehicle<input name="vehicle" maxlength="100"></label><label>Driver<input name="driver" maxlength="120"></label></div>
+        <label>Notes<textarea name="notes" rows="2" maxlength="1000"></textarea></label>
+        <div id="waybill-form-status" class="form-status"></div><button class="btn btn-primary" type="submit"><i class="fas fa-truck-fast"></i> Create Waybill</button>
+      </form>
+    </div>
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Dispatch register</h3><span>Latest waybills</span></div></div><div class="table-wrap"><table class="business-table"><thead><tr><th>Waybill</th><th>Customer</th><th>Route</th><th>Status</th><th>Date</th></tr></thead><tbody id="waybill-table"></tbody></table></div></div>
+  </div>
+</section>
 
-                    // Remove 'active' class from all links and add to the clicked one
-                    menuLinks.forEach(item => item.classList.remove('active'));
-                    link.classList.add('active');
-                });
-            });
+<section id="payroll" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">PEOPLE OPERATIONS</span><h2>Payroll</h2><p>Maintain staff payroll records for your trading business.</p></div></div>
+  <div class="marketer-two-column">
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Add payroll record</h3><span>Net pay is calculated automatically</span></div></div>
+      <form id="payroll-form" class="business-form">
+        <label>Employee name<input name="employee_name" required maxlength="160"></label>
+        <div class="form-grid-2"><label>Role / position<input name="role_title" maxlength="100"></label><label>Pay period<input name="pay_period" required maxlength="40" placeholder="November 2026"></label></div>
+        <div class="form-grid-3"><label>Basic salary (₦)<input name="basic_salary" type="number" min="0" step="0.01" required></label><label>Allowances (₦)<input name="allowances" type="number" min="0" step="0.01" value="0"></label><label>Deductions (₦)<input name="deductions" type="number" min="0" step="0.01" value="0"></label></div>
+        <label>Status<select name="status"><option value="pending">Pending</option><option value="approved">Approved</option><option value="paid">Paid</option></select></label>
+        <div id="payroll-form-status" class="form-status"></div><button class="btn btn-primary" type="submit"><i class="fas fa-users-gear"></i> Save Payroll</button>
+      </form>
+    </div>
+    <div class="marketer-panel"><div class="panel-heading"><div><h3>Payroll register</h3><span>Staff payment records</span></div></div><div class="table-wrap"><table class="business-table"><thead><tr><th>Employee</th><th>Period</th><th>Net pay</th><th>Status</th></tr></thead><tbody id="payroll-table"></tbody></table></div></div>
+  </div>
+</section>
 
-            // Initialize Market Trends Chart
-            const ctx = document.getElementById('marketTrendsChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Market Trends',
-                        data: [65, 59, 80, 81, 56, 55],
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+<section id="business-finance" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">BUSINESS FINANCE</span><h2>Finance</h2><p>See money invoiced, collected and still outstanding.</p></div></div>
+  <div id="finance-kpis" class="marketer-kpi-grid"></div>
+  <div class="marketer-panel"><div class="panel-heading"><div><h3>Financial controls</h3><span>Operational figures from your saved business records</span></div></div><div class="finance-control-grid">
+    <button data-section="invoices"><i class="fas fa-file-invoice-dollar"></i><strong>Invoices</strong><small>Bill customers</small></button>
+    <button data-section="receipts"><i class="fas fa-money-bill-transfer"></i><strong>Receipts</strong><small>Track collections</small></button>
+    <button data-section="payroll"><i class="fas fa-users"></i><strong>Payroll</strong><small>Manage staff costs</small></button>
+    <button data-section="waybills"><i class="fas fa-truck"></i><strong>Waybills</strong><small>Track dispatches</small></button>
+  </div></div>
+</section>
+
+<section id="business-profile" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">BUSINESS IDENTITY</span><h2>Business Profile</h2><p>Information used to identify your business on future documents.</p></div></div>
+  <div class="marketer-panel">
+    <form id="business-profile-form" class="business-form business-form-wide">
+      <div class="form-grid-2"><label>Business name<input name="business_name" required maxlength="160"></label><label>Phone number<input name="phone" maxlength="40"></label></div>
+      <label>Business address<input name="address" maxlength="240"></label>
+      <label>Tax ID / registration number<input name="tax_id" maxlength="80"></label>
+      <div id="business-profile-status" class="form-status"></div><button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Save Business Profile</button>
+    </form>
+  </div>
+</section>
+
+<section id="market-trends" class="content-section" style="display:none">
+  <div class="section-heading"><div><span class="eyebrow">MARKET INTELLIGENCE</span><h2>Market Trends</h2><p>Review your listed product prices and use the market data tools available on Smart AgricTech.</p></div></div>
+  <div class="marketer-panel"><div class="panel-heading"><div><h3>Your current listings</h3><span>Latest prices from your own catalog</span></div></div><div id="market-price-list" class="price-list"></div></div>
+</section>
+
+<section id="Community-support" class="content-section" style="display:none"></section>
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/dashboard-sections-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/account-workspace.js') }}"></script>
-<section id="Community-support" class="content-section" style="display:none"></section>
 <script src="{{ url_for('static', filename='js/community-hub.js') }}"></script>
 <script src="{{ url_for('static', filename='js/workspace-insights.js') }}"></script>
+<script src="{{ url_for('static', filename='js/marketer-workspace.js') }}"></script>
 </body>
 </html>
