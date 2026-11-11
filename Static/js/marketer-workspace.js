@@ -73,7 +73,14 @@ async function loadSummary(){
       ['Pending delivery',d.pending_waybills,'fa-truck-fast']
     ];
     const html=kpis.map(([label,value,icon])=>'<article class="mk-kpi"><span class="kpi-icon"><i class="fas '+icon+'"></i></span><small>'+esc(label)+'</small><strong>'+esc(value)+'</strong></article>').join('');
-    ['home-kpis','overview-kpis','finance-kpis'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html});
+    const homeValues={
+      'home-products-value':d.listings,
+      'home-invoices-value':d.invoices,
+      'home-collected-value':money(d.collected),
+      'home-outstanding-value':money(d.outstanding)
+    };
+    Object.entries(homeValues).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=value});
+    ['overview-kpis','finance-kpis'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html});
     const status=document.getElementById('overview-status');
     if(status)status.innerHTML=[
       ['Invoiced',money(d.invoiced)],['Collected',money(d.collected)],['Outstanding',money(d.outstanding)],
