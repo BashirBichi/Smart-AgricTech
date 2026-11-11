@@ -829,6 +829,58 @@ def marketer_business_waybills():
     ) for x in rows])
 
 
+@app.route('/api/marketer/business/invoices/<int:invoice_id>', methods=['DELETE'])
+def marketer_business_invoice_delete(invoice_id):
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+    row = BusinessInvoice.query.filter_by(id=invoice_id, owner_id=owner).first()
+    if not row:
+        return jsonify(error='Invoice not found'), 404
+    db.session.delete(row)
+    db.session.commit()
+    return jsonify(message='Invoice deleted')
+
+
+@app.route('/api/marketer/business/receipts/<int:receipt_id>', methods=['DELETE'])
+def marketer_business_receipt_delete(receipt_id):
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+    row = BusinessReceipt.query.filter_by(id=receipt_id, owner_id=owner).first()
+    if not row:
+        return jsonify(error='Receipt not found'), 404
+    db.session.delete(row)
+    db.session.commit()
+    return jsonify(message='Receipt deleted')
+
+
+@app.route('/api/marketer/business/payroll/<int:payroll_id>', methods=['DELETE'])
+def marketer_business_payroll_delete(payroll_id):
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+    row = BusinessPayroll.query.filter_by(id=payroll_id, owner_id=owner).first()
+    if not row:
+        return jsonify(error='Payroll record not found'), 404
+    db.session.delete(row)
+    db.session.commit()
+    return jsonify(message='Payroll record deleted')
+
+
+@app.route('/api/marketer/business/waybills/<int:waybill_id>', methods=['DELETE'])
+def marketer_business_waybill_delete(waybill_id):
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+    row = BusinessWaybill.query.filter_by(id=waybill_id, owner_id=owner).first()
+    if not row:
+        return jsonify(error='Waybill not found'), 404
+    db.session.delete(row)
+    db.session.commit()
+    return jsonify(message='Waybill deleted')
+
+
 # Utility function to check allowed file types
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
