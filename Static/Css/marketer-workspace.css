@@ -3,3 +3,38 @@
 @media(max-width:1100px){.marketer-kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.marketer-two-column,.marketer-home-grid{grid-template-columns:1fr}.finance-control-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.price-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:768px){.marketer-shell .sidebar{display:none!important}.marketer-shell .main-content{width:100%!important;max-width:100%!important;margin:0!important;padding:12px 12px 86px!important}.marketer-header{position:relative;border-radius:13px;padding:10px 12px!important}.marketer-header h1{font-size:16px!important}.marketer-header-icon{width:36px;height:36px}.marketer-profile-button{font-size:0;padding:9px}.marketer-profile-button i{font-size:18px}.marketer-mobile-nav{display:grid;position:fixed;left:8px;right:8px;bottom:8px;z-index:1030;grid-template-columns:repeat(5,1fr);gap:4px;padding:7px;background:#fff;border:1px solid var(--mk-line);border-radius:16px;box-shadow:0 10px 35px rgba(16,62,49,.15)}.marketer-mobile-nav button{border:0;background:transparent;color:#6b7d71;font-size:9px;font-weight:800;padding:7px 2px;border-radius:10px}.marketer-mobile-nav button.active{background:#edf6ef;color:var(--mk-green)}.marketer-mobile-nav i{display:block;font-size:14px;margin-bottom:3px}.marketer-hero{padding:21px;display:block}.marketer-hero h2{font-size:25px!important}.hero-badge{margin-top:17px;display:inline-flex}.section-heading{align-items:flex-start;flex-direction:column}.marketer-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.mk-kpi{padding:14px}.mk-kpi strong{font-size:19px}.quick-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid-2,.form-grid-3{grid-template-columns:1fr}.marketer-panel{padding:15px}.price-list{grid-template-columns:1fr}.business-table{min-width:520px}}
 @media(max-width:430px){.marketer-kpi-grid{grid-template-columns:1fr 1fr}.quick-action-grid{grid-template-columns:1fr 1fr}.mk-kpi strong{font-size:17px}.marketer-hero{border-radius:16px}.section-heading h2{font-size:24px!important}}
+
+/* Uniform dashboard integration */
+.marketer-shell .sidebar{width:var(--agri-sidebar-width,250px)!important;padding:24px 14px!important}
+.marketer-shell .main-content{min-height:100vh}
+.marketer-shell .dashboard-header{min-height:60px}
+.marketer-shell .agri-mobile-menu-toggle{border:1px solid var(--mk-line);color:var(--mk-green);background:#fff;font-weight:800}
+.marketer-mobile-drawer .offcanvas-header{background:#123e31;border-bottom:1px solid #255841;padding:18px 15px}
+.marketer-mobile-drawer .offcanvas-body{background:#123e31;padding:12px 14px}
+.marketer-mobile-drawer .agri-mobile-nav-intro{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:15px}
+.marketer-mobile-drawer .agri-mobile-nav-intro small{display:block;color:#b8d5c2;font-size:10px;margin-top:2px}
+.marketer-mobile-drawer .agri-nav-avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#ffffff18;color:#cfe8b1}
+.marketer-mobile-drawer .agri-nav-search-label{display:flex;align-items:center;gap:8px;background:#ffffff12;border:1px solid #ffffff20;border-radius:10px;padding:9px 11px;color:#cfe8b1;margin-bottom:12px}
+.marketer-mobile-drawer .agri-nav-search-label input{border:0;outline:0;background:transparent;color:#fff;width:100%;font-size:12px}
+.marketer-mobile-drawer .agri-nav-search-label input::placeholder{color:#abc7b4}
+.marketer-mobile-drawer .nav-link{color:#cbded0!important;border-radius:10px!important;margin:2px 0!important;padding:11px 12px!important;font-size:12px!important}
+.marketer-mobile-drawer .nav-link:hover,.marketer-mobile-drawer .nav-link.active{background:#ffffff16!important;color:#fff!important;box-shadow:inset 3px 0 0 #b6dda2}
+.marketer-mobile-drawer .nav-link i{color:#b9ddba!important;width:20px}
+.marketer-mobile-drawer .nav-link.active i,.marketer-mobile-drawer .nav-link:hover i{color:#fff!important}
+.marketer-bottom-nav{display:none}
+.record-card-actions,.record-actions{display:flex;align-items:center;gap:5px}
+.record-card-actions button,.record-actions button{width:30px;height:30px;border:1px solid var(--mk-line);background:#f8fbf8;border-radius:8px;color:var(--mk-green)}
+.record-card-actions button:last-child,.record-actions button:last-child{color:#b03b3b}
+.record-card-actions button:hover,.record-actions button:hover{background:#edf6ef}
+.business-table .record-actions{justify-content:flex-end}
+.business-table td.record-actions{white-space:nowrap}
+@media(max-width:768px){
+ .marketer-shell .dashboard-header{display:flex;align-items:center;gap:9px}
+ .marketer-shell .marketer-mobile-title{flex:1;min-width:0}
+ .marketer-shell .marketer-mobile-title h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .marketer-bottom-nav{display:grid}
+ .marketer-shell .main-content{padding-bottom:88px!important}
+ .marketer-shell .marketer-hero p{font-size:12px}
+ .marketer-shell .section-heading .btn{width:auto}
+ .marketer-shell .business-table{min-width:700px}
+}
