@@ -474,6 +474,71 @@ def poultry_records_api():
                     feed_kg=r.feed_kg, notes=r.notes) for r, name in records])
 
 
+@app.route('/api/marketer/products', methods=['GET', 'POST'])
+def marketer_products_api():
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+
+    if request.method == 'POST':
+        data = request.form
+        name = str(data.get('name', '')).strip()[:100]
+        description = str(data.get('description', '')).strip()[:200]
+        try:
+            price = float(data.get('price', 0))
+            quantity = int(data.get('quantity', 0))
+        except (TypeError, ValueError, OverflowError):
+            return jsonify(error='Invalid price or quantity'), 400
+
+        if not name or not 0 < price <= 1000000000 or not 0 < quantity <= 1000000:
+            return jsonify(error='Product name, positive price and quantity are required'), 400
+
+        media_file = request.files.get('image')
+        media_path = None
+        if media_file and media_file.filename:
+            if not allowed_file(media_file.filename):
+                return jsonify(error='Unsupported image format'), 400
+            import uuid
+            filename = uuid.uuid4().hex + '_' + secure_filename(media_file.filename)[:80]
+            media_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            media_path = filename
+
+        product = Product(
+            name=name,
+            quantity=quantity,
+            price=price,
+            description=description,
+            posted_by=user.name,
+            media_file=media_path
+        )
+        db.session.add(product)
+        db.session.commit()
+        return jsonify(message='Product listed', id=product.id), 201
+
+    rows = Product.query.filter_by(posted_by=user.name).order_by(Product.id.desc()).limit(300).all()
+    return jsonify(products=[dict(
+        id=x.id,
+        name=x.name,
+        quantity=x.quantity,
+        price=x.price,
+        description=x.description or '',
+        image_url=url_for('static', filename='uploads/' + os.path.basename(x.media_file)) if x.media_file else ''
+    ) for x in rows])
+
+
+@app.route('/api/marketer/products/<int:product_id>', methods=['DELETE'])
+def marketer_product_delete(product_id):
+    owner, user = _business_user()
+    if owner is None or user is None:
+        return jsonify(error='Marketer login required'), 403
+    product = Product.query.filter_by(id=product_id, posted_by=user.name).first()
+    if not product:
+        return jsonify(error='Product not found'), 404
+    db.session.delete(product)
+    db.session.commit()
+    return jsonify(message='Product removed')
+
+
 def marketer_identity():
     if not session.get('user_id') or session.get('role') != 'marketer':
         return None
