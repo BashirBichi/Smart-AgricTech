@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/account-workspace.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/community-hub.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/workspace-insights.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='Css/farmer-mobile-app.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='Css/marketer-workspace.css') }}">
 </head>
 <body>
@@ -81,10 +82,10 @@
 </section>
 
 <header class="dashboard-header marketer-header">
-  <button class="btn agri-mobile-menu-toggle d-md-none" type="button" aria-label="Open navigation menu" data-bs-toggle="offcanvas" data-bs-target="#marketerMobileSidebar" aria-controls="marketerMobileSidebar"><i class="fas fa-bars"></i><span class="d-none d-sm-inline">Menu</span></button>
-  <div class="marketer-mobile-title"><span class="marketer-header-icon"><i class="fas fa-store"></i></span><div><span class="eyebrow">MARKETER WORKSPACE</span><h1>Business & Market Operations</h1></div></div>
+  <button class="btn agri-mobile-menu-toggle d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#marketerMobileSidebar" aria-controls="marketerMobileSidebar"><i class="fas fa-bars" aria-hidden="true"></i> Menu</button>
+  <h1 class="dashboard-title">Smart AgricTech | Empowering Farmers, Traders &amp; Innovators</h1>
   <div class="dropdown">
-    <button class="profile-menu dropdown-toggle marketer-profile-button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle"></i> {{ name }} </button>
+    <button class="profile-menu dropdown-toggle marketer-profile-button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"><span aria-hidden="true">👤</span> Profile</button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
       <li><a class="dropdown-item" href="#" data-section="view-profile"><i class="fas fa-id-badge"></i> View Profile</a></li>
       <li><a class="dropdown-item" href="#" data-section="edit-profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
